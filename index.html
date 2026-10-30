@@ -1,0 +1,854 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Proposta JLD Connect</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Proposta comercial de consultoria em gestão, processos e tecnologia para a JLD Connect C Telecom Ltda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: documento de consultoria. Capa clara com faixa verde no topo, capítulos numerados, réguas finas em vez de cartões.
+   Verde = consultoria e ação (resultado, crescimento, WhatsApp). Azul-marinho = estrutura, texto e suporte técnico. */
+:root{
+  --bg:#fbfcfb; --sheet:#ffffff; --ink:#10212f; --muted:#56636e; --rule:#dce3e0; --rule-2:#c3ccc8;
+  --green:#0e6a4e; --green-mark:#1c9a6c; --green-wash:#eaf4ef;
+  --navy:#1d3a57; --navy-wash:#ebf0f5; --warn:#a4462f;
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Source Sans 3","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c1416; --sheet:#111c1f; --ink:#e7eeec; --muted:#9fb0ab; --rule:#23312f; --rule-2:#33443f;
+  --green:#5fcf9f; --green-mark:#5fcf9f; --green-wash:#13281f; --navy:#a9c2dc; --navy-wash:#152230; --warn:#ff9378; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1416; --sheet:#111c1f; --ink:#e7eeec; --muted:#9fb0ab; --rule:#23312f; --rule-2:#33443f;
+  --green:#5fcf9f; --green-mark:#5fcf9f; --green-wash:#13281f; --navy:#a9c2dc; --navy-wash:#152230; --warn:#ff9378; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4{margin:0;text-wrap:balance}
+h1,h2{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+h3,h4{font-family:var(--sans);font-weight:700}
+p{margin:0}
+a{color:inherit}
+button{-webkit-tap-highlight-color:transparent;font-family:var(--sans)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.g{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.label{font-size:.78rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums lining-nums}
+
+.topband{height:6px;background:var(--green)}
+.progress{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:3px;z-index:20}
+.progress i{display:block;height:100%;width:0;background:var(--green)}
+
+/* CAPA */
+.cover-in{max-width:1180px;margin:0 auto;padding-block:48px 0}
+.cover-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:64px;align-items:start}
+.cover .label{color:var(--green)}
+.cover h1{font-size:clamp(2.3rem,5.2vw,4.3rem);line-height:1.04;margin-top:18px;max-width:16ch}
+.cover-for{margin-top:18px;font-size:1.12rem;color:var(--muted)}
+.cover-for b{color:var(--ink);font-weight:600}
+.claim{margin-top:40px;padding-top:28px;border-top:1px solid var(--rule)}
+.claim p{font-family:var(--serif);font-size:clamp(1.45rem,2.6vw,2rem);line-height:1.25;font-weight:500;max-width:22ch}
+.claim p em{font-style:italic;color:var(--green)}
+.claim .lead{font-family:var(--sans);font-size:1.08rem;font-weight:400;color:var(--muted);max-width:52ch;margin-top:14px;line-height:1.6}
+.sign{display:flex;align-items:center;gap:14px;margin-top:28px}
+.initials{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--green);color:var(--green);display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.05rem;flex:none}
+.sign b{display:block;font-weight:700}
+.sign span{font-size:.92rem;color:var(--muted)}
+
+.diag{border-top:3px solid var(--ink);padding-top:16px;min-width:0}
+.diag-h{display:flex;justify-content:space-between;gap:12px}
+.diag ul{list-style:none;margin:14px 0 0;padding:0}
+.diag li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;align-items:center;padding-block:13px;border-bottom:1px solid var(--rule);font-size:1rem}
+.status{font-size:.82rem;font-weight:600;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;color:var(--muted);transition:color .35s}
+.status::before{content:"";width:9px;height:9px;border-radius:50%;border:1.5px solid currentColor;transition:background .35s,border-color .35s}
+.status.ok{color:var(--green)}
+.status.ok::before{background:var(--green-mark);border-color:var(--green-mark)}
+.diag-f{margin-top:12px;font-size:.88rem;color:var(--muted)}
+
+.meta{margin-top:48px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2)}
+.meta div{padding:14px 16px 16px 0;display:grid;gap:2px}
+.meta div+div{padding-left:16px;border-left:1px solid var(--rule)}
+.meta b{font-weight:600;font-size:1rem}
+
+/* DOCUMENTO */
+.doc{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:64px}
+.index{position:sticky;top:calc(env(safe-area-inset-top,0px) + 28px);align-self:start;padding-top:72px}
+.index ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.index a{display:grid;grid-template-columns:28px 1fr;text-decoration:none;font-size:.93rem;color:var(--muted);padding:6px 0;border-left:2px solid transparent;padding-left:12px;transition:color .2s,border-color .2s}
+.index a span{font-family:var(--serif);font-weight:600;color:var(--rule-2);transition:color .2s}
+.index a.on{color:var(--ink);border-left-color:var(--green)}
+.index a.on span{color:var(--green)}
+.index .who{margin-top:30px;font-size:.86rem;color:var(--muted);line-height:1.45;padding-left:14px}
+.index .who b{color:var(--ink);display:block}
+main{min-width:0}
+section{padding-block:84px;border-bottom:1px solid var(--rule)}
+section:last-child{border-bottom:0}
+.chap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:20px;align-items:baseline}
+.chap .n{font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,3vw,2.3rem);color:var(--green);line-height:1}
+.chap h2{font-size:clamp(1.75rem,3.4vw,2.6rem);line-height:1.12;max-width:22ch}
+.chap .label{grid-column:2;margin-bottom:-8px}
+.intro{margin-top:16px;max-width:62ch;color:var(--muted)}
+.js .rv{transform:translateY(14px);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{transform:none}
+
+/* 01 HOJE x COM O ROBERT */
+.tabs{margin-top:36px;display:flex;gap:28px;border-bottom:1px solid var(--rule-2)}
+.tabs button{appearance:none;-webkit-appearance:none;background:none;border:0;padding:0 0 12px;font-size:1.02rem;font-weight:600;color:var(--muted);cursor:pointer;position:relative}
+.tabs button::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.3,.8,.2,1)}
+.tabs button[aria-pressed="true"]{color:var(--ink)}
+.tabs button[aria-pressed="true"]::after{transform:scaleX(1)}
+.ba{display:grid}
+.ba-row{display:grid;grid-template-columns:190px minmax(0,1fr);gap:28px;padding-block:24px;border-bottom:1px solid var(--rule)}
+.ba-row h3{font-family:var(--serif);font-weight:600;font-size:1.2rem}
+.ba-txt{display:grid}
+.ba-txt>div{grid-area:1/1;transition:opacity .35s,transform .35s;display:grid;gap:10px;align-content:start}
+.ba-txt .d{opacity:0;transform:translateY(8px);pointer-events:none}
+.ba.after .ba-txt .a{opacity:0;transform:translateY(-8px);pointer-events:none}
+.ba.after .ba-txt .d{opacity:1;transform:none;pointer-events:auto}
+.ba-txt .a p{color:var(--muted)}
+.proof{font-size:.92rem;color:var(--muted);display:grid;grid-template-columns:auto 1fr;gap:10px}
+.proof::before{content:"Experiência";font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);padding-top:2px}
+.fine{margin-top:18px;font-size:.92rem;color:var(--muted)}
+
+/* 02 METAS */
+.measures{margin-top:44px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--ink)}
+.m{padding:24px 28px 8px 0;display:grid;gap:10px;align-content:start}
+.m+.m{padding-left:28px;border-left:1px solid var(--rule)}
+.m h3{font-family:var(--serif);font-weight:600;font-size:1.35rem}
+.m .goal{color:var(--muted)}
+.m ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:10px;font-size:.98rem}
+.m li{display:grid;grid-template-columns:14px 1fr;gap:10px}
+.m li::before{content:"";width:8px;height:8px;margin-top:9px;background:var(--green-mark)}
+.legal{margin-top:20px;font-size:.9rem;color:var(--muted);font-style:italic}
+
+/* 03 QUEM CONDUZ */
+.who-grid{margin-top:40px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:64px;align-items:start}
+.bio{font-family:var(--serif);font-size:1.3rem;line-height:1.5}
+.bio strong{font-weight:700}
+.bio2{margin-top:18px;color:var(--muted)}
+.stat{display:grid;grid-template-columns:100px minmax(0,1fr);gap:18px;padding-block:18px;border-top:1px solid var(--rule);align-items:baseline}
+.stat:last-child{border-bottom:1px solid var(--rule)}
+.stat b{font-family:var(--serif);font-weight:700;font-size:2.5rem;line-height:1;color:var(--green)}
+.stat span{color:var(--muted);font-size:.98rem}
+.public{margin-top:56px;border-top:3px solid var(--navy);padding-top:22px;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:40px}
+.public h3{font-family:var(--serif);font-weight:600;font-size:1.45rem;line-height:1.2;margin-top:8px}
+.orgs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+.org{padding:4px 18px;border-left:1px solid var(--rule)}
+.org b{font-family:var(--serif);font-weight:700;font-size:1.5rem;display:block;color:var(--navy)}
+.org span{font-size:.88rem;color:var(--muted)}
+.certs{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.cert h4{font-size:1.05rem;margin-top:6px}
+.cert p{margin-top:6px;color:var(--muted);font-size:.98rem}
+
+/* 04 MÉTODO */
+.route{margin-top:44px;position:relative}
+.route-line{position:absolute;left:0;right:0;top:17px;height:2px;background:var(--rule-2)}
+.route-line i{display:block;height:100%;background:var(--green);width:0;transition:width .5s cubic-bezier(.3,.8,.2,1)}
+.stops{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+.stop{appearance:none;-webkit-appearance:none;border:0;background:transparent;text-align:left;padding:0 8px 0 0;cursor:pointer;color:inherit;display:grid;gap:12px}
+.stop .dot{width:36px;height:36px;border-radius:50%;background:var(--bg);border:2px solid var(--rule-2);display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1rem;color:var(--muted);transition:all .3s}
+.stop.done .dot{border-color:var(--green);color:var(--green)}
+.stop[aria-pressed="true"] .dot{background:var(--green);border-color:var(--green);color:var(--sheet)}
+.stop b{font-size:1rem;font-weight:600}
+.stage{margin-top:28px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;padding-block:24px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.stage-title{display:none;font-family:var(--serif);font-weight:600;font-size:1.25rem;grid-column:1/-1}
+.stage .label{display:block;margin-bottom:6px}
+.ledger{margin-top:32px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.ledger table{border-collapse:collapse;width:100%;min-width:520px;font-size:.95rem}
+.ledger caption{text-align:left;color:var(--muted);font-size:.93rem;padding-bottom:10px}
+.ledger th{font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:8px 12px;border-bottom:2px solid var(--ink)}
+.ledger td{padding:11px 12px;border-bottom:1px solid var(--rule)}
+.ledger td.n{white-space:nowrap}
+.print-only{display:none}
+
+/* 05 INVESTIMENTO */
+.lanes{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--rule)}
+.lane{padding:24px 28px 24px 0;display:grid;gap:8px;align-content:start;position:relative;transition:background .3s}
+.lane+.lane{padding-left:28px;border-left:1px solid var(--rule)}
+.lane::before{content:"";position:absolute;top:-1px;left:0;right:0;height:3px;transform:scaleX(.18);transform-origin:left;transition:transform .45s cubic-bezier(.3,.8,.2,1)}
+.lane.c::before{background:var(--green)}
+.lane.s::before{background:var(--navy)}
+.lane+.lane::before{left:28px}
+.lane.hit::before{transform:scaleX(1)}
+.lane.c .label{color:var(--green)}
+.lane.s .label{color:var(--navy)}
+.lane h3{font-family:var(--serif);font-weight:600;font-size:1.5rem}
+.lane p{color:var(--muted);font-size:.98rem}
+.lane .how{font-weight:600;font-size:.95rem}
+.where{margin-top:8px;padding:22px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.where h3{font-size:1.05rem}
+.where .hint{font-size:.94rem;color:var(--muted)}
+.sits{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.sit{appearance:none;-webkit-appearance:none;border:1px solid var(--rule-2);background:var(--sheet);color:var(--ink);font-size:.92rem;font-weight:500;padding:8px 12px;border-radius:3px;cursor:pointer;text-align:left;transition:all .2s}
+.sit:hover{border-color:var(--ink)}
+.sit[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.answer{margin-top:14px;font-size:1rem;min-height:1.6em}
+.answer b.c{color:var(--green)}
+.answer b.s{color:var(--navy)}
+
+.part{margin-top:72px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.part .label{font-size:.8rem}
+.part.c .label{color:var(--green)}
+.part.s .label{color:var(--navy)}
+.part h3{font-family:var(--serif);font-weight:600;font-size:1.7rem}
+.part-intro{margin-top:14px;color:var(--muted);max-width:62ch}
+.plans{margin-top:26px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0}
+.plan{padding:24px 22px 26px;display:grid;gap:12px;align-content:start;cursor:pointer;position:relative;border:1px solid var(--rule);background:var(--sheet);transition:background .3s,border-color .3s}
+.plan+.plan{border-left:0}
+.plan::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:4px;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.3,.8,.2,1)}
+.plan[aria-checked="true"]{background:var(--green-wash)}
+.plan[aria-checked="true"]::before{transform:scaleX(1)}
+.plan .flag{font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.plan[aria-checked="true"] .flag{color:var(--green)}
+.plan h4{font-family:var(--serif);font-weight:600;font-size:1.45rem}
+.plan .val{font-family:var(--serif);font-weight:700;font-size:2.35rem;line-height:1}
+.plan .val small{font-family:var(--sans);font-size:.95rem;font-weight:500;color:var(--muted)}
+.plan .sub{font-size:.9rem;color:var(--muted)}
+.split{display:flex;height:4px;gap:2px}
+.split i{display:block;height:100%}
+.split .p{background:var(--green-mark)}
+.split .r{background:var(--rule-2)}
+.plan ul{list-style:none;margin:4px 0 0;padding:0;display:grid;gap:8px;font-size:.96rem}
+.plan li{color:var(--muted);padding-left:16px;position:relative}
+.plan li::before{content:"";position:absolute;left:0;top:.72em;width:7px;height:1.5px;background:currentColor}
+.choose{font-size:.88rem;font-weight:600;color:var(--green)}
+.plan[aria-checked="true"] .choose::before{content:"✓ "}
+.key{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:.88rem;color:var(--muted)}
+.key span::before{content:"";display:inline-block;width:14px;height:4px;margin-right:8px;vertical-align:3px;background:var(--green-mark)}
+.key span.r::before{background:var(--rule-2)}
+
+.market{margin-top:40px;padding-top:22px;border-top:1px solid var(--rule)}
+.market h4{font-family:var(--serif);font-weight:600;font-size:1.3rem}
+.market .lede{color:var(--muted);margin-top:4px;font-size:.98rem;max-width:62ch}
+.scale{position:relative;margin-top:58px;height:10px;background:var(--rule)}
+.scale .band{position:absolute;top:0;bottom:0;background:var(--navy-wash);box-shadow:inset 0 0 0 1px var(--navy)}
+.scale .med{position:absolute;top:-9px;bottom:-9px;width:2px;background:var(--navy)}
+.scale .me{position:absolute;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:var(--green-mark);box-shadow:0 0 0 4px var(--bg);transition:left .5s cubic-bezier(.3,.8,.2,1)}
+.scale .lab{position:absolute;bottom:calc(100% + 14px);transform:translateX(-50%);white-space:nowrap;font-size:.84rem;font-weight:700}
+.scale .lab.me-l{color:var(--green);transition:left .5s cubic-bezier(.3,.8,.2,1)}
+.scale .lab.med-l{color:var(--navy);bottom:auto;top:calc(100% + 14px)}
+.ticks{display:flex;justify-content:space-between;margin-top:42px;font-size:.8rem;color:var(--muted)}
+.mfacts{margin-top:20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--rule)}
+.mfacts div{padding:14px 16px 4px 0;display:grid;gap:2px}
+.mfacts div+div{padding-left:16px;border-left:1px solid var(--rule)}
+.mfacts b{font-family:var(--serif);font-size:1.45rem;font-weight:700}
+.mfacts span{font-size:.9rem;color:var(--muted)}
+.src{margin-top:16px;font-size:.88rem;color:var(--muted)}
+.src a{color:var(--navy)}
+
+.calc{margin-top:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:center;padding-block:24px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.calc label{font-weight:700;font-size:1.02rem;display:block;margin-bottom:14px}
+.calc input[type=range]{width:100%;accent-color:var(--green);height:28px}
+.calc .rs{display:flex;justify-content:space-between;font-size:.8rem;color:var(--muted)}
+.calc .note{margin-top:10px;font-size:.93rem;color:var(--muted)}
+.calc dl{margin:0;display:grid;grid-template-columns:1fr auto;gap:10px 20px;font-size:1rem}
+.calc dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.calc .tot{font-family:var(--serif);font-weight:700;font-size:1.3rem;padding-top:12px;border-top:2px solid var(--ink)}
+
+.support{margin-top:26px}
+.support-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.support table{border-collapse:collapse;width:100%;min-width:520px;font-size:1rem}
+.support th{font-size:.74rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:12px 14px;border-bottom:2px solid var(--ink)}
+.support th.k{color:var(--navy)}
+.support td.k{background:var(--navy-wash);font-weight:700;color:var(--ink)}
+.support td{padding:13px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+.support td small{display:block;color:var(--muted);font-size:.86rem}
+.support td.v{white-space:nowrap;font-variant-numeric:tabular-nums}
+.support td.old{color:var(--muted)}
+.support-foot{padding-top:12px;font-size:.92rem;color:var(--muted)}
+.rules{margin-top:30px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:1px solid var(--rule)}
+.rule{padding:16px 18px 12px 0;display:grid;gap:4px;align-content:start;border-bottom:1px solid var(--rule)}
+.rule b{font-size:.98rem}
+.rule span{font-size:.93rem;color:var(--muted)}
+
+/* 06 TERMOS */
+.needs{margin-top:40px}
+.needs h3{font-family:var(--serif);font-weight:600;font-size:1.3rem}
+.needs>p{color:var(--muted);font-size:.98rem;margin-top:2px}
+.needs ul{list-style:none;margin:16px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink)}
+.needs li{padding:14px 16px 4px 0;display:grid;gap:4px;font-size:.95rem;align-content:start}
+.needs li+li{padding-left:16px;border-left:1px solid var(--rule)}
+.needs li span{color:var(--muted)}
+.terms{margin-top:56px;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:56px}
+.terms h3{font-family:var(--serif);font-weight:600;font-size:1.3rem;margin-bottom:12px}
+.outs details{border-top:1px solid var(--rule);padding-block:12px}
+.outs details:last-of-type{border-bottom:1px solid var(--rule)}
+.outs summary{cursor:pointer;font-weight:600}
+.outs details p{margin-top:6px;color:var(--muted);font-size:.96rem}
+.conds{list-style:none;margin:0;padding:0;border-bottom:1px solid var(--rule)}
+.conds li{display:grid;grid-template-columns:130px minmax(0,1fr);gap:16px;padding-block:12px;border-top:1px solid var(--rule);font-size:.97rem}
+.conds b{font-weight:700}
+.conds span{color:var(--muted)}
+
+/* 07 ACEITE */
+.accept{margin-top:44px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:56px;align-items:start}
+.steps3{list-style:none;margin:0;padding:0;display:grid}
+.steps3 li{display:grid;grid-template-columns:44px 1fr;gap:14px;padding-block:16px;border-top:1px solid var(--rule)}
+.steps3 .b{font-family:var(--serif);font-weight:700;font-size:1.7rem;line-height:1;color:var(--green)}
+.steps3 strong{display:block}
+.steps3 p{color:var(--muted);font-size:.96rem}
+.form{border:1px solid var(--rule-2);border-top:4px solid var(--green);background:var(--sheet);padding:30px;display:grid;gap:16px}
+.form h3{font-family:var(--serif);font-weight:600;font-size:1.5rem}
+.form label{font-weight:600;font-size:.92rem;display:grid;gap:6px;color:var(--muted)}
+.form input,.form textarea{font:16px var(--sans);color:var(--ink);background:var(--bg);border:1px solid var(--rule-2);border-radius:3px;padding:12px 14px;width:100%;-webkit-appearance:none;appearance:none}
+.form textarea{min-height:88px;resize:vertical}
+.chosen{font-size:1.05rem;padding:12px 14px;background:var(--green-wash);border-left:3px solid var(--green)}
+.chosen b{color:var(--green)}
+.send{background:var(--green);color:#ffffff;font-weight:700;font-size:1.02rem;padding:16px 20px;border-radius:3px;text-align:center;text-decoration:none;display:block;transition:filter .2s}
+.send:hover{filter:brightness(1.08)}
+.copy{appearance:none;-webkit-appearance:none;background:transparent;border:1px solid var(--rule-2);color:var(--ink);font-size:.9rem;font-weight:600;padding:9px 14px;border-radius:3px;cursor:pointer}
+.copied{min-height:1.2em;font-size:.88rem;color:var(--green)}
+.small{font-size:.86rem;color:var(--muted)}
+footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px solid var(--rule);font-size:.86rem;color:var(--muted);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+
+@media (min-width:1101px){.progress{display:none}}
+@media (max-width:1100px){.doc{grid-template-columns:minmax(0,1fr);gap:0}.index{display:none}}
+@media (max-width:860px){
+  .cover-grid,.who-grid,.public,.terms,.accept,.calc{grid-template-columns:minmax(0,1fr);gap:40px}
+  .measures,.plans,.lanes{grid-template-columns:minmax(0,1fr)}
+  .m,.m+.m{padding:22px 0 10px;border-left:0}
+  .m+.m{border-top:1px solid var(--rule)}
+  .lane,.lane+.lane{padding:22px 0;border-left:0}
+  .lane+.lane{border-top:1px solid var(--rule)}
+  .lane+.lane::before{left:0}
+  .plan+.plan{border-left:1px solid var(--rule);border-top:0}
+  .stage{grid-template-columns:minmax(0,1fr);gap:16px}
+  .meta{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .meta div:nth-child(3){padding-left:0;border-left:0}
+  .meta div:nth-child(n+3){border-top:1px solid var(--rule)}
+  .needs ul{grid-template-columns:1fr 1fr}
+  .rules{grid-template-columns:minmax(0,1fr)}
+  .needs li:nth-child(3){padding-left:0;border-left:0}
+  .needs li:nth-child(n+3){border-top:1px solid var(--rule)}
+}
+@media (max-width:600px){
+  body{font-size:17px}
+  section{padding-block:60px}
+  .cover-in{padding-block:36px 0}
+  .chap{gap:14px}
+  .ba-row{grid-template-columns:minmax(0,1fr);gap:8px}
+  .orgs{grid-template-columns:minmax(0,1fr);gap:12px}
+  .org{border-left:2px solid var(--rule);padding-left:14px}
+  .certs{grid-template-columns:minmax(0,1fr);gap:24px}
+  .stop b{display:none}
+  .stage-title{display:block}
+  .conds li{grid-template-columns:minmax(0,1fr);gap:2px}
+  .mfacts{grid-template-columns:minmax(0,1fr)}
+  .mfacts div+div{padding-left:0;border-left:0;border-top:1px solid var(--rule)}
+  .needs ul{grid-template-columns:minmax(0,1fr)}
+  .needs li+li{padding-left:0;border-left:0;border-top:1px solid var(--rule)}
+  .stat{grid-template-columns:80px minmax(0,1fr)}
+  .stat b{font-size:2.1rem}
+  .form{padding:22px 18px}
+  .support table{min-width:0;font-size:.92rem}
+  .support th,.support td{padding:11px 8px}
+  .support th{font-size:.66rem}
+  .tabs{gap:22px}
+}
+@media print{
+  @page{size:A4;margin:12mm}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{background:#fff}
+  body{font-size:10.5pt}
+  .progress,.index,.tabs,.sits,.answer,.where .hint,.screen-only,.route,.stage,.form label,.form .send,.form .copy,.copied,.form .small,.key,.choose{display:none!important}
+  .print-only{display:block!important}
+  .print-steps{margin:22px 0 0;padding-left:20px;display:grid!important;gap:8px}
+  .doc,.ba,.ba-row,.ba-txt,.measures,.who-grid,.terms,.plans,.lanes,.accept,.cover-grid,.public,.certs{display:block!important}
+  section{padding-block:22px}
+  .js .rv{transform:none!important}
+  .ba-txt>div{display:block!important;opacity:1!important;transform:none!important;margin-bottom:8px}
+  .ba-txt .d::before{content:"Com o Robert";display:block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green)}
+  .ba-txt .a::before{content:"Hoje";display:block;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--warn)}
+  .ba-row,.plan,.rule,.m,.lane,.needs li,.conds li,.public,.cert,.support tr,.stat{break-inside:avoid}
+  .m,.m+.m,.lane,.lane+.lane{padding:14px 0;border-left:0}
+  .plan{border:1px solid var(--rule)!important;margin-bottom:10px;background:#fff!important}
+  .plan::before{display:none}
+  .diag{margin-top:24px}
+  .public>div+div{margin-top:14px}
+  .terms>div{margin-bottom:20px}
+  h2,h3{break-after:avoid}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .rv{transform:none}
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+
+<div class="topband" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+
+<header class="cover g">
+  <div class="cover-in">
+    <div class="cover-grid">
+      <div>
+        <span class="label">Proposta comercial · nº 001/2026</span>
+        <h1>Consultoria em Gestão, Processos e Tecnologia</h1>
+        <p class="cover-for">Preparada para <b>JLD Connect C Telecom Ltda</b></p>
+        <div class="claim">
+          <p class="rv">Entendi onde a operação <em>trava</em>. E sei como destravar.</p>
+          <p class="lead rv">Consultoria mensal para organizar planilhas, acessos, equipamentos e rotinas da JLD Connect, com horas definidas, suporte técnico com preço fechado e prestação de contas todo mês.</p>
+        </div>
+        <div class="sign"><span class="initials" aria-hidden="true">RM</span><div><b>Robert Martins Cezar</b><span>Coordenador de Projetos · 8+ anos em tecnologia e gestão</span></div></div>
+      </div>
+      <aside class="diag" aria-label="Diagnóstico inicial">
+        <div class="diag-h"><span class="label">Diagnóstico inicial</span><span class="label">5 pontos</span></div>
+        <ul id="diag">
+          <li>Planilhas de vendas frágeis<span class="status ok">Com plano de ação</span></li>
+          <li>E-mail corporativo incompleto<span class="status ok">Com plano de ação</span></li>
+          <li>12 notebooks antigos<span class="status ok">Com plano de ação</span></li>
+          <li>Acessos sem regra definida<span class="status ok">Com plano de ação</span></li>
+          <li>Rotinas na memória das pessoas<span class="status ok">Com plano de ação</span></li>
+        </ul>
+        <p class="diag-f">Levantado nas primeiras conversas. Detalhado no capítulo 01.</p>
+      </aside>
+    </div>
+    <div class="meta">
+      <div><span class="label">Emitida em</span><b>30 out 2026</b></div>
+      <div><span class="label">Válida até</span><b>14 nov 2026</b></div>
+      <div><span class="label">Responsável</span><b>Robert Martins Cezar</b></div>
+      <div><span class="label">Modalidade</span><b>Consultoria mensal</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="doc g">
+  <aside class="index" aria-label="Índice da proposta">
+    <ol id="idx">
+      <li><a href="#diagnostico"><span>01</span>O que entendi</a></li>
+      <li><a href="#metas"><span>02</span>Metas de trabalho</a></li>
+      <li><a href="#quem"><span>03</span>Quem conduz</a></li>
+      <li><a href="#metodo"><span>04</span>Como trabalho</a></li>
+      <li><a href="#investimento"><span>05</span>Investimento</a></li>
+      <li><a href="#termos"><span>06</span>Termos</a></li>
+      <li><a href="#aceite"><span>07</span>Aceite</a></li>
+    </ol>
+    <p class="who"><b>Robert Martins Cezar</b>Gestão, processos e tecnologia</p>
+  </aside>
+
+  <main>
+    <section id="diagnostico">
+      <div class="chap"><span class="n">01</span><h2 class="rv">Cada problema que vi, e o que eu faço para resolver.</h2></div>
+      <div class="tabs" id="sw" role="group" aria-label="Comparar hoje e com o Robert">
+        <button type="button" aria-pressed="true" data-v="a">Hoje</button>
+        <button type="button" aria-pressed="false" data-v="d">Com o Robert</button>
+      </div>
+      <div class="ba" id="ba">
+        <div class="ba-row"><h3>Planilhas de vendas</h3><div class="ba-txt">
+          <div class="a"><p>Uma aba por mês, nomes digitados dentro de fórmulas e períodos fixos. Um erro de digitação passa sem ninguém perceber.</p></div>
+          <div class="d"><p>Eu corrijo as fórmulas, padronizo a estrutura e treino a equipe para usar sem quebrar.</p><p class="proof">Mais de 8 anos controlando prazos, custos e entregas em projetos de tecnologia.</p></div>
+        </div></div>
+        <div class="ba-row"><h3>E-mail corporativo</h3><div class="ba-txt">
+          <div class="a"><p>Parte da equipe usa conta pessoal. Quem sai pode levar contatos e histórico de clientes.</p></div>
+          <div class="d"><p>Eu crio e padronizo as contas de todos e defino o que fazer no dia em que alguém sai.</p><p class="proof">Projetos de transformação digital no ambiente Microsoft.</p></div>
+        </div></div>
+        <div class="ba-row"><h3>Máquinas</h3><div class="ba-txt">
+          <div class="a"><p>12 notebooks antigos (i3 e i5) que precisam ser avaliados.</p></div>
+          <div class="d"><p>Eu faço o inventário e indico, máquina por máquina, o que vale atualizar, manter ou substituir.</p><p class="proof">Decisão por custo e benefício, com visão de gestão.</p></div>
+        </div></div>
+        <div class="ba-row"><h3>Acessos</h3><div class="ba-txt">
+          <div class="a"><p>Permissões de sistemas e equipamentos ainda sem regra documentada.</p></div>
+          <div class="d"><p>Eu defino quem acessa o quê, registro e reviso. Cada pessoa com o acesso de que precisa.</p><p class="proof">Implantação de soluções Microsoft no Detran-SP, INSS e TJSP, onde acesso e segurança são regra.</p></div>
+        </div></div>
+        <div class="ba-row"><h3>Rotinas</h3><div class="ba-txt">
+          <div class="a"><p>Processos que dependem do WhatsApp e da memória de quem executa.</p></div>
+          <div class="d"><p>Eu mapeio, documento e priorizo as rotinas críticas, e acompanho as demandas mês a mês.</p><p class="proof">Certificações A-CSM e Product Owner: organizar e priorizar trabalho é o meu dia a dia.</p></div>
+        </div></div>
+      </div>
+      <p class="fine">O diagnóstico do primeiro mês confirma e completa esta lista.</p>
+    </section>
+
+    <section id="metas">
+      <div class="chap"><span class="n">02</span><h2 class="rv">Nem toda melhoria vira hora economizada. Por isso as metas cobrem três frentes.</h2></div>
+      <div class="measures">
+        <div class="m rv"><h3>Produtividade</h3><p class="goal">Menos retrabalho na rotina de vendas.</p>
+          <ul><li><span>Planilhas de vendas corrigidas e padronizadas</span></li><li><span>Equipe treinada no uso das planilhas</span></li><li><span>Erros de conferência apontados e corrigidos</span></li></ul></div>
+        <div class="m rv"><h3>Segurança e controle</h3><p class="goal">A informação da empresa fica na empresa.</p>
+          <ul><li><span>100% da equipe com e-mail corporativo</span></li><li><span>Acesso encerrado no dia do desligamento</span></li><li><span>100% das máquinas inventariadas, com cópia de segurança definida</span></li></ul></div>
+        <div class="m rv"><h3>Organização</h3><p class="goal">Rotinas que não dependem de uma só pessoa.</p>
+          <ul><li><span>Processos críticos documentados</span></li><li><span>Demandas registradas e priorizadas</span></li><li><span>Relatório mensal de horas e entregas</span></li></ul></div>
+      </div>
+      <p class="legal">As metas orientam o trabalho e o relatório mensal. Os resultados dependem também da participação da equipe e das decisões da empresa.</p>
+    </section>
+
+    <section id="quem">
+      <div class="chap"><span class="n">03</span><h2 class="rv">Experiência de projetos de grande porte, no tamanho da sua operação.</h2></div>
+      <div class="who-grid">
+        <div>
+          <p class="bio rv">Sou <strong>Robert Martins Cezar</strong>, Coordenador de Projetos em consultoria de transformação digital com foco em Microsoft. Coordeno times de desenvolvedores e analistas em projetos para grandes empresas de mineração, energia e indústria.</p>
+          <p class="bio2 rv">Na JLD Connect, levo o mesmo método: entender o problema antes de propor solução, priorizar o que dá mais resultado e prestar contas do que foi feito. Moro a poucos minutos da empresa, então a presença é fácil quando faz diferença.</p>
+        </div>
+        <div>
+          <div class="stat rv"><b>8+</b><span>anos em gestão de projetos de tecnologia</span></div>
+          <div class="stat rv"><b>40+</b><span>contratos ativos no portfólio que coordeno</span></div>
+          <div class="stat rv"><b>2</b><span>formas de conduzir: ágil e tradicional, conforme o projeto</span></div>
+        </div>
+      </div>
+      <div class="public rv">
+        <div><span class="label">Setor público · São Paulo</span><h3>Implementação e implantação de soluções Microsoft em órgãos públicos.</h3></div>
+        <div class="orgs">
+          <div class="org"><b>Detran-SP</b><span>Departamento Estadual de Trânsito</span></div>
+          <div class="org"><b>INSS</b><span>Unidades de São Paulo</span></div>
+          <div class="org"><b>TJSP</b><span>Tribunal de Justiça de São Paulo</span></div>
+        </div>
+      </div>
+      <div class="certs">
+        <div class="cert rv"><span class="label">Certificação</span><h4>Advanced Certified ScrumMaster (A-CSM)</h4><p>Organizar o trabalho em ciclos curtos, destravar o que está parado e entregar melhoria visível a cada etapa.</p></div>
+        <div class="cert rv"><span class="label">Certificação</span><h4>Product Owner</h4><p>Transformar necessidades do negócio em prioridades claras e decidir o que vale fazer primeiro.</p></div>
+      </div>
+    </section>
+
+    <section id="metodo">
+      <div class="chap"><span class="n">04</span><h2 class="rv">Cinco etapas, do diagnóstico ao resultado medido.</h2></div>
+      <div class="route screen-only">
+        <div class="route-line" aria-hidden="true"><i id="rl"></i></div>
+        <div class="stops" id="stops">
+          <button class="stop" type="button" aria-pressed="true" aria-label="Etapa 1, Diagnóstico"><span class="dot">1</span><b>Diagnóstico</b></button>
+          <button class="stop" type="button" aria-pressed="false" aria-label="Etapa 2, Priorização"><span class="dot">2</span><b>Priorização</b></button>
+          <button class="stop" type="button" aria-pressed="false" aria-label="Etapa 3, Planejamento"><span class="dot">3</span><b>Planejamento</b></button>
+          <button class="stop" type="button" aria-pressed="false" aria-label="Etapa 4, Implementação"><span class="dot">4</span><b>Implementação</b></button>
+          <button class="stop" type="button" aria-pressed="false" aria-label="Etapa 5, Acompanhamento"><span class="dot">5</span><b>Acompanhamento</b></button>
+        </div>
+      </div>
+      <div class="stage screen-only" aria-live="polite">
+        <h3 class="stage-title" id="s0">Diagnóstico</h3>
+        <div><span class="label">O que acontece</span><p id="s1">Conheço processos, planilhas, equipamentos e acessos, conversando com quem faz o trabalho no dia a dia.</p></div>
+        <div><span class="label">O que você recebe</span><p id="s2">Mapa dos problemas encontrados e inventário das máquinas.</p></div>
+        <div><span class="label">Quando</span><p id="s3">Primeiro mês.</p></div>
+      </div>
+      <ol class="print-only print-steps">
+        <li><b>Diagnóstico.</b> Conheço processos, planilhas, equipamentos e acessos. Entrega: mapa dos problemas e inventário das máquinas. Primeiro mês.</li>
+        <li><b>Priorização.</b> Classifico cada necessidade por urgência, impacto, risco, custo e esforço. Entrega: lista de prioridades aprovada com você.</li>
+        <li><b>Planejamento.</b> Defino solução, responsável, custo e prazo de cada item. Entrega: plano de ação do trimestre.</li>
+        <li><b>Implementação.</b> Executo e acompanho as melhorias com a equipe. Entrega: melhorias implantadas e documentadas.</li>
+        <li><b>Acompanhamento.</b> Meço os resultados e aponto novas oportunidades. Entrega: relatório mensal e reunião de resultados.</li>
+      </ol>
+      <div class="ledger">
+        <table>
+          <caption>Cada hora fica registrada e vai no relatório do mês. Exemplo de como fica:</caption>
+          <thead><tr><th>Data</th><th>Tipo</th><th>Atividade</th><th>Horas</th></tr></thead>
+          <tbody>
+            <tr><td class="n num">05/11</td><td>Presencial</td><td>Levantamento das planilhas de vendas com o back office</td><td class="n num">2,0</td></tr>
+            <tr><td class="n num">06/11</td><td>Remoto</td><td>Correção das fórmulas da planilha de vendas</td><td class="n num">1,5</td></tr>
+            <tr><td class="n num">12/11</td><td>Presencial</td><td>Inventário dos notebooks e das contas de e-mail</td><td class="n num">3,0</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="investimento">
+      <div class="chap"><span class="n">05</span><h2 class="rv">Duas frentes, cobradas de forma separada e transparente.</h2></div>
+      <div class="lanes">
+        <div class="lane c" id="laneC"><span class="label">Frente A</span><h3>Consultoria mensal</h3><p>Horas reservadas para organizar a empresa: planilhas, processos, acessos, e-mails e melhorias.</p><span class="how">Mensalidade fixa por pacote de horas.</span></div>
+        <div class="lane s" id="laneS"><span class="label">Frente B</span><h3>Suporte técnico</h3><p>Serviços nos equipamentos: formatar, trocar peça, limpar, instalar. Cada um com preço fechado.</p><span class="how">Por serviço feito, com desconto para quem tem contrato.</span></div>
+      </div>
+      <div class="where">
+        <h3>Isso entra onde?</h3>
+        <p class="hint">Toque em uma situação para ver como ela é cobrada.</p>
+        <div class="sits" id="sits"></div>
+        <p class="answer" id="answer" aria-live="polite"></p>
+        <p class="print-only">Entram nas horas da consultoria: corrigir planilhas, criar e-mails, definir acessos, avaliar as máquinas e documentar rotinas. Vão pela tabela de suporte: formatar, trocar peças, instalar programas e impressoras, limpeza interna.</p>
+      </div>
+
+      <div class="part c"><span class="label">Frente A</span><h3>Consultoria mensal</h3></div>
+      <p class="part-intro">Escolha o ritmo. Quanto maior o pacote, menor o valor de cada hora. A presença é combinada semana a semana.</p>
+      <div class="plans" id="plans" role="radiogroup" aria-label="Pacotes de consultoria"></div>
+      <div class="key"><span>Horas presenciais</span><span class="r">Horas remotas</span></div>
+
+      <div class="market">
+        <h4>Onde esse valor fica no mercado</h4>
+        <p class="lede">Valor da hora de consultores sêniores em 2026, segundo referências públicas, comparado ao valor da hora no pacote <b id="mkName">Recomendado</b>.</p>
+        <div class="scale" aria-hidden="true">
+          <span class="band" style="left:44%;right:0"></span>
+          <span class="med" style="left:64%"></span>
+          <span class="me" id="mkDot" style="left:27%"></span>
+          <span class="lab me-l" id="mkLab" style="left:27%">Sua hora: R$ 135</span>
+          <span class="lab med-l" style="left:64%">Mediana sênior: R$ 320</span>
+        </div>
+        <div class="ticks num"><span>R$ 0</span><span>R$ 250</span><span>R$ 500</span></div>
+        <div class="mfacts">
+          <div><b class="num">R$ 220 a 500</b><span>faixa de consultor sênior por hora</span></div>
+          <div><b class="num" id="mkPct">58% abaixo</b><span>da mediana sênior, segundo as referências citadas</span></div>
+          <div><b class="num" id="mkFloor">R$ 85 a menos</b><span>que o piso sênior, por hora</span></div>
+        </div>
+        <p class="src">Fontes: <a href="https://www.lancei.pro/benchmark/consultoria" target="_blank" rel="noopener">Lancei, benchmark de consultores 2026</a> e <a href="https://agilize.com.br/artigos/consultor-ti-diaria-freelancer/" target="_blank" rel="noopener">Agilize, consultor de TI, out/2026</a>.</p>
+      </div>
+
+      <div class="calc screen-only" aria-live="polite">
+        <div>
+          <label for="extra">E se em algum mês a demanda passar do pacote?</label>
+          <input type="range" id="extra" min="0" max="16" step="1" value="0">
+          <div class="rs"><span>0 h</span><span>8 h</span><span>16 h extras</span></div>
+          <p class="note">Horas extras custam R$ 150 cada e só são usadas com sua aprovação.</p>
+        </div>
+        <dl>
+          <dt>Pacote <span id="cName">Recomendado</span></dt><dd id="cBase">R$ 3.240</dd>
+          <dt>Horas extras (<span id="cXh">0</span> h)</dt><dd id="cX">R$ 0</dd>
+          <dt class="tot">Total do mês</dt><dd class="tot" id="cTot">R$ 3.240</dd>
+          <dt>Valor médio por hora</dt><dd id="cAvg">R$ 135,00</dd>
+        </dl>
+      </div>
+
+      <div class="part s"><span class="label">Frente B</span><h3>Suporte técnico</h3></div>
+      <p class="part-intro">Preço fechado por equipamento. Com contrato mensal, todo serviço sai mais barato. Peças são compradas pela empresa, com a minha orientação.</p>
+      <div class="support">
+        <div class="support-scroll">
+          <table>
+            <thead><tr><th>Serviço</th><th>Avulso</th><th class="k">Com contrato</th></tr></thead>
+            <tbody>
+              <tr><td>Diagnóstico técnico<small>Abatido do valor do serviço, se aprovado</small></td><td class="v old">R$ 100</td><td class="v k">R$ 80</td></tr>
+              <tr><td>Formatação completa<small>Sistema, drivers e programas básicos</small></td><td class="v old">R$ 150</td><td class="v k">R$ 120</td></tr>
+              <tr><td>Backup e transferência de arquivos</td><td class="v old">R$ 60</td><td class="v k">R$ 50</td></tr>
+              <tr><td>Troca de SSD com cópia do sistema<small>Peça à parte</small></td><td class="v old">R$ 190</td><td class="v k">R$ 150</td></tr>
+              <tr><td>Troca de memória, bateria ou teclado<small>Peça à parte</small></td><td class="v old">R$ 100</td><td class="v k">R$ 80</td></tr>
+              <tr><td>Limpeza interna e troca de pasta térmica</td><td class="v old">R$ 150</td><td class="v k">R$ 120</td></tr>
+              <tr><td>Remoção de vírus e otimização</td><td class="v old">R$ 120</td><td class="v k">R$ 100</td></tr>
+              <tr><td>Instalação de programa ou impressora<small>Por item</small></td><td class="v old">R$ 60</td><td class="v k">R$ 50</td></tr>
+              <tr><td>Visita extra fora da agenda combinada</td><td class="v old">R$ 80</td><td class="v k">R$ 60</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="support-foot">Valores por equipamento. Os serviços do mês são cobrados junto com a mensalidade seguinte, com relatório por máquina.</p>
+      </div>
+      <div class="rules">
+        <div class="rule"><b>Orçamento antes</b><span>Nenhum serviço ou compra de peça sem a sua aprovação.</span></div>
+        <div class="rule"><b>Backup é da empresa</b><span>Não respondo por arquivos perdidos em máquina sem backup, salvo se o backup for contratado.</span></div>
+        <div class="rule"><b>Garantia de 90 dias</b><span>Sobre o serviço feito. A peça segue a garantia do fabricante.</span></div>
+        <div class="rule"><b>Só software original</b><span>Não instalo programa sem licença. Protege a empresa e os dados.</span></div>
+        <div class="rule"><b>Sem conserto viável</b><span>Cobro só o diagnóstico e entrego um parecer por escrito.</span></div>
+      </div>
+    </section>
+
+    <section id="termos">
+      <div class="chap"><span class="n">06</span><h2 class="rv">Regras claras desde o primeiro dia.</h2></div>
+      <div class="needs">
+        <h3>O que preciso da JLD</h3>
+        <p>Para o trabalho andar no ritmo combinado.</p>
+        <ul>
+          <li><b>Um responsável interno</b><span>Pessoa de referência para aprovar prioridades e orçamentos.</span></li>
+          <li><b>Acesso autorizado</b><span>Às planilhas, máquinas e contas necessárias, com autorização formal.</span></li>
+          <li><b>Equipe disponível</b><span>Tempo da equipe nas visitas combinadas, para levantamentos e treinamentos.</span></li>
+          <li><b>Compras pela empresa</b><span>Peças, equipamentos e licenças pagos direto ao fornecedor.</span></li>
+        </ul>
+      </div>
+      <div class="terms">
+        <div class="outs">
+          <h3>Não está incluído</h3>
+          <details><summary>Atendimento de emergência 24 horas</summary><p>O remoto segue o prazo de resposta do pacote. Urgências fora disso são combinadas caso a caso.</p></details>
+          <details><summary>Desenvolvimento de sistemas</summary><p>Projetos de software têm proposta e contrato próprios.</p></details>
+          <details><summary>Compra de equipamentos, peças e licenças</summary><p>Oriento a escolha. O pagamento é feito pela empresa direto ao fornecedor.</p></details>
+          <details><summary>Serviços de especialistas</summary><p>Cabeamento, rede elétrica, contabilidade e jurídico. Quando for preciso, indico e acompanho o profissional.</p></details>
+        </div>
+        <div>
+          <h3>Condições</h3>
+          <ul class="conds">
+            <li><b>Vigência</b><span>3 meses, renovados automaticamente por mais 3. Após 6 meses, novo contrato com valores revistos.</span></li>
+            <li><b>Encerramento</b><span>A partir do 4º mês, qualquer das partes pode encerrar com aviso de 30 dias. Quem não quiser renovar avisa até 30 dias antes do fim do 3º mês.</span></li>
+            <li><b>Pagamento</b><span>Mensalidade até o dia 10 do mês de referência, por Pix, com recibo de pagamento a autônomo (RPA). Serviços de suporte do mês somados à mensalidade seguinte.</span></li>
+            <li><b>Atraso</b><span>Multa de 2% e juros de 1% ao mês. Após 15 dias de atraso, o atendimento fica suspenso até a regularização.</span></li>
+            <li><b>Horas</b><span>Não usadas valem no mês seguinte e expiram no fim de cada período de 3 meses.</span></li>
+            <li><b>Presença</b><span>Visitas combinadas em comum acordo, em blocos de no mínimo 2 horas. Visitas semanais nos 3 primeiros meses.</span></li>
+            <li><b>Atuação</b><span>Autônoma, sem exclusividade e sem subordinação.</span></li>
+            <li><b>Relatório</b><span>Todo mês: horas usadas, saldo, entregas e serviços de suporte.</span></li>
+            <li><b>Dados</b><span>Acesso só com autorização formal. Os dados permanecem em contas e equipamentos da JLD, e não levo cópias para fora da empresa. Confidencialidade e LGPD no contrato.</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="aceite">
+      <div class="chap"><span class="n">07</span><h2 class="rv">Escolheu? Me mande pelo WhatsApp e seguimos.</h2></div>
+      <div class="accept">
+        <ol class="steps3">
+          <li><span class="b">1</span><div><strong>Você envia a escolha</strong><p>Pelo botão ao lado. Se quiser ajustar algo, escreva nas observações.</p></div></li>
+          <li><span class="b">2</span><div><strong>Contrato de prestação de serviço</strong><p>Com as condições definitivas: escopo, horas, tabela de suporte, limites e confidencialidade.</p></div></li>
+          <li><span class="b">3</span><div><strong>Primeira visita</strong><p>Início do diagnóstico: planilhas, máquinas e acessos.</p></div></li>
+        </ol>
+        <form class="form" id="form" novalidate>
+          <h3>Sua escolha</h3>
+          <div class="chosen" id="chosen">Pacote <b>Recomendado</b>: 24 h/mês por R$ 3.240</div>
+          <label for="who">Seu nome<input id="who" type="text" autocomplete="name" placeholder="Quem está aprovando"></label>
+          <label for="obs">Observações (opcional)<textarea id="obs" placeholder="Algum ajuste, dúvida ou melhor dia para começar"></textarea></label>
+          <a class="send" id="send" href="https://wa.me/5521993216948" target="_blank" rel="noopener">Enviar escolha pelo WhatsApp</a>
+          <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="copy" type="button" id="copy">Copiar mensagem</button><span class="copied" id="copied"></span></div>
+          <p class="small">O WhatsApp abre na conversa com o Robert, com a mensagem pronta. É só tocar em enviar.</p>
+          <p class="legal" style="margin-top:0">Esta proposta não substitui o contrato de prestação de serviços, que trará as condições definitivas.</p>
+          <p class="print-only">Para aceitar: WhatsApp (21) 99321-6948, Robert Martins Cezar.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+</div>
+
+<footer class="g"><span>Robert Martins Cezar · Gestão, processos e tecnologia</span><span>Proposta nº 001/2026 para JLD Connect C Telecom Ltda</span></footer>
+
+<script>
+(function(){
+  document.documentElement.classList.add("js");
+  var WHATSAPP = "5521993216948";
+  var HORA = 150, MED = 320, PISO = 220, MAX = 500;
+  var $ = function(id){ return document.getElementById(id); };
+  function brl(v){ return "R$ " + Math.round(v).toLocaleString("pt-BR"); }
+  function brl2(v){ return "R$ " + v.toLocaleString("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2}); }
+  function hr(v){ return "R$ " + v.toLocaleString("pt-BR",{minimumFractionDigits:(v%1?2:0),maximumFractionDigits:2}); }
+  var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var rv = document.querySelectorAll(".rv");
+  if ("IntersectionObserver" in window && !reduce) {
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }); }, {rootMargin:"0px 0px -8% 0px"});
+    rv.forEach(function(el){ io.observe(el); });
+  } else rv.forEach(function(el){ el.classList.add("in"); });
+
+  /* capa: identificado -> com plano de ação */
+  if (!reduce) {
+    var st = document.querySelectorAll("#diag .status");
+    st.forEach(function(c){ c.className = "status"; c.textContent = "Identificado"; });
+    st.forEach(function(c,i){ setTimeout(function(){ c.className = "status ok"; c.textContent = "Com plano de ação"; }, 800 + i*420); });
+  }
+
+  /* índice e progresso */
+  var links = [].slice.call(document.querySelectorAll("#idx a"));
+  var secs = links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+  function onScroll(){
+    var h = document.documentElement, top = window.pageYOffset || h.scrollTop;
+    $("prog").style.width = (top / Math.max(1, h.scrollHeight - h.clientHeight) * 100) + "%";
+    var cur = 0;
+    secs.forEach(function(s,i){ if (s.getBoundingClientRect().top < innerHeight*0.4) cur = i; });
+    links.forEach(function(a,i){ a.classList.toggle("on", i === cur); });
+  }
+  addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+  /* hoje x com o Robert */
+  var sw = $("sw"), ba = $("ba");
+  [].forEach.call(sw.querySelectorAll("button"), function(b){
+    b.addEventListener("click", function(){
+      var after = b.getAttribute("data-v") === "d";
+      ba.classList.toggle("after", after);
+      [].forEach.call(sw.querySelectorAll("button"), function(x){ x.setAttribute("aria-pressed", x === b); });
+    });
+  });
+
+  /* etapas */
+  var et = [
+    ["Conheço processos, planilhas, equipamentos e acessos, conversando com quem faz o trabalho no dia a dia.","Mapa dos problemas encontrados e inventário das máquinas.","Primeiro mês."],
+    ["Classifico cada necessidade por urgência, impacto, risco, custo e esforço.","Lista de prioridades aprovada com você.","Final do primeiro mês."],
+    ["Defino a solução, o responsável, o custo e o prazo de cada item.","Plano de ação do trimestre.","Início do segundo mês."],
+    ["Executo e acompanho as melhorias junto com a equipe.","Melhorias implantadas e documentadas.","A partir do segundo mês."],
+    ["Meço os resultados e aponto novas oportunidades.","Relatório mensal e reunião de resultados.","Todo mês."]
+  ];
+  var stops = [].slice.call(document.querySelectorAll(".stop"));
+  function pickStop(i){
+    stops.forEach(function(s,k){ s.setAttribute("aria-pressed", k === i); s.classList.toggle("done", k < i); });
+    $("rl").style.width = (i/(stops.length-1)*100) + "%";
+    $("s0").textContent = stops[i].querySelector("b").textContent;
+    $("s1").textContent = et[i][0]; $("s2").textContent = et[i][1]; $("s3").textContent = et[i][2];
+  }
+  stops.forEach(function(s,i){ s.addEventListener("click", function(){ pickStop(i); }); });
+
+  /* isso entra onde? */
+  var sits = [
+    ["Corrigir a planilha de vendas","c"],["Criar e-mail para a equipe","c"],["Definir quem acessa cada sistema","c"],
+    ["Avaliar as 12 máquinas e indicar o que fazer","c"],["Documentar uma rotina do back office","c"],
+    ["Formatar um notebook lento","s"],["Trocar o SSD de uma máquina","s"],["Instalar uma impressora","s"],["Limpar e trocar pasta térmica","s"]
+  ];
+  $("sits").innerHTML = sits.map(function(s,i){ return '<button class="sit" type="button" aria-pressed="false" data-i="'+i+'">'+s[0]+'</button>'; }).join("");
+  var sitBtns = [].slice.call(document.querySelectorAll(".sit"));
+  sitBtns.forEach(function(b){
+    b.addEventListener("click", function(){
+      var s = sits[+b.getAttribute("data-i")];
+      sitBtns.forEach(function(x){ x.setAttribute("aria-pressed", x === b); });
+      $("laneC").classList.toggle("hit", s[1] === "c"); $("laneS").classList.toggle("hit", s[1] === "s");
+      $("answer").innerHTML = s[1] === "c"
+        ? s[0] + ": entra nas <b class=\"c\">horas da consultoria mensal</b> (Frente A)."
+        : s[0] + ": cobrado pela <b class=\"s\">tabela de suporte técnico</b> (Frente B)" + (/SSD/.test(s[0]) ? ", mais a peça." : ".");
+    });
+  });
+
+  /* pacotes */
+  var P = [
+    {nome:"Essencial", h:16, pres:12, rem:4, preco:2280, inc:["Até 12 h presenciais e 4 h remotas","Resposta remota em até 2 dias úteis","Relatório mensal de horas e entregas"]},
+    {nome:"Recomendado", h:24, pres:16, rem:8, preco:3240, flag:"Mais indicado para o início", inc:["Até 16 h presenciais e 8 h remotas","Resposta remota em até 1 dia útil","Relatório mensal de horas e entregas","Reunião mensal de resultados"]},
+    {nome:"Ampliado", h:32, pres:20, rem:12, preco:4080, inc:["Até 20 h presenciais e 12 h remotas","Resposta remota em até 1 dia útil","Relatório e reunião mensal de resultados","Plano trimestral de melhorias"]}
+  ];
+  $("plans").innerHTML = P.map(function(p,i){
+    var hora = p.preco/p.h;
+    return '<div class="plan" role="radio" tabindex="'+(i===1?0:-1)+'" aria-checked="'+(i===1)+'" data-i="'+i+'">'
+      + '<span class="flag">'+(p.flag || (p.h + " horas por mês"))+'</span>'
+      + '<h4>'+p.nome+'</h4>'
+      + '<div class="val num">'+brl(p.preco)+'<small> /mês</small></div>'
+      + '<div class="sub num">'+p.h+' horas · '+brl2(hora)+' por hora</div>'
+      + '<div class="split" aria-label="'+p.pres+' horas presenciais e '+p.rem+' remotas"><i class="p" style="width:'+(p.pres/p.h*100)+'%"></i><i class="r" style="width:'+(p.rem/p.h*100)+'%"></i></div>'
+      + '<ul>'+p.inc.map(function(x){ return "<li>"+x+"</li>"; }).join("")+'</ul>'
+      + '<span class="choose">'+(i===1?'Selecionado':'Selecionar')+'</span></div>';
+  }).join("");
+  var cards = [].slice.call(document.querySelectorAll(".plan"));
+  var sel = 1, shownTot = 3240;
+
+  function tween(el, from, to){
+    if (reduce || from === to || !window.requestAnimationFrame) { el.textContent = brl(to); return; }
+    var t0 = null, d = 420;
+    function step(t){ if (t0 === null) t0 = t; var k = Math.min(1,(t-t0)/d), e = 1-Math.pow(1-k,3); el.textContent = brl(from + (to-from)*e); if (k<1) requestAnimationFrame(step); }
+    requestAnimationFrame(step);
+  }
+  function message(){
+    var p = P[sel], x = +$("extra").value, who = $("who").value.trim(), obs = $("obs").value.trim();
+    var m = "Olá, Robert! Sobre a proposta nº 001/2026 da JLD Connect, escolhi o pacote " + p.nome + ": " + p.h + " h/mês por " + brl(p.preco) + ".";
+    if (x) m += " Na simulação, considerei até " + x + " h extras em meses de maior demanda.";
+    if (obs) m += "\nObservações: " + obs;
+    if (who) m += "\n" + who;
+    return m;
+  }
+  function update(){
+    var p = P[sel], x = +$("extra").value, tot = p.preco + x*HORA, hrs = p.h + x, hora = p.preco/p.h;
+    $("cName").textContent = p.nome; $("cBase").textContent = brl(p.preco);
+    $("cXh").textContent = x; $("cX").textContent = brl(x*HORA);
+    tween($("cTot"), shownTot, tot); shownTot = tot;
+    $("cAvg").textContent = brl2(tot/hrs);
+    var pos = (hora/MAX*100).toFixed(1) + "%";
+    $("mkDot").style.left = pos; $("mkLab").style.left = pos;
+    $("mkLab").textContent = "Sua hora: " + hr(hora);
+    $("mkName").textContent = p.nome;
+    $("mkPct").textContent = Math.round((1 - hora/MED)*100) + "% abaixo";
+    $("mkFloor").textContent = hr(PISO - hora) + " a menos";
+    $("chosen").innerHTML = "Pacote <b>" + p.nome + "</b>: " + p.h + " h/mês por " + brl(p.preco);
+    $("send").href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(message());
+  }
+  function pick(i){
+    sel = i;
+    cards.forEach(function(c,k){
+      c.setAttribute("aria-checked", k === i); c.tabIndex = k === i ? 0 : -1;
+      c.querySelector(".choose").textContent = k === i ? "Selecionado" : "Selecionar";
+    });
+    update();
+  }
+  cards.forEach(function(c,i){
+    c.addEventListener("click", function(){ pick(i); });
+    c.addEventListener("keydown", function(e){
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(i); }
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); var n=(i+1)%3; pick(n); cards[n].focus(); }
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); var m=(i+2)%3; pick(m); cards[m].focus(); }
+    });
+  });
+  ["extra","who","obs"].forEach(function(id){ $(id).addEventListener("input", update); });
+  $("form").addEventListener("submit", function(e){ e.preventDefault(); });
+  $("copy").addEventListener("click", function(){
+    var t = message();
+    function ok(){ $("copied").textContent = "Mensagem copiada."; }
+    function fail(){ $("copied").textContent = "Não foi possível copiar. Use o botão do WhatsApp."; }
+    try { navigator.clipboard.writeText(t).then(ok, fail); } catch(e) { fail(); }
+  });
+  update();
+})();
+</script>
+
+</body>
+</html>
