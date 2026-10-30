@@ -401,7 +401,7 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
         <div class="sign"><span class="initials" aria-hidden="true">RM</span><div><b>Robert Martins Cezar</b><span>Coordenador de Projetos · 8+ anos em tecnologia e gestão</span></div></div>
       </div>
       <aside class="diag" aria-label="Diagnóstico inicial">
-        <div class="diag-h"><span class="label">Diagnóstico inicial</span><span class="label">5 pontos</span></div>
+        <div class="diag-h"><span class="label">Diagnóstico inicial</span><span class="label" id="diagCount">5 de 5 com plano</span></div>
         <ul id="diag">
           <li>Planilhas de vendas frágeis<span class="status ok">Com plano de ação</span></li>
           <li>E-mail corporativo incompleto<span class="status ok">Com plano de ação</span></li>
@@ -709,10 +709,23 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
   } else rv.forEach(function(el){ el.classList.add("in"); });
 
   /* capa: identificado -> com plano de ação */
+  /* roda quando o quadro aparece na tela (no celular ele fica abaixo da dobra) */
   if (!reduce) {
-    var st = document.querySelectorAll("#diag .status");
+    var st = [].slice.call(document.querySelectorAll("#diag .status"));
+    var cnt = $("diagCount"), started = false;
     st.forEach(function(c){ c.className = "status"; c.textContent = "Identificado"; });
-    st.forEach(function(c,i){ setTimeout(function(){ c.className = "status ok"; c.textContent = "Com plano de ação"; }, 800 + i*420); });
+    cnt.textContent = "0 de 5 com plano";
+    function runDiag(){
+      if (started) return; started = true;
+      st.forEach(function(c,i){ setTimeout(function(){
+        c.className = "status ok"; c.textContent = "Com plano de ação";
+        cnt.textContent = (i+1) + " de 5 com plano";
+      }, 600 + i*550); });
+    }
+    if ("IntersectionObserver" in window) {
+      var dio = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ dio.disconnect(); runDiag(); } }); }, {threshold:0.6});
+      dio.observe($("diag"));
+    } else runDiag();
   }
 
   /* índice e progresso */
