@@ -49,6 +49,7 @@ button{-webkit-tap-highlight-color:transparent;font-family:var(--sans)}
 .cover-in{max-width:1180px;margin:0 auto;padding-block:48px 0}
 .cover-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:64px;align-items:start}
 .cover .label{color:var(--green)}
+.cover-head-label{font-size:clamp(.9rem,1.6vw,1.05rem)!important;letter-spacing:.1em}
 .cover h1{font-size:clamp(2.3rem,5.2vw,4.3rem);line-height:1.04;margin-top:18px;max-width:16ch}
 .cover-for{margin-top:18px;font-size:1.12rem;color:var(--muted)}
 .cover-for b{color:var(--ink);font-weight:600}
@@ -113,6 +114,8 @@ section:last-child{border-bottom:0}
 .ba.after .ba-txt .d{opacity:1;transform:none;pointer-events:auto}
 .ba-txt .a p{color:var(--muted)}
 .proof{font-size:.92rem;color:var(--muted);display:grid;grid-template-columns:auto 1fr;gap:10px}
+.impact{font-size:.92rem;color:var(--muted);display:grid;grid-template-columns:auto 1fr;gap:10px}
+.impact::before{content:"Impacto";font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--warn);padding-top:2px}
 .proof::before{content:"Experiência";font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);padding-top:2px}
 .fine{margin-top:18px;font-size:.92rem;color:var(--muted)}
 
@@ -391,7 +394,7 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
   <div class="cover-in">
     <div class="cover-grid">
       <div>
-        <span class="label">Proposta comercial · nº 001/2026</span>
+        <span class="label cover-head-label">Proposta comercial · nº 001/2026</span>
         <h1>Consultoria em Gestão, Processos e Tecnologia</h1>
         <p class="cover-for">Preparada para <b>JLD Connect C Telecom Ltda</b></p>
         <div class="claim">
@@ -405,7 +408,7 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
         <ul id="diag">
           <li>Planilhas de vendas frágeis<span class="status ok">Com plano de ação</span></li>
           <li>E-mail corporativo incompleto<span class="status ok">Com plano de ação</span></li>
-          <li>12 notebooks antigos<span class="status ok">Com plano de ação</span></li>
+          <li>Notebooks antigos: tratar ou substituir<span class="status ok">Com plano de ação</span></li>
           <li>Acessos sem regra definida<span class="status ok">Com plano de ação</span></li>
           <li>Rotinas na memória das pessoas<span class="status ok">Com plano de ação</span></li>
         </ul>
@@ -444,24 +447,24 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
       </div>
       <div class="ba" id="ba">
         <div class="ba-row"><h3>Planilhas de vendas</h3><div class="ba-txt">
-          <div class="a"><p>Uma aba por mês, nomes digitados dentro de fórmulas e períodos fixos. Um erro de digitação passa sem ninguém perceber.</p></div>
-          <div class="d"><p>Eu corrijo as fórmulas, padronizo a estrutura e treino a equipe para usar sem quebrar.</p><p class="proof">Mais de 8 anos controlando prazos, custos e entregas em projetos de tecnologia.</p></div>
+          <div class="a"><p>Uma aba por mês, com nomes e datas escritos à mão dentro das fórmulas. Um erro de digitação passa sem ninguém perceber.</p><p class="impact">Retrabalho na conferência e risco de erro nos valores.</p></div>
+          <div class="d"><p>Eu corrijo as fórmulas, organizo as planilhas num modelo único e ensino a equipe a usar sem estragar.</p><p class="proof">Mais de 8 anos controlando prazos, custos e entregas em projetos de tecnologia.</p></div>
         </div></div>
         <div class="ba-row"><h3>E-mail corporativo</h3><div class="ba-txt">
-          <div class="a"><p>Parte da equipe usa conta pessoal. Quem sai pode levar contatos e histórico de clientes.</p></div>
-          <div class="d"><p>Eu crio e padronizo as contas de todos e defino o que fazer no dia em que alguém sai.</p><p class="proof">Projetos de transformação digital no ambiente Microsoft.</p></div>
+          <div class="a"><p>Parte da equipe usa e-mail pessoal para trabalhar.</p><p class="impact">Quem sai da empresa pode levar junto contatos e conversas com clientes.</p></div>
+          <div class="d"><p>Eu crio e padronizo as contas de todos e defino o que fazer no dia em que alguém sai.</p><p class="proof">Projetos de transformação digital (modernização de empresas) com ferramentas Microsoft, como Outlook e Teams.</p></div>
         </div></div>
         <div class="ba-row"><h3>Máquinas</h3><div class="ba-txt">
-          <div class="a"><p>12 notebooks antigos (i3 e i5) que precisam ser avaliados.</p></div>
-          <div class="d"><p>Eu faço o inventário e indico, máquina por máquina, o que vale atualizar, manter ou substituir.</p><p class="proof">Decisão por custo e benefício, com visão de gestão.</p></div>
+          <div class="a"><p>Notebooks antigos que pedem tratamento ou substituição. Falta saber, máquina por máquina, qual caminho vale mais a pena.</p><p class="impact">Risco de máquina parar no meio do trabalho, ou de gastar com troca que não era necessária.</p></div>
+          <div class="d"><p>Eu avalio cada notebook e indico o que vale consertar, melhorar ou trocar, com o custo de cada opção.</p><p class="proof">Decisão por custo e benefício, com visão de gestão.</p></div>
         </div></div>
         <div class="ba-row"><h3>Acessos</h3><div class="ba-txt">
-          <div class="a"><p>Permissões de sistemas e equipamentos ainda sem regra documentada.</p></div>
-          <div class="d"><p>Eu defino quem acessa o quê, registro e reviso. Cada pessoa com o acesso de que precisa.</p><p class="proof">Implantação de soluções Microsoft no Detran-SP, INSS e TJSP, onde acesso e segurança são regra.</p></div>
+          <div class="a"><p>Não existe uma regra escrita de quem pode acessar cada sistema, pasta ou computador.</p><p class="impact">Pessoas podem ver ou alterar o que não deveriam, sem ninguém perceber.</p></div>
+          <div class="d"><p>Eu defino quem pode acessar o quê, deixo isso registrado e reviso sempre. Cada pessoa com o acesso de que precisa.</p><p class="proof">Implantação de soluções Microsoft no Detran-SP, INSS e TJSP, onde acesso e segurança são regra.</p></div>
         </div></div>
         <div class="ba-row"><h3>Rotinas</h3><div class="ba-txt">
-          <div class="a"><p>Processos que dependem do WhatsApp e da memória de quem executa.</p></div>
-          <div class="d"><p>Eu mapeio, documento e priorizo as rotinas críticas, e acompanho as demandas mês a mês.</p><p class="proof">Certificações A-CSM e Product Owner: organizar e priorizar trabalho é o meu dia a dia.</p></div>
+          <div class="a"><p>Muitas rotinas dependem do WhatsApp e da memória de quem faz.</p><p class="impact">Quando alguém falta ou sai, a rotina para ou passa a ser feita de outro jeito.</p></div>
+          <div class="d"><p>Eu levanto as rotinas mais importantes, coloco o passo a passo por escrito e acompanho os pedidos mês a mês.</p><p class="proof">Certificações internacionais em gestão ágil (A-CSM e Product Owner): organizar e priorizar trabalho é o meu dia a dia.</p></div>
         </div></div>
       </div>
       <p class="fine">O diagnóstico do primeiro mês confirma e completa esta lista.</p>
@@ -471,11 +474,11 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
       <div class="chap"><span class="n">02</span><h2 class="rv">Nem toda melhoria vira hora economizada. Por isso as metas cobrem três frentes.</h2></div>
       <div class="measures">
         <div class="m rv"><h3>Produtividade</h3><p class="goal">Menos retrabalho na rotina de vendas.</p>
-          <ul><li><span>Planilhas de vendas corrigidas e padronizadas</span></li><li><span>Equipe treinada no uso das planilhas</span></li><li><span>Erros de conferência apontados e corrigidos</span></li></ul></div>
+          <ul><li><span>Planilhas de vendas corrigidas e num modelo único</span></li><li><span>Equipe treinada para usar as planilhas</span></li><li><span>Erros de conferência encontrados e corrigidos</span></li></ul></div>
         <div class="m rv"><h3>Segurança e controle</h3><p class="goal">A informação da empresa fica na empresa.</p>
-          <ul><li><span>100% da equipe com e-mail corporativo</span></li><li><span>Acesso encerrado no dia do desligamento</span></li><li><span>100% das máquinas inventariadas, com cópia de segurança definida</span></li></ul></div>
+          <ul><li><span>Toda a equipe com e-mail da empresa</span></li><li><span>Acessos bloqueados no mesmo dia em que alguém sai</span></li><li><span>Todos os notebooks avaliados e com cópia de segurança dos arquivos</span></li></ul></div>
         <div class="m rv"><h3>Organização</h3><p class="goal">Rotinas que não dependem de uma só pessoa.</p>
-          <ul><li><span>Processos críticos documentados</span></li><li><span>Demandas registradas e priorizadas</span></li><li><span>Relatório mensal de horas e entregas</span></li></ul></div>
+          <ul><li><span>Rotinas mais importantes registradas por escrito</span></li><li><span>Pedidos registrados e organizados por prioridade</span></li><li><span>Relatório mensal de horas e entregas</span></li></ul></div>
       </div>
       <p class="legal">As metas orientam o trabalho e o relatório mensal. Os resultados dependem também da participação da equipe e das decisões da empresa.</p>
     </section>
@@ -490,7 +493,7 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
         <div>
           <div class="stat rv"><b>8+</b><span>anos em gestão de projetos de tecnologia</span></div>
           <div class="stat rv"><b>40+</b><span>contratos ativos no portfólio que coordeno</span></div>
-          <div class="stat rv"><b>2</b><span>formas de conduzir: ágil e tradicional, conforme o projeto</span></div>
+          <div class="stat rv"><b>2</b><span>formas de conduzir projetos: em etapas curtas (ágil) ou com tudo planejado antes (tradicional)</span></div>
         </div>
       </div>
       <div class="public rv">
@@ -521,12 +524,12 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
       </div>
       <div class="stage screen-only" aria-live="polite">
         <h3 class="stage-title" id="s0">Diagnóstico</h3>
-        <div><span class="label">O que acontece</span><p id="s1">Conheço processos, planilhas, equipamentos e acessos, conversando com quem faz o trabalho no dia a dia.</p></div>
-        <div><span class="label">O que você recebe</span><p id="s2">Mapa dos problemas encontrados e inventário das máquinas.</p></div>
+        <div><span class="label">O que acontece</span><p id="s1">Conheço as rotinas, planilhas, notebooks e acessos, conversando com quem faz o trabalho no dia a dia.</p></div>
+        <div><span class="label">O que você recebe</span><p id="s2">Lista dos problemas encontrados e avaliação dos notebooks.</p></div>
         <div><span class="label">Quando</span><p id="s3">Primeiro mês.</p></div>
       </div>
       <ol class="print-only print-steps">
-        <li><b>Diagnóstico.</b> Conheço processos, planilhas, equipamentos e acessos. Entrega: mapa dos problemas e inventário das máquinas. Primeiro mês.</li>
+        <li><b>Diagnóstico.</b> Conheço as rotinas, planilhas, notebooks e acessos. Entrega: lista dos problemas e avaliação dos notebooks. Primeiro mês.</li>
         <li><b>Priorização.</b> Classifico cada necessidade por urgência, impacto, risco, custo e esforço. Entrega: lista de prioridades aprovada com você.</li>
         <li><b>Planejamento.</b> Defino solução, responsável, custo e prazo de cada item. Entrega: plano de ação do trimestre.</li>
         <li><b>Implementação.</b> Executo e acompanho as melhorias com a equipe. Entrega: melhorias implantadas e documentadas.</li>
@@ -537,9 +540,9 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
           <caption>Cada hora fica registrada e vai no relatório do mês. Exemplo de como fica:</caption>
           <thead><tr><th>Data</th><th>Tipo</th><th>Atividade</th><th>Horas</th></tr></thead>
           <tbody>
-            <tr><td class="n num">05/11</td><td>Presencial</td><td>Levantamento das planilhas de vendas com o back office</td><td class="n num">2,0</td></tr>
+            <tr><td class="n num">05/11</td><td>Presencial</td><td>Levantamento das planilhas de vendas com a equipe do escritório</td><td class="n num">2,0</td></tr>
             <tr><td class="n num">06/11</td><td>Remoto</td><td>Correção das fórmulas da planilha de vendas</td><td class="n num">1,5</td></tr>
-            <tr><td class="n num">12/11</td><td>Presencial</td><td>Inventário dos notebooks e das contas de e-mail</td><td class="n num">3,0</td></tr>
+            <tr><td class="n num">12/11</td><td>Presencial</td><td>Avaliação dos notebooks e das contas de e-mail</td><td class="n num">3,0</td></tr>
           </tbody>
         </table>
       </div>
@@ -556,29 +559,29 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
         <p class="hint">Toque em uma situação para ver como ela é cobrada.</p>
         <div class="sits" id="sits"></div>
         <p class="answer" id="answer" aria-live="polite"></p>
-        <p class="print-only">Entram nas horas da consultoria: corrigir planilhas, criar e-mails, definir acessos, avaliar as máquinas e documentar rotinas. Vão pela tabela de suporte: formatar, trocar peças, instalar programas e impressoras, limpeza interna.</p>
+        <p class="print-only">Entram nas horas da consultoria: corrigir planilhas, criar e-mails, definir acessos, avaliar os notebooks e registrar rotinas. Vão pela tabela de suporte: formatar, trocar peças, instalar programas e impressoras, limpeza interna.</p>
       </div>
 
       <div class="part c"><span class="label">Frente A</span><h3>Consultoria mensal</h3></div>
-      <p class="part-intro">Escolha o ritmo. Quanto maior o pacote, menor o valor de cada hora. A presença é combinada semana a semana.</p>
+      <p class="part-intro">Escolha o ritmo. Quanto maior o pacote, menor o valor de cada hora. As visitas são combinadas semana a semana, e as horas remotas são feitas a distância, por WhatsApp, telefone ou acesso ao computador.</p>
       <div class="plans" id="plans" role="radiogroup" aria-label="Pacotes de consultoria"></div>
       <div class="key"><span>Horas presenciais</span><span class="r">Horas remotas</span></div>
 
       <div class="market">
         <h4>Onde esse valor fica no mercado</h4>
-        <p class="lede">Valor da hora de consultores sêniores em 2026, segundo referências públicas, comparado ao valor da hora no pacote <b id="mkName">Recomendado</b>.</p>
+        <p class="lede">Quanto consultores experientes cobram por hora em 2026, segundo pesquisas públicas, comparado ao valor da hora no pacote <b id="mkName">Recomendado</b>.</p>
         <div class="scale" aria-hidden="true">
           <span class="band" style="left:44%;right:0"></span>
           <span class="med" style="left:64%"></span>
           <span class="me" id="mkDot" style="left:27%"></span>
           <span class="lab me-l" id="mkLab" style="left:27%">Sua hora: R$ 135</span>
-          <span class="lab med-l" style="left:64%">Mediana sênior: R$ 320</span>
+          <span class="lab med-l" style="left:64%">Valor mais comum: R$ 320</span>
         </div>
         <div class="ticks num"><span>R$ 0</span><span>R$ 250</span><span>R$ 500</span></div>
         <div class="mfacts">
-          <div><b class="num">R$ 220 a 500</b><span>faixa de consultor sênior por hora</span></div>
-          <div><b class="num" id="mkPct">58% abaixo</b><span>da mediana sênior, segundo as referências citadas</span></div>
-          <div><b class="num" id="mkFloor">R$ 85 a menos</b><span>que o piso sênior, por hora</span></div>
+          <div><b class="num">R$ 220 a 500</b><span>por hora, faixa cobrada por consultores experientes</span></div>
+          <div><b class="num" id="mkPct">58% abaixo</b><span>do valor mais comum do mercado, segundo as pesquisas citadas</span></div>
+          <div><b class="num" id="mkFloor">R$ 85 a menos</b><span>por hora, em relação ao menor valor da faixa</span></div>
         </div>
         <p class="src">Fontes: <a href="https://www.lancei.pro/benchmark/consultoria" target="_blank" rel="noopener">Lancei, benchmark de consultores 2026</a> e <a href="https://agilize.com.br/artigos/consultor-ti-diaria-freelancer/" target="_blank" rel="noopener">Agilize, consultor de TI, out/2026</a>.</p>
       </div>
@@ -605,13 +608,13 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
           <table>
             <thead><tr><th>Serviço</th><th>Avulso</th><th class="k">Com contrato</th></tr></thead>
             <tbody>
-              <tr><td>Diagnóstico técnico<small>Abatido do valor do serviço, se aprovado</small></td><td class="v old">R$ 100</td><td class="v k">R$ 80</td></tr>
-              <tr><td>Formatação completa<small>Sistema, drivers e programas básicos</small></td><td class="v old">R$ 150</td><td class="v k">R$ 120</td></tr>
-              <tr><td>Backup e transferência de arquivos</td><td class="v old">R$ 60</td><td class="v k">R$ 50</td></tr>
-              <tr><td>Troca de SSD com cópia do sistema<small>Peça à parte</small></td><td class="v old">R$ 190</td><td class="v k">R$ 150</td></tr>
+              <tr><td>Diagnóstico técnico<small>Descobre o defeito. Valor abatido do serviço, se aprovado</small></td><td class="v old">R$ 100</td><td class="v k">R$ 80</td></tr>
+              <tr><td>Formatação completa<small>Reinstala o Windows e os programas básicos</small></td><td class="v old">R$ 150</td><td class="v k">R$ 120</td></tr>
+              <tr><td>Cópia de segurança dos arquivos (backup)<small>Salva os arquivos antes de qualquer serviço</small></td><td class="v old">R$ 60</td><td class="v k">R$ 50</td></tr>
+              <tr><td>Troca do HD por SSD<small>Deixa o notebook bem mais rápido. Peça à parte</small></td><td class="v old">R$ 190</td><td class="v k">R$ 150</td></tr>
               <tr><td>Troca de memória, bateria ou teclado<small>Peça à parte</small></td><td class="v old">R$ 100</td><td class="v k">R$ 80</td></tr>
-              <tr><td>Limpeza interna e troca de pasta térmica</td><td class="v old">R$ 150</td><td class="v k">R$ 120</td></tr>
-              <tr><td>Remoção de vírus e otimização</td><td class="v old">R$ 120</td><td class="v k">R$ 100</td></tr>
+              <tr><td>Limpeza interna e troca de pasta térmica<small>Evita superaquecimento e desligamentos</small></td><td class="v old">R$ 150</td><td class="v k">R$ 120</td></tr>
+              <tr><td>Remoção de vírus e otimização<small>Deixa o sistema limpo e mais leve</small></td><td class="v old">R$ 120</td><td class="v k">R$ 100</td></tr>
               <tr><td>Instalação de programa ou impressora<small>Por item</small></td><td class="v old">R$ 60</td><td class="v k">R$ 50</td></tr>
               <tr><td>Visita extra fora da agenda combinada</td><td class="v old">R$ 80</td><td class="v k">R$ 60</td></tr>
             </tbody>
@@ -621,9 +624,9 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
       </div>
       <div class="rules">
         <div class="rule"><b>Orçamento antes</b><span>Nenhum serviço ou compra de peça sem a sua aprovação.</span></div>
-        <div class="rule"><b>Backup é da empresa</b><span>Não respondo por arquivos perdidos em máquina sem backup, salvo se o backup for contratado.</span></div>
+        <div class="rule"><b>Cópia de segurança é da empresa</b><span>Não respondo por arquivos perdidos em notebook sem cópia de segurança (backup), salvo se o backup for contratado.</span></div>
         <div class="rule"><b>Garantia de 90 dias</b><span>Sobre o serviço feito. A peça segue a garantia do fabricante.</span></div>
-        <div class="rule"><b>Só software original</b><span>Não instalo programa sem licença. Protege a empresa e os dados.</span></div>
+        <div class="rule"><b>Só programas originais</b><span>Não instalo programa pirata. Protege a empresa e os dados.</span></div>
         <div class="rule"><b>Sem conserto viável</b><span>Cobro só o diagnóstico e entrego um parecer por escrito.</span></div>
       </div>
     </section>
@@ -635,7 +638,7 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
         <p>Para o trabalho andar no ritmo combinado.</p>
         <ul>
           <li><b>Um responsável interno</b><span>Pessoa de referência para aprovar prioridades e orçamentos.</span></li>
-          <li><b>Acesso autorizado</b><span>Às planilhas, máquinas e contas necessárias, com autorização formal.</span></li>
+          <li><b>Acesso autorizado</b><span>Às planilhas, notebooks e contas necessárias, com autorização por escrito.</span></li>
           <li><b>Equipe disponível</b><span>Tempo da equipe nas visitas combinadas, para levantamentos e treinamentos.</span></li>
           <li><b>Compras pela empresa</b><span>Peças, equipamentos e licenças pagos direto ao fornecedor.</span></li>
         </ul>
@@ -651,15 +654,15 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
         <div>
           <h3>Condições</h3>
           <ul class="conds">
-            <li><b>Vigência</b><span>3 meses, renovados automaticamente por mais 3. Após 6 meses, novo contrato com valores revistos.</span></li>
+            <li><b>Duração</b><span>3 meses, renovados automaticamente por mais 3. Após 6 meses, novo contrato com valores revistos.</span></li>
             <li><b>Encerramento</b><span>A partir do 4º mês, qualquer das partes pode encerrar com aviso de 30 dias. Quem não quiser renovar avisa até 30 dias antes do fim do 3º mês.</span></li>
             <li><b>Pagamento</b><span>Mensalidade até o dia 10 do mês de referência, por Pix, com recibo de pagamento a autônomo (RPA). Serviços de suporte do mês somados à mensalidade seguinte.</span></li>
             <li><b>Atraso</b><span>Multa de 2% e juros de 1% ao mês. Após 15 dias de atraso, o atendimento fica suspenso até a regularização.</span></li>
             <li><b>Horas</b><span>Não usadas valem no mês seguinte e expiram no fim de cada período de 3 meses.</span></li>
             <li><b>Presença</b><span>Visitas combinadas em comum acordo, em blocos de no mínimo 2 horas. Visitas semanais nos 3 primeiros meses.</span></li>
-            <li><b>Atuação</b><span>Autônoma, sem exclusividade e sem subordinação.</span></li>
+            <li><b>Atuação</b><span>Como profissional independente (autônomo), sem exclusividade e sem vínculo de emprego.</span></li>
             <li><b>Relatório</b><span>Todo mês: horas usadas, saldo, entregas e serviços de suporte.</span></li>
-            <li><b>Dados</b><span>Acesso só com autorização formal. Os dados permanecem em contas e equipamentos da JLD, e não levo cópias para fora da empresa. Confidencialidade e LGPD no contrato.</span></li>
+            <li><b>Dados</b><span>Acesso só com autorização por escrito. As informações ficam nas contas e notebooks da JLD, e não levo cópias para fora da empresa. Sigilo e cuidados da Lei Geral de Proteção de Dados (LGPD) no contrato.</span></li>
           </ul>
         </div>
       </div>
@@ -671,7 +674,7 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
         <ol class="steps3">
           <li><span class="b">1</span><div><strong>Você envia a escolha</strong><p>Pelo botão ao lado. Se quiser ajustar algo, escreva nas observações.</p></div></li>
           <li><span class="b">2</span><div><strong>Contrato de prestação de serviço</strong><p>Com as condições definitivas: escopo, horas, tabela de suporte, limites e confidencialidade.</p></div></li>
-          <li><span class="b">3</span><div><strong>Primeira visita</strong><p>Início do diagnóstico: planilhas, máquinas e acessos.</p></div></li>
+          <li><span class="b">3</span><div><strong>Primeira visita</strong><p>Início do diagnóstico: planilhas, notebooks e acessos.</p></div></li>
         </ol>
         <form class="form" id="form" novalidate>
           <h3>Sua escolha</h3>
@@ -752,7 +755,7 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
 
   /* etapas */
   var et = [
-    ["Conheço processos, planilhas, equipamentos e acessos, conversando com quem faz o trabalho no dia a dia.","Mapa dos problemas encontrados e inventário das máquinas.","Primeiro mês."],
+    ["Conheço as rotinas, planilhas, notebooks e acessos, conversando com quem faz o trabalho no dia a dia.","Lista dos problemas encontrados e avaliação dos notebooks.","Primeiro mês."],
     ["Classifico cada necessidade por urgência, impacto, risco, custo e esforço.","Lista de prioridades aprovada com você.","Final do primeiro mês."],
     ["Defino a solução, o responsável, o custo e o prazo de cada item.","Plano de ação do trimestre.","Início do segundo mês."],
     ["Executo e acompanho as melhorias junto com a equipe.","Melhorias implantadas e documentadas.","A partir do segundo mês."],
@@ -770,7 +773,7 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
   /* isso entra onde? */
   var sits = [
     ["Corrigir a planilha de vendas","c"],["Criar e-mail para a equipe","c"],["Definir quem acessa cada sistema","c"],
-    ["Avaliar as 12 máquinas e indicar o que fazer","c"],["Documentar uma rotina do back office","c"],
+    ["Avaliar os notebooks e indicar o que fazer","c"],["Registrar por escrito uma rotina do escritório","c"],
     ["Formatar um notebook lento","s"],["Trocar o SSD de uma máquina","s"],["Instalar uma impressora","s"],["Limpar e trocar pasta térmica","s"]
   ];
   $("sits").innerHTML = sits.map(function(s,i){ return '<button class="sit" type="button" aria-pressed="false" data-i="'+i+'">'+s[0]+'</button>'; }).join("");
@@ -788,9 +791,9 @@ footer{max-width:1180px;margin:0 auto;padding-block:28px 40px;border-top:1px sol
 
   /* pacotes */
   var P = [
-    {nome:"Essencial", h:16, pres:12, rem:4, preco:2280, inc:["Até 12 h presenciais e 4 h remotas","Resposta remota em até 2 dias úteis","Relatório mensal de horas e entregas"]},
-    {nome:"Recomendado", h:24, pres:16, rem:8, preco:3240, flag:"Mais indicado para o início", inc:["Até 16 h presenciais e 8 h remotas","Resposta remota em até 1 dia útil","Relatório mensal de horas e entregas","Reunião mensal de resultados"]},
-    {nome:"Ampliado", h:32, pres:20, rem:12, preco:4080, inc:["Até 20 h presenciais e 12 h remotas","Resposta remota em até 1 dia útil","Relatório e reunião mensal de resultados","Plano trimestral de melhorias"]}
+    {nome:"Essencial", h:16, pres:12, rem:4, preco:2280, inc:["Até 12 h presenciais e 4 h remotas","Resposta pelo WhatsApp em até 2 dias úteis","Relatório mensal de horas e entregas"]},
+    {nome:"Recomendado", h:24, pres:16, rem:8, preco:3240, flag:"Mais indicado para o início", inc:["Até 16 h presenciais e 8 h remotas","Resposta pelo WhatsApp em até 1 dia útil","Relatório mensal de horas e entregas","Reunião mensal de resultados"]},
+    {nome:"Ampliado", h:32, pres:20, rem:12, preco:4080, inc:["Até 20 h presenciais e 12 h remotas","Resposta pelo WhatsApp em até 1 dia útil","Relatório e reunião mensal de resultados","Plano de melhorias a cada 3 meses"]}
   ];
   $("plans").innerHTML = P.map(function(p,i){
     var hora = p.preco/p.h;
