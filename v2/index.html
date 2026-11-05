@@ -6,26 +6,25 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Proposta JLD Connect</title>
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Proposta da ferramenta de pagamentos e do suporte mensal para a JLD Connect C Telecom Ltda.">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0c1416">
+<meta name="format-detection" content="telephone=no">
+<meta name="description" content="Proposta do NexFlow, do suporte com 16 horas mensais e dos opcionais para a JLD Connect C Telecom Ltda.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: apresentação em slides verticais (desliza para cima). Uma ideia por tela, mesma identidade da proposta nº 001. */
-:root{
-  --bg:#fbfcfb; --sheet:#ffffff; --ink:#10212f; --muted:#56636e; --rule:#dce3e0; --rule-2:#c3ccc8;
-  --green:#0e6a4e; --green-mark:#1c9a6c; --green-wash:#eaf4ef; --navy:#1d3a57; --navy-wash:#ebf0f5;
+:root,:root[data-theme="light"],:root[data-theme="dark"]{
+  --bg:#0c1416; --sheet:#111c1f; --ink:#e7eeec; --muted:#9fb0ab; --rule:#23312f; --rule-2:#33443f;
+  --green:#5fcf9f; --green-mark:#5fcf9f; --green-wash:#13281f; --navy:#a9c2dc; --navy-wash:#152230; --on-green:#08231a;
   --serif:"Source Serif 4",Georgia,serif; --sans:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:dark;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0c1416; --sheet:#111c1f; --ink:#e7eeec; --muted:#9fb0ab; --rule:#23312f; --rule-2:#33443f;
-  --green:#5fcf9f; --green-mark:#5fcf9f; --green-wash:#13281f; --navy:#a9c2dc; --navy-wash:#152230; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0c1416; --sheet:#111c1f; --ink:#e7eeec; --muted:#9fb0ab; --rule:#23312f; --rule-2:#33443f;
-  --green:#5fcf9f; --green-mark:#5fcf9f; --green-wash:#13281f; --navy:#a9c2dc; --navy-wash:#152230; color-scheme:dark}
 *{box-sizing:border-box}
 html,body{height:100%}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
+a,button,[role="checkbox"]{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.5;overflow:hidden}
 h1,h2,h3{margin:0;text-wrap:balance}
 h1,h2{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
@@ -34,13 +33,11 @@ p{margin:0}
 .muted{color:var(--muted)}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px}
 
-/* deck */
-.deck{position:fixed;inset:0;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
+.deck{position:fixed;inset:0;overflow-y:auto;scroll-snap-type:y proximity;scroll-behavior:smooth;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
 .slide{min-height:100vh;min-height:100svh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:64px max(20px,env(safe-area-inset-right,0px)) 76px max(20px,env(safe-area-inset-left,0px));position:relative}
 .slide>.in{width:100%;max-width:720px;margin:0 auto}
 .slide+.slide{border-top:1px solid var(--rule)}
 
-/* barra fixa */
 .topband{position:fixed;left:0;right:0;top:0;height:5px;background:var(--green);z-index:30}
 .progress{position:fixed;left:0;right:0;top:5px;height:3px;z-index:30;background:var(--rule)}
 .progress i{display:block;height:100%;width:0;background:var(--green-mark);transition:width .35s}
@@ -49,12 +46,11 @@ p{margin:0}
 .menu{font:inherit;font-size:.86rem;font-weight:700;color:var(--green);background:var(--sheet);border:1.5px solid var(--green);border-radius:999px;padding:6px 14px;cursor:pointer}
 .menu[hidden]{display:none}
 
-/* próximo */
-.next{position:absolute;left:50%;bottom:max(18px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:8px;font:inherit;font-size:.86rem;font-weight:600;color:var(--muted);background:none;border:0;cursor:pointer;white-space:nowrap;padding:8px 10px}
-.next svg{width:18px;height:18px;stroke:var(--green);animation:bob 1.8s ease-in-out infinite}
+.next{position:absolute;left:50%;bottom:max(18px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:8px;font:inherit;font-size:.86rem;font-weight:600;color:var(--muted);background:none;border:0;cursor:pointer;white-space:nowrap;padding:8px 10px;max-width:calc(100% - 24px)}
+.next span{overflow:hidden;text-overflow:ellipsis}
+.next svg{width:18px;height:18px;flex:none;stroke:var(--green);animation:bob 1.8s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(4px)}}
 
-/* entrada */
 .js .slide .rv{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .7s cubic-bezier(.2,.7,.2,1)}
 .js .slide.on .rv{opacity:1;transform:none}
 .js .slide.on .rv:nth-child(2){transition-delay:.06s}
@@ -62,12 +58,12 @@ p{margin:0}
 .js .slide.on .rv:nth-child(4){transition-delay:.18s}
 .js .slide.on .rv:nth-child(5){transition-delay:.24s}
 
-/* cabeçalho de capítulo */
-.chap{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
+.chap{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
 .chap .n{font-family:var(--serif);font-weight:600;font-size:1.5rem;color:var(--green);line-height:1}
 .chap .label{color:var(--muted)}
-.slide h2{font-size:clamp(1.7rem,6vw,2.4rem);line-height:1.1}
+.slide h2{font-size:clamp(1.6rem,5.6vw,2.3rem);line-height:1.12}
 .sub{margin-top:10px;color:var(--muted);font-size:1.02rem}
+.brand{display:inline-block;margin-top:10px;font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sheet);background:var(--green);border-radius:6px;padding:3px 9px}
 
 /* capa */
 .cover-label{font-size:clamp(.88rem,1.6vw,1.02rem);letter-spacing:.1em}
@@ -84,108 +80,142 @@ p{margin:0}
 .meta .label{color:var(--muted);font-size:.7rem}
 .meta b{font-weight:600;font-size:.98rem}
 @media (max-width:620px){.meta{grid-template-columns:1fr 1fr}.meta div:nth-child(3){padding-left:0;border-left:0}.meta div:nth-child(n+3){border-top:1px solid var(--rule)}}
-.start{display:inline-flex;align-items:center;gap:10px;margin-top:26px;background:var(--green);color:#fff;border:0;border-radius:8px;padding:14px 22px;font:inherit;font-weight:700;font-size:1.02rem;cursor:pointer}
-:root[data-theme="dark"] .start,:root[data-theme="dark"] .send{color:#08231a}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .start,:root:not([data-theme="light"]) .send{color:#08231a}}
+.start{display:inline-flex;align-items:center;gap:10px;margin-top:26px;background:var(--green);color:var(--on-green);border:0;border-radius:8px;padding:14px 22px;font:inherit;font-weight:700;font-size:1.02rem;cursor:pointer}
 
 /* sumário */
-.toc{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px}
-.toc a{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:12px;align-items:center;text-decoration:none;color:inherit;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;transition:border-color .2s}
-.toc a:hover{border-color:var(--green)}
-.toc .n{font-family:var(--serif);font-weight:600;font-size:1.5rem;color:var(--green);line-height:1}
-.toc b{display:block;font-size:1.04rem;line-height:1.3}
-.toc .s{display:block;font-size:.88rem;color:var(--muted)}
-.toc .v{font-weight:700;font-size:1rem;text-align:right;white-space:nowrap}
-.toc .v small{display:block;font-weight:500;font-size:.78rem;color:var(--muted)}
-.toc li.last a{background:var(--green-wash);border-color:transparent}
+.toc-h{margin-top:8px}
+.toc{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.toc a{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;text-decoration:none;color:inherit;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;transition:border-color .2s}
+@media (hover:hover){.toc a:hover{border-color:var(--green)}}
+.toc a:active{border-color:var(--green)}
+.toc .n{font-family:var(--serif);font-weight:600;font-size:1.45rem;color:var(--green);line-height:1.1}
+.toc b{display:block;font-size:1.02rem;line-height:1.3}
+.toc .s{display:block;font-size:.88rem;color:var(--muted);line-height:1.35;margin-top:2px}
+.toc .v{display:inline-block;margin-top:6px;font-weight:700;font-size:.92rem;color:var(--green)}
 
 /* preço */
-.price{margin-top:22px;background:var(--green-wash);border-radius:12px;padding:24px 22px}
+.price{margin-top:20px;background:var(--green-wash);border-radius:12px;padding:22px}
 .price .old{text-decoration:line-through;color:var(--muted);font-size:1.05rem}
 .price .big{font-family:var(--serif);font-weight:600;font-size:clamp(2.8rem,12vw,3.8rem);line-height:1.05;margin-top:2px}
-.price .split{margin-top:10px;font-size:1.25rem;font-weight:700}
-.price .tag{display:inline-block;margin-top:14px;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);border:1.5px solid var(--green);border-radius:999px;padding:4px 10px}
+.price .split{margin-top:8px;font-size:1.25rem;font-weight:700}
+.price .tag{display:inline-block;margin-top:12px;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);border:1.5px solid var(--green);border-radius:999px;padding:4px 10px}
 
-/* lista do que faz */
-.does{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.does{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:10px}
 .does li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;align-items:start}
 .does .ic{width:28px;height:28px;border-radius:7px;display:grid;place-items:center;background:var(--green-wash);color:var(--green);font-weight:700;font-size:.9rem}
 .does b{display:block;font-size:1rem;line-height:1.3}
 .does span{display:block;color:var(--muted);font-size:.9rem;line-height:1.4}
 
-/* duas caixas */
-.pair{margin-top:22px;display:grid;gap:14px}
+.pair{margin-top:20px;display:grid;gap:14px}
 .card{border-radius:12px;padding:20px;display:grid;gap:8px}
-.card .ico{width:40px;height:40px;border-radius:10px;display:grid;place-items:center}
+.card .ico{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;background:var(--sheet)}
 .card .ico svg{width:22px;height:22px}
-.card h3{font-size:1.15rem}
+.card h3{font-size:1.12rem}
 .card p{color:var(--muted);font-size:.98rem}
 .card.yours{background:var(--green-wash)}
-.card.yours .ico{background:var(--sheet);color:var(--green)}
+.card.yours .ico{color:var(--green)}
 .card.jld{background:var(--navy-wash)}
-.card.jld .ico{background:var(--sheet);color:var(--navy)}
+.card.jld .ico{color:var(--navy)}
 
-/* horas */
-.hours{margin-top:22px;background:var(--navy-wash);border-radius:12px;padding:24px 22px}
-.hours .big{font-family:var(--serif);font-weight:600;font-size:clamp(2.8rem,12vw,3.8rem);line-height:1.05}
+/* suporte */
+.hours{margin-top:18px;background:var(--navy-wash);border-radius:12px;padding:20px}
+.hours .big{font-family:var(--serif);font-weight:600;font-size:clamp(2.6rem,11vw,3.4rem);line-height:1.05}
 .hours .big small{font-family:var(--sans);font-size:1.05rem;font-weight:500;color:var(--muted)}
-.hours p{margin-top:6px;color:var(--muted)}
-.hbar{margin-top:20px;display:grid;grid-template-columns:repeat(16,1fr);gap:4px}
-.hbar i{height:22px;border-radius:4px;background:var(--navy);transform-origin:bottom;transform:scaleY(.2);opacity:.3;transition:transform .4s,opacity .4s}
+.incl{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
+.incl li{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:start}
+.incl li::before{content:"✓";width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:.8rem;font-weight:700;background:var(--sheet);color:var(--green);margin-top:1px}
+.incl b{display:block;font-size:1rem;line-height:1.3}
+.incl span{display:block;color:var(--muted);font-size:.9rem;line-height:1.35}
+.hbar{margin-top:16px;display:grid;grid-template-columns:repeat(16,1fr);gap:4px}
+.hbar i{height:20px;border-radius:4px;background:var(--navy);transform-origin:bottom;transform:scaleY(.2);opacity:.3;transition:transform .4s,opacity .4s}
 .hbar i.b{background:var(--green-mark)}
 .slide.on .hbar i{transform:none;opacity:1}
-.hcount{display:flex;justify-content:space-between;margin-top:6px;font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
-.legend{display:grid;gap:6px;margin-top:14px;font-size:.95rem}
-.legend span::before{content:"";display:inline-block;width:14px;height:12px;border-radius:3px;margin-right:8px;background:var(--navy);vertical-align:-1px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:8px;font-size:.88rem;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:12px;height:10px;border-radius:2px;margin-right:6px;background:var(--navy)}
 .legend span.b::before{background:var(--green-mark)}
 
-.uses{margin-top:16px;border-top:1px solid var(--rule)}
+.uses{margin-top:14px;border-top:1px solid var(--rule)}
 .uses div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding-block:10px;border-bottom:1px solid var(--rule);font-size:.98rem}
 .uses b{white-space:nowrap}
 .uses .free b{color:var(--green)}
 
-.rules{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px}
-.rules li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;align-items:center;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+.rules{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.rules li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;align-items:center;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:13px 16px}
 .rules .k{font-family:var(--serif);font-weight:600;font-size:1.3rem;color:var(--navy);text-align:center;line-height:1;white-space:nowrap}
 .rules b{display:block;font-size:1rem}
 .rules span{display:block;color:var(--muted);font-size:.9rem}
 
 /* opcionais */
-.opts{margin-top:16px;display:grid;gap:10px}
-.opt{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--sheet);border:2px solid var(--rule);border-radius:10px;padding:12px 14px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s,background .2s}
+.opts{margin-top:14px;display:grid;gap:10px}
+.opt{display:grid;grid-template-columns:26px minmax(0,1fr);gap:12px;align-items:start;background:var(--sheet);border:2px solid var(--rule);border-radius:10px;padding:12px 14px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s,background .2s}
 .opt[aria-checked="true"]{border-color:var(--green);background:var(--green-wash)}
 .opt b{display:block;font-size:1rem;line-height:1.3}
-.opt span{display:block;font-size:.88rem;color:var(--muted);line-height:1.35}
-.opt .pv{text-align:right;font-weight:700;white-space:nowrap}
-.opt .pv small{display:block;font-weight:500;font-size:.78rem;color:var(--muted)}
-.check{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;border:2px solid var(--rule-2);margin-left:8px;vertical-align:middle;font-size:.85rem;color:transparent}
+.opt .d{display:block;font-size:.88rem;color:var(--muted);line-height:1.35}
+.opt .pv{display:block;margin-top:4px;font-weight:700;color:var(--green)}
+.opt .pv small{font-weight:500;font-size:.85rem;color:var(--muted)}
+.check{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;border:2px solid var(--rule-2);margin-top:1px;font-size:.85rem;color:transparent}
+.opt .check{display:inline-grid;color:transparent;line-height:1}
 .opt[aria-checked="true"] .check{background:var(--green);border-color:var(--green);color:var(--sheet)}
-.mini{margin-top:14px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;background:var(--ink);color:var(--bg);border-radius:10px;padding:14px 16px}
+.mini{margin-top:12px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;background:var(--green-wash);color:var(--ink);border:1.5px solid var(--green);border-radius:10px;padding:13px 16px}
 .mini span{font-size:.92rem;opacity:.85}
-.mini b{font-family:var(--serif);font-weight:600;font-size:1.5rem;white-space:nowrap}
+.mini b{font-family:var(--serif);font-weight:600;font-size:1.5rem;white-space:nowrap;color:var(--green)}
+
+/* combinados: fluxo */
+.flow{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:0;position:relative}
+.flow li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;align-items:start;padding-bottom:16px;position:relative}
+.flow li:not(:last-child)::after{content:"";position:absolute;left:19px;top:40px;bottom:2px;width:2px;background:var(--rule-2)}
+.flow .st{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:600;font-size:1.15rem;color:var(--green);border:1.5px solid var(--green);background:var(--sheet);position:relative;z-index:1}
+.flow b{display:block;font-size:1.02rem;line-height:1.3;padding-top:8px}
+.flow span{display:block;color:var(--muted);font-size:.9rem;line-height:1.4}
+.note{margin-top:4px;background:var(--navy-wash);border-radius:10px;padding:12px 14px;font-size:.92rem;color:var(--ink)}
+
+/* combinados: contrato */
+.tiles{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:12px 14px;display:grid;gap:2px;align-content:start}
+.tile .label{color:var(--muted);font-size:.68rem}
+.tile b{font-family:var(--serif);font-weight:600;font-size:1.25rem;line-height:1.15}
+.tile span{font-size:.86rem;color:var(--muted);line-height:1.35}
+.tile.wide{grid-column:1/-1}
 
 /* resumo */
-.sum{margin-top:20px;background:var(--ink);color:var(--bg);border-radius:12px;padding:22px}
+.sum{margin-top:18px;background:var(--sheet);color:var(--ink);border:1.5px solid var(--green);border-radius:12px;padding:22px}
 .sum .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding-block:7px;font-size:1rem}
 .sum .row b{font-variant-numeric:tabular-nums}
-.sum .total{border-top:1px solid var(--muted);margin-top:6px;padding-top:12px;font-size:1.1rem;align-items:baseline}
-.sum .total b{font-family:var(--serif);font-weight:600;font-size:2rem}
+.sum .total{border-top:1px solid var(--rule-2);margin-top:6px;padding-top:12px;font-size:1.1rem;align-items:baseline}
+.sum .total b{font-family:var(--serif);font-weight:600;font-size:2rem;color:var(--green)}
 .sum .after{margin-top:6px;font-size:.92rem;opacity:.8}
 .sum .tot{margin-top:4px;font-size:.88rem;opacity:.75}
 .chosen{margin-top:14px;font-size:.95rem;color:var(--muted)}
 .chosen b{color:var(--ink)}
 .chosen a{color:var(--green);font-weight:600}
 
-/* combinados */
-.terms{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
-.terms li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;font-size:1rem}
-.terms li::before{content:"";width:8px;height:8px;margin-top:9px;background:var(--green-mark);border-radius:2px}
-.send{display:block;margin-top:22px;background:var(--green);color:#fff;text-align:center;text-decoration:none;font-weight:700;font-size:1.05rem;padding:16px;border-radius:8px}
+.send{display:block;margin-top:18px;background:var(--green);color:var(--on-green);text-align:center;text-decoration:none;font-weight:700;font-size:1.05rem;padding:15px;border-radius:8px}
 .small{margin-top:10px;font-size:.85rem;color:var(--muted)}
-.foot{margin-top:22px;padding-top:14px;border-top:1px solid var(--rule);font-size:.82rem;color:var(--muted)}
+.foot{margin-top:20px;padding-top:14px;border-top:1px solid var(--rule);font-size:.82rem;color:var(--muted)}
 
-@media (max-height:680px){.slide{padding-top:54px;padding-bottom:62px}.does{gap:7px}.does span{font-size:.86rem}.price,.hours{padding:18px}.chap{margin-bottom:12px}.toc a{padding:11px 14px}.uses div{padding-block:8px}}
-@media (max-height:740px){.slide h2{font-size:1.55rem}.cover h1{font-size:2.3rem;margin-top:10px}.sign{margin-top:16px}.meta{margin-top:18px}.meta div{padding-block:8px 10px}.start{margin-top:18px}.toc{gap:8px;margin-top:14px}.sub{margin-top:6px;font-size:.95rem}.opts{margin-top:12px;gap:8px}.opt{padding:9px 12px}.opt span{font-size:.84rem}.mini{margin-top:10px;padding:10px 14px}.terms{gap:8px;margin-top:14px}.terms li{font-size:.95rem}.send{margin-top:14px;padding:13px}.sum{padding:16px;margin-top:14px}.sum .row{padding-block:3px}.sum .total{padding-top:8px}.sum .total b{font-size:1.6rem}.chosen{margin-top:10px}.small{margin-top:8px}.foot{display:none}.pair{margin-top:16px;gap:10px}.card{padding:16px}}
+@media (max-height:740px){
+  .slide{padding-top:54px;padding-bottom:60px}
+  .slide h2{font-size:1.5rem}.chap{margin-bottom:10px}
+  .cover h1{font-size:2.3rem;margin-top:10px}.sign{margin-top:16px}.meta{margin-top:18px}.meta div{padding-block:8px 10px}.start{margin-top:18px}
+  .toc{gap:8px;margin-top:12px}.toc a{padding:10px 14px;gap:10px;grid-template-columns:28px minmax(0,1fr)}.toc .n{font-size:1.25rem}.toc b{font-size:.96rem}.toc .s{font-size:.82rem}.toc .v{margin-top:2px;font-size:.86rem}
+  .price,.hours{padding:16px}.price .big,.hours .big{font-size:2.6rem}
+  .does{gap:7px}.does span{font-size:.86rem}
+  .incl{gap:7px}.incl span{font-size:.86rem}.hbar{margin-top:12px}
+  .uses div{padding-block:8px}
+  .rules li{padding:11px 14px}
+  .sub{margin-top:6px;font-size:.92rem;line-height:1.4}.opts{margin-top:10px;gap:8px}.opt{padding:8px 12px}.opt b{font-size:.95rem}.opt .d{font-size:.8rem;line-height:1.3}.mini{margin-top:10px;padding:10px 14px}
+  .flow{margin-top:12px}.flow li{padding-bottom:10px}.flow span{font-size:.86rem}
+  .tiles{margin-top:12px;gap:8px}.tile{padding:10px 12px}.tile b{font-size:1.12rem}
+  .send{margin-top:14px;padding:13px}.sum{padding:16px;margin-top:14px}.sum .row{padding-block:3px}.sum .total{padding-top:8px}.sum .total b{font-size:1.6rem}
+  .chosen{margin-top:10px}.small{margin-top:8px}.foot{display:none}.pair{margin-top:14px;gap:10px}.card{padding:16px}
+}
+@media (max-height:700px){.toc-l{display:none}.toc-h{margin-top:0}}
+@media (max-height:660px){.slide{padding-top:48px;padding-bottom:52px}.next{bottom:6px}.slide h2{font-size:1.38rem}.chap{margin-bottom:6px}.toc .s{display:block}.tiles .tile span{font-size:.8rem}.does{gap:5px}}
+@media (max-height:640px){.toc .s{font-size:.8rem;line-height:1.3}.toc a{padding:9px 12px}.opt .d{font-size:.78rem}.sub{font-size:.88rem}.mini{padding:9px 14px}.mini b{font-size:1.3rem}}
+@media (max-height:600px){.slide{padding-top:42px;padding-bottom:40px}.next{font-size:.78rem;padding:4px 8px;bottom:4px}.bar-top{top:10px}.slide h2{font-size:1.28rem}.cover h1{font-size:2rem}.sign{margin-top:12px}.meta{margin-top:12px}.meta div{padding-block:6px 8px}.start{margin-top:12px;padding:11px 18px}.cover .for{margin-top:8px;font-size:1rem}
+  .toc{gap:6px;margin-top:8px}.toc .v{font-size:.8rem}.pair{margin-top:10px}.card{padding:12px;gap:4px}.card .ico{display:none}.card p{font-size:.9rem}
+  .opts{gap:6px}.opt{padding:7px 10px}.opt .pv{margin-top:2px}.check{width:20px;height:20px}
+  .tiles{gap:6px}.tile{padding:8px 10px}.tile b{font-size:1rem}.send{padding:11px;margin-top:10px}.sum{padding:12px}.sum .total b{font-size:1.4rem}.small{font-size:.78rem}.chosen{font-size:.88rem}}
 @media (prefers-reduced-motion:reduce){.deck{scroll-behavior:auto}.js .slide .rv{opacity:1;transform:none;transition:none}.hbar i{transform:none;opacity:1;transition:none}.next svg{animation:none}}
 @media print{
   body{overflow:visible}.deck{position:static;overflow:visible}
@@ -198,7 +228,7 @@ p{margin:0}
 <link rel="apple-touch-icon" href="../preview.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Proposta JLD Connect">
-<meta property="og:description" content="Proposta em 3 partes: ferramenta, suporte e opcionais para a JLD Connect C Telecom Ltda.">
+<meta property="og:description" content="Proposta em 4 partes: NexFlow, suporte com 16 horas, opcionais e combinados para a JLD Connect C Telecom Ltda.">
 <meta property="og:url" content="https://treborhand.github.io/proposta-jld/v2/">
 <meta property="og:image" content="https://treborhand.github.io/proposta-jld/preview.png">
 <meta property="og:image:width" content="800">
@@ -209,14 +239,14 @@ p{margin:0}
 
 <div class="topband" aria-hidden="true"></div>
 <div class="progress" aria-hidden="true"><i id="prog"></i></div>
-<div class="bar-top"><span class="count" id="count" aria-hidden="true">1/11</span><button class="menu" id="menu" type="button" hidden>Sumário</button></div>
+<div class="bar-top"><span class="count" id="count" aria-hidden="true">1/12</span><button class="menu" id="menu" type="button" hidden>Sumário</button></div>
 
 <main class="deck" id="deck">
 
   <section class="slide cover" id="inicio" data-next="Sumário">
     <div class="in">
       <span class="label cover-label rv">Proposta comercial · nº 002/2026</span>
-      <h1 class="rv">Sua proposta em 3 partes</h1>
+      <h1 class="rv">Sua proposta em 4 partes</h1>
       <p class="for rv">Preparada para <b>JLD Connect C Telecom Ltda</b></p>
       <div class="rv">
         <div class="sign"><span class="initials" aria-hidden="true">RM</span><div><b>Robert Martins Cezar</b><span>Coordenador de Projetos · 8+ anos em tecnologia e gestão</span></div></div>
@@ -224,31 +254,32 @@ p{margin:0}
           <div><span class="label">Emitida em</span><b>05 nov 2026</b></div>
           <div><span class="label">Válida até</span><b>20 nov 2026</b></div>
           <div><span class="label">Responsável</span><b>Robert Martins Cezar</b></div>
-          <div><span class="label">Modalidade</span><b>Ferramenta + suporte</b></div>
+          <div><span class="label">Modalidade</span><b>Aplicativo + suporte</b></div>
         </div>
       </div>
       <button class="start rv" type="button" data-go="sumario">Começar</button>
     </div>
   </section>
 
-  <section class="slide" id="sumario" data-next="A ferramenta">
+  <section class="slide" id="sumario" data-next="NexFlow">
     <div class="in">
-      <span class="label rv">Sumário</span>
-      <h2 class="rv" style="margin-top:8px">Toque para ir direto</h2>
+      <span class="label rv toc-l">Sumário</span>
+      <h2 class="rv toc-h">O que tem nesta proposta</h2>
       <ol class="toc rv">
-        <li><a href="#ferramenta"><span class="n">01</span><span><b>A ferramenta</b><span class="s">Paga a comissão certa, sem planilha</span></span><span class="v">R$ 12.500<small>ou 10 × R$ 1.250</small></span></a></li>
-        <li><a href="#suporte"><span class="n">02</span><span><b>Suporte + 16 horas</b><span class="s">Ferramenta, TI e o que precisar</span></span><span class="v">R$ 1.700<small>por mês</small></span></a></li>
-        <li><a href="#opcionais"><span class="n">03</span><span><b>Opcionais</b><span class="s">Adicione se quiser</span></span><span class="v">a partir de<small>R$ 900</small></span></a></li>
-        <li><a href="#combinados"><span class="n">04</span><span><b>Combinados</b><span class="s">Prazo, pagamento e garantia</span></span><span class="v">5<small>regras</small></span></a></li>
-        <li class="last"><a href="#resumo"><span class="n">05</span><span><b>Resumo da minha escolha</b><span class="s">Quanto fica por mês</span></span><span class="v" id="tocTot">R$ 2.950<small>por mês</small></span></a></li>
+        <li><a href="#nexflow"><span class="n">01</span><span><b>NexFlow: aplicativo de Gestão, Financeiro e Controle</b><span class="s">Calcula, confere e paga a comissão dos vendedores.</span><span class="v">R$ 12.500 ou 10 × R$ 1.250</span></span></a></li>
+        <li><a href="#suporte"><span class="n">02</span><span><b>Suporte ao NexFlow + 16 horas de atuação mensal do Robert</b><span class="s">O NexFlow funcionando e 16 horas por mês para TI, computadores, planilhas e processos.</span><span class="v">R$ 1.700 por mês</span></span></a></li>
+        <li><a href="#opcionais"><span class="n">03</span><span><b>Opcionais</b><span class="s">Fora deste escopo, mas já levantados como necessidade nas reuniões.</span><span class="v">De R$ 900 a R$ 3.000, se quiser</span></span></a></li>
+        <li><a href="#combinados"><span class="n">04</span><span><b>Combinados</b><span class="s">Regras deste trabalho: como vou atuar, contrato e pagamento.</span><span class="v">Como funciona na prática</span></span></a></li>
       </ol>
     </div>
   </section>
 
-  <section class="slide" id="ferramenta" data-next="O que ela faz">
+  <section class="slide" id="nexflow" data-next="O que o NexFlow faz">
     <div class="in">
-      <div class="chap rv"><span class="n">01</span><span class="label">A ferramenta · 1 de 3</span></div>
-      <h2 class="rv">Paga a comissão certa, sem planilha.</h2>
+      <div class="chap rv"><span class="n">01</span><span class="label">NexFlow · 1 de 3</span></div>
+      <h2 class="rv">Aplicativo de Gestão, Financeiro e Controle</h2>
+      <span class="brand rv">NexFlow</span>
+      <p class="sub rv">Calcula, confere e paga a comissão dos vendedores, sem planilha.</p>
       <div class="price rv">
         <div class="old">De R$ 20.520</div>
         <div class="big">R$ 12.500</div>
@@ -258,13 +289,13 @@ p{margin:0}
     </div>
   </section>
 
-  <section class="slide" id="ferramenta-faz" data-next="O que é seu e o que a JLD faz">
+  <section class="slide" id="nexflow-faz" data-next="O que é seu e o que a JLD faz">
     <div class="in">
-      <div class="chap rv"><span class="n">01</span><span class="label">A ferramenta · 2 de 3</span></div>
-      <h2 class="rv">O que ela faz</h2>
+      <div class="chap rv"><span class="n">01</span><span class="label">NexFlow · 2 de 3</span></div>
+      <h2 class="rv">O que o NexFlow faz</h2>
       <ul class="does rv">
         <li><span class="ic">1</span><div><b>Calcula a comissão de cada vendedor</b><span>Por perfil, velocidade e campanha, com histórico.</span></div></li>
-        <li><span class="ic">2</span><div><b>Confere sozinha com a Osab</b><span>Só entra para pagamento o que foi instalado.</span></div></li>
+        <li><span class="ic">2</span><div><b>Confere sozinho com a Osab</b><span>Só entra para pagamento o que foi instalado.</span></div></li>
         <li><span class="ic">3</span><div><b>Fecha todo dia (D+1)</b><span>Extrato pronto por vendedor.</span></div></li>
         <li><span class="ic">4</span><div><b>Você aprova, o financeiro paga</b><span>Com comprovante. Bloqueia pagamento repetido.</span></div></li>
         <li><span class="ic">5</span><div><b>Controla os vales</b><span>Desconta sozinho das próximas comissões.</span></div></li>
@@ -274,20 +305,20 @@ p{margin:0}
     </div>
   </section>
 
-  <section class="slide" id="ferramenta-uso" data-next="Suporte + 16 horas">
+  <section class="slide" id="nexflow-uso" data-next="Suporte + 16 horas">
     <div class="in">
-      <div class="chap rv"><span class="n">01</span><span class="label">A ferramenta · 3 de 3</span></div>
+      <div class="chap rv"><span class="n">01</span><span class="label">NexFlow · 3 de 3</span></div>
       <h2 class="rv">O que é seu e o que a JLD faz</h2>
       <div class="pair">
         <div class="card yours rv">
           <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2 20 3M16 7l3 3M14 9l2 2"/></svg></span>
-          <h3>A ferramenta é sua para usar</h3>
-          <p>Você usa sem prazo. O sistema continua sendo meu: não pode ser vendido nem repassado.</p>
+          <h3>O NexFlow é seu para usar</h3>
+          <p>Você usa sem prazo. O sistema continua sendo meu: não pode ser vendido nem repassado. Os dados são da JLD.</p>
         </div>
         <div class="card jld rv">
           <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></span>
           <h3>O que a JLD faz</h3>
-          <p>Sobe todo dia a planilha de vendas (no modelo que vamos combinar) e o relatório da Osab. A hospedagem fica na LocaWeb da JLD.</p>
+          <p>Sobe todo dia a planilha de vendas (no modelo que vamos combinar) e o relatório da Osab. A hospedagem fica na conta LocaWeb da JLD, paga pela JLD.</p>
         </div>
       </div>
     </div>
@@ -296,12 +327,14 @@ p{margin:0}
   <section class="slide" id="suporte" data-next="Quanto gasta cada pedido">
     <div class="in">
       <div class="chap rv"><span class="n">02</span><span class="label">Suporte + 16 horas · 1 de 3</span></div>
-      <h2 class="rv">16 horas por mês para o que você precisar.</h2>
+      <h2 class="rv">Suporte ao NexFlow + 16 horas de atuação mensal do Robert</h2>
       <div class="hours rv">
         <div class="big">R$ 1.700 <small>por mês</small></div>
-        <p>Ferramenta, TI, computadores, planilhas e processos.</p>
+        <ul class="incl">
+          <li><div><b>Suporte ao NexFlow</b><span>Mantenho o aplicativo funcionando. Defeito eu corrijo sem gastar suas horas.</span></div></li>
+          <li><div><b>16 horas do Robert por mês</b><span>Para TI, computadores, planilhas, processos e ajustes no NexFlow.</span></div></li>
+        </ul>
         <div class="hbar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></div>
-        <div class="hcount" aria-hidden="true"><span>1 h</span><span>16 h</span></div>
         <div class="legend"><span>12 h para qualquer pedido</span><span class="b">Até 4 h para computadores</span></div>
       </div>
     </div>
@@ -318,8 +351,8 @@ p{margin:0}
         <div><span>Trocar SSD ou memória (peça à parte)</span><b>1 h</b></div>
         <div><span>Limpeza interna</span><b>1 h</b></div>
         <div><span>Descobrir defeito</span><b>30 min</b></div>
-        <div><span>Ajuste na ferramenta quando a Osab mudar</span><b>tempo real</b></div>
-        <div class="free"><span>Defeito na ferramenta</span><b>não gasta horas</b></div>
+        <div><span>Ajuste no NexFlow quando a Osab mudar</span><b>tempo real</b></div>
+        <div class="free"><span>Defeito no NexFlow</span><b>não gasta horas</b></div>
       </div>
     </div>
   </section>
@@ -332,47 +365,62 @@ p{margin:0}
         <li><span class="k">+2 h</span><div><b>Eu aviso antes de começar</b><span>Você aprova e só então eu sigo.</span></div></li>
         <li><span class="k">+4 h</span><div><b>Vira projeto</b><span>Com orçamento à parte.</span></div></li>
         <li><span class="k">1,5×</span><div><b>Urgência fora do horário</b><span>Conta 1,5 hora para cada hora.</span></div></li>
-        <li><span class="k">R$ 120</span><div><b>Hora extra</b><span>Horas que sobram valem no mês seguinte.</span></div></li>
+        <li><span class="k">R$ 120</span><div><b>Hora extra</b><span>Horas que sobram valem só no mês seguinte.</span></div></li>
       </ul>
     </div>
   </section>
 
-  <section class="slide" id="opcionais" data-next="Combinados">
+  <section class="slide" id="opcionais" data-next="Como vou trabalhar">
     <div class="in">
       <div class="chap rv"><span class="n">03</span><span class="label">Opcionais</span></div>
-      <h2 class="rv">Toque para adicionar</h2>
-      <p class="sub rv">O valor entra junto com as 10 parcelas da ferramenta.</p>
+      <h2 class="rv">Itens fora deste escopo</h2>
+      <p class="sub rv">Já apareceram nas nossas reuniões, mas não estão no NexFlow. Toque para adicionar.</p>
       <div class="opts rv" id="opts"></div>
       <div class="mini rv" aria-live="polite"><span>Por mês, nos 10 primeiros meses</span><b id="miniTot">R$ 2.950</b></div>
     </div>
   </section>
 
-  <section class="slide" id="combinados" data-next="Resumo da minha escolha">
+  <section class="slide" id="combinados" data-next="Contrato e pagamento">
     <div class="in">
-      <div class="chap rv"><span class="n">04</span><span class="label">Combinados</span></div>
-      <h2 class="rv">Regras claras desde o primeiro dia</h2>
-      <ul class="terms rv">
-        <li>Contrato de 1 ano, com mínimo de 3 meses. Depois disso, qualquer um pode sair avisando 1 mês antes.</li>
-        <li>Se sair antes de quitar a ferramenta, paga o que falta dela.</li>
-        <li>Pedido novo fora desta lista: orço antes, a R$ 120 por hora.</li>
-        <li>Defeito na ferramenta: eu corrijo sem gastar suas horas (garantia de 90 dias após a entrega e durante o suporte).</li>
-        <li>Pagamento até o dia 10, por Pix, com recibo de autônomo (RPA).</li>
-      </ul>
+      <div class="chap rv"><span class="n">04</span><span class="label">Combinados · 1 de 2</span></div>
+      <h2 class="rv">Como vou trabalhar</h2>
+      <ol class="flow rv">
+        <li><span class="st">1</span><div><b>Você pede pelo WhatsApp</b><span>Eu registro cada pedido.</span></div></li>
+        <li><span class="st">2</span><div><b>Eu digo quanto tempo leva</b><span>Se passar de 2 horas, você aprova antes.</span></div></li>
+        <li><span class="st">3</span><div><b>Eu resolvo</b><span>Por acesso remoto ou em visita marcada com antecedência.</span></div></li>
+        <li><span class="st">4</span><div><b>Todo mês, você recebe o relatório</b><span>Com o que foi feito e as horas usadas.</span></div></li>
+      </ol>
+      <p class="note rv">Peças, equipamentos e serviços de outras empresas: a JLD compra e paga à parte. Não saem das 16 horas.</p>
+    </div>
+  </section>
+
+  <section class="slide" id="contrato" data-next="Resumo da sua escolha">
+    <div class="in">
+      <div class="chap rv"><span class="n">04</span><span class="label">Combinados · 2 de 2</span></div>
+      <h2 class="rv">Contrato e pagamento</h2>
+      <div class="tiles rv">
+        <div class="tile"><span class="label">Prazo</span><b>1 ano</b><span>Mínimo de 3 meses.</span></div>
+        <div class="tile"><span class="label">Para sair</span><b>Aviso de 1 mês</b><span>Vale para os dois lados, após 3 meses.</span></div>
+        <div class="tile"><span class="label">Pagamento</span><b>Até o dia 10</b><span>Por Pix, com recibo de autônomo (RPA).</span></div>
+        <div class="tile"><span class="label">Garantia</span><b>90 dias</b><span>Após a entrega e durante o suporte.</span></div>
+        <div class="tile wide"><span class="label">Se sair antes de quitar o NexFlow</span><span style="font-size:.95rem;color:var(--ink)">Paga o que falta das parcelas do NexFlow.</span></div>
+        <div class="tile wide"><span class="label">Pedido novo fora desta proposta</span><span style="font-size:.95rem;color:var(--ink)">Eu faço o orçamento antes, a R$ 120 por hora.</span></div>
+      </div>
       <a class="send rv js-send" href="https://wa.me/5521993216948" target="_blank" rel="noopener">Enviar minha escolha pelo WhatsApp</a>
     </div>
   </section>
 
   <section class="slide" id="resumo">
     <div class="in">
-      <div class="chap rv"><span class="n">05</span><span class="label">Resumo da minha escolha</span></div>
-      <h2 class="rv">Quanto fica por mês</h2>
+      <span class="label rv">Resumo da sua escolha</span>
+      <h2 class="rv" style="margin-top:8px">Quanto fica por mês</h2>
       <div class="sum rv" aria-live="polite">
-        <div class="row"><span>Ferramenta (10 ×)</span><b>R$ 1.250</b></div>
+        <div class="row"><span>NexFlow (10 ×)</span><b>R$ 1.250</b></div>
         <div class="row" id="sOptRow" hidden><span>Opcionais (10 ×)</span><b id="sOpt">R$ 0</b></div>
-        <div class="row"><span>Suporte + 16 horas</span><b>R$ 1.700</b></div>
+        <div class="row"><span>Suporte ao NexFlow + 16 horas</span><b>R$ 1.700</b></div>
         <div class="row total"><span>Por mês, nos 10 primeiros meses</span><b id="sTot">R$ 2.950</b></div>
-        <div class="after">Depois: R$ 1.700 por mês.</div>
-        <div class="tot" id="sAll">Ferramenta total: R$ 12.500</div>
+        <div class="after">Do 11º mês em diante: R$ 1.700 por mês.</div>
+        <div class="tot" id="sAll">Total do NexFlow: R$ 12.500, em 10 parcelas.</div>
       </div>
       <p class="chosen rv" id="chosen"></p>
       <a class="send rv js-send" href="https://wa.me/5521993216948" target="_blank" rel="noopener">Enviar minha escolha pelo WhatsApp</a>
@@ -386,15 +434,15 @@ p{margin:0}
 (function(){
   var WA="5521993216948";
   var O=[
-    {id:"repasse",nome:"Repasse da Nio + Resultado",desc:"Confere o que a Nio pagou, prepara a contestação e mostra quanto sobrou.",preco:3000},
-    {id:"inad",nome:"Inadimplência",desc:"Mostra o % de faturas em atraso por vendedor.",preco:900},
-    {id:"folha",nome:"Controle da equipe",desc:"Substitui a planilha da folha: vales, faltas, líquido e prévia do 13º.",preco:1700}
+    {id:"repasse",nome:"Repasse da Nio + Resultado",desc:"Confere se a Nio pagou certo, prepara a contestação do que faltou e mostra quanto sobrou após pagar os vendedores.",preco:3000},
+    {id:"inad",nome:"Inadimplência",desc:"Mostra, por vendedor, quantos clientes estão com fatura em atraso.",preco:900},
+    {id:"folha",nome:"Controle da equipe",desc:"Substitui a planilha da folha: vales, faltas, valor líquido de cada um e prévia do 13º.",preco:1700}
   ];
   var sel={};
   function brl(v){return "R$ "+Math.round(v).toLocaleString("pt-BR");}
   function $(id){return document.getElementById(id);}
   var box=$("opts");
-  box.innerHTML=O.map(function(o){return '<div class="opt" role="checkbox" tabindex="0" aria-checked="false" data-id="'+o.id+'"><div><b>'+o.nome+'</b><span>'+o.desc+'</span></div><div class="pv">'+brl(o.preco)+'<span class="check">✓</span><small>10 × '+brl(o.preco/10)+'</small></div></div>';}).join("");
+  box.innerHTML=O.map(function(o){return '<div class="opt" role="checkbox" tabindex="0" aria-checked="false" data-id="'+o.id+'"><span class="check" aria-hidden="true">✓</span><div><b>'+o.nome+'</b><span class="d">'+o.desc+'</span><span class="pv">'+brl(o.preco)+' <small>ou 10 × '+brl(o.preco/10)+'</small></span></div></div>';}).join("");
   function update(){
     var add=0,names=[];
     O.forEach(function(o){if(sel[o.id]){add+=o.preco;names.push(o.nome);}});
@@ -402,10 +450,9 @@ p{margin:0}
     $("sOptRow").hidden=!add;
     $("sOpt").textContent=brl(add/10);
     $("sTot").textContent=tot; $("miniTot").textContent=tot;
-    $("tocTot").innerHTML=tot+"<small>por mês</small>";
-    $("sAll").textContent="Ferramenta total: "+brl(12500+add)+(add?" (com opcionais)":"");
+    $("sAll").textContent=(add?"Total do NexFlow + opcionais: ":"Total do NexFlow: ")+brl(12500+add)+", em 10 parcelas.";
     $("chosen").innerHTML="Opcionais: <b>"+(names.length?names.join(", "):"nenhum")+"</b>. <a href=\"#opcionais\">Alterar</a>";
-    var msg="Olá, Robert! Sobre a proposta nº 002/2026 da JLD Connect: quero a ferramenta em 10 × R$ 1.250 e o suporte com 16 horas por mês (R$ 1.700)."+(names.length?" Opcionais: "+names.join(", ")+".":" Sem opcionais.")+" Total por mês nos 10 primeiros meses: "+tot+".";
+    var msg="Olá, Robert! Sobre a proposta nº 002/2026 da JLD Connect: quero o NexFlow em 10 × R$ 1.250 e o suporte ao NexFlow + 16 horas por mês (R$ 1.700)."+(names.length?" Opcionais: "+names.join(", ")+".":" Sem opcionais.")+" Total por mês nos 10 primeiros meses: "+tot+".";
     [].forEach.call(document.querySelectorAll(".js-send"),function(a){a.href="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);});
   }
   [].forEach.call(box.querySelectorAll(".opt"),function(el){
@@ -422,7 +469,7 @@ p{margin:0}
   slides.forEach(function(s,i){
     var nx=s.getAttribute("data-next"); if(!nx) return;
     var b=document.createElement("button"); b.type="button"; b.className="next";
-    b.innerHTML=(i===0?"Deslize para cima":"Próximo: "+nx)+chev;
+    b.innerHTML="<span>"+(i===0?"Deslize para cima":"Próximo: "+nx)+"</span>"+chev;
     b.addEventListener("click",function(){go(i+1);}); s.appendChild(b);
   });
   function go(i){ if(i<0||i>=slides.length) return; deck.scrollTo({top:slides[i].offsetTop,behavior:reduce?"auto":"smooth"}); }
