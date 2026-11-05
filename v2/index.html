@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Proposta JLD Connect</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Proposta da ferramenta de pagamentos e do suporte mensal para a JLD Connect C Telecom Ltda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: proposta curta, pensada para celular. Três cartões grandes (ferramenta, horas, opcionais) e um resumo que soma sozinho. Pouco texto, frases curtas. */
+:root{
+  --bg:#fbfcfb; --sheet:#ffffff; --ink:#10212f; --muted:#56636e; --rule:#dce3e0; --rule-2:#c3ccc8;
+  --green:#0e6a4e; --green-mark:#1c9a6c; --green-wash:#eaf4ef; --navy:#1d3a57; --navy-wash:#ebf0f5;
+  --serif:"Source Serif 4",Georgia,serif; --sans:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0c1416; --sheet:#111c1f; --ink:#e7eeec; --muted:#9fb0ab; --rule:#23312f; --rule-2:#33443f;
+  --green:#5fcf9f; --green-mark:#5fcf9f; --green-wash:#13281f; --navy:#a9c2dc; --navy-wash:#152230; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1416; --sheet:#111c1f; --ink:#e7eeec; --muted:#9fb0ab; --rule:#23312f; --rule-2:#33443f;
+  --green:#5fcf9f; --green-mark:#5fcf9f; --green-wash:#13281f; --navy:#a9c2dc; --navy-wash:#152230; color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.55}
+h1,h2,h3{margin:0;text-wrap:balance}
+h1,h2{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+p{margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
+.top{height:6px;background:var(--green)}
+.progress{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:3px;z-index:20}
+.progress i{display:block;height:100%;width:0;background:var(--green)}
+.js .rv{transform:translateY(14px);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .rv.in{transform:none}
+.label{font-size:.78rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green)}
+.muted{color:var(--muted)}
+section{padding-block:44px;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:0}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+
+header{padding-block:40px 32px}
+.cover-label{font-size:clamp(.9rem,1.6vw,1.05rem);letter-spacing:.1em}
+header h1{font-size:clamp(2.2rem,7vw,3.2rem);line-height:1.06;margin-top:16px;max-width:16ch}
+header .for{margin-top:14px;font-size:1.08rem;color:var(--muted)}
+header .for b{color:var(--ink);font-weight:600}
+.sign{display:flex;align-items:center;gap:14px;margin-top:24px}
+.initials{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--green);color:var(--green);display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.05rem;flex:none}
+.sign b{display:block;font-weight:700;line-height:1.3}
+.sign span{font-size:.92rem;color:var(--muted)}
+.meta{margin-top:28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2)}
+.meta div{padding:12px 14px 14px 0;display:grid;gap:2px}
+.meta div+div{padding-left:14px;border-left:1px solid var(--rule)}
+.meta .label{color:var(--muted);font-size:.72rem}
+.meta b{font-weight:600;font-size:.98rem}
+@media (max-width:620px){.meta{grid-template-columns:1fr 1fr}.meta div:nth-child(3){padding-left:0;border-left:0}.meta div:nth-child(n+3){border-top:1px solid var(--rule)}}
+.three{margin-top:26px;display:grid;gap:10px}
+.three a{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;text-decoration:none;color:inherit;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+.three .n{font-family:var(--serif);font-weight:600;font-size:1.6rem;color:var(--green);line-height:1}
+.three a:hover{border-color:var(--green)}
+.three b{display:block;font-size:1.05rem}
+.three span.s{font-size:.92rem;color:var(--muted)}
+.three .v{font-weight:700;font-size:1.05rem;text-align:right;white-space:nowrap}
+.three .v small{display:block;font-weight:500;font-size:.8rem;color:var(--muted)}
+
+.head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:baseline}
+.head .n{font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,5vw,2.1rem);color:var(--green);line-height:1}
+.head h2{font-size:clamp(1.6rem,5.4vw,2.1rem);line-height:1.12}
+.price{margin-top:18px;background:var(--green-wash);border-radius:10px;padding:18px}
+.price .old{text-decoration:line-through;color:var(--muted);font-size:1rem}
+.price .big{font-family:var(--serif);font-weight:600;font-size:2.4rem;line-height:1.1}
+.price .tag{display:inline-block;margin-top:6px;font-size:.82rem;font-weight:700;color:var(--green)}
+.price .split{margin-top:8px;font-weight:600}
+
+.does{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:12px}
+.does li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
+.does .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:var(--green-wash);color:var(--green);font-weight:700}
+.does b{display:block}
+.does span{color:var(--muted);font-size:.95rem}
+.box{margin-top:20px;border:1px solid var(--rule-2);border-radius:10px;padding:16px;display:grid;gap:8px}
+.box h3{font-size:1rem}
+.box p{font-size:.96rem;color:var(--muted)}
+.box.warn{border-color:transparent;background:var(--navy-wash)}
+.box.warn h3{color:var(--navy)}
+
+.hours{margin-top:18px;background:var(--navy-wash);border-radius:10px;padding:18px}
+.hours .big{font-family:var(--serif);font-weight:600;font-size:2.4rem;line-height:1.1}
+.bar{margin-top:14px;display:grid;grid-template-columns:repeat(16,1fr);gap:3px}
+.bar i{height:14px;border-radius:3px;background:var(--navy)}
+.bar i.b{background:var(--green-mark)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:.88rem;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:12px;height:10px;border-radius:2px;margin-right:6px;background:var(--navy)}
+.legend span.b::before{background:var(--green-mark)}
+.uses{margin-top:20px;border-top:1px solid var(--rule)}
+.uses div{display:grid;grid-template-columns:1fr auto;gap:12px;padding-block:11px;border-bottom:1px solid var(--rule);font-size:.98rem}
+.uses b{white-space:nowrap}
+.uses .free b{color:var(--green)}
+.rules{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.rules li{display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:.98rem}
+.rules li::before{content:"!";width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem;background:var(--navy-wash);color:var(--navy)}
+
+.opts{margin-top:18px;display:grid;gap:10px}
+.opt{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--sheet);border:2px solid var(--rule);border-radius:10px;padding:14px 16px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s,background .2s}
+.opt[aria-checked="true"]{border-color:var(--green);background:var(--green-wash)}
+.opt b{display:block;font-size:1.02rem}
+.opt span{font-size:.92rem;color:var(--muted)}
+.opt .pv{text-align:right;font-weight:700;white-space:nowrap}
+.opt .pv small{display:block;font-weight:500;font-size:.8rem;color:var(--muted)}
+.check{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;border:2px solid var(--rule-2);margin-left:8px;vertical-align:middle;font-size:.85rem;color:transparent}
+.opt[aria-checked="true"] .check{background:var(--green);border-color:var(--green);color:var(--sheet)}
+
+.sum{margin-top:18px;background:var(--ink);color:var(--bg);border-radius:12px;padding:20px}
+.sum .row{display:grid;grid-template-columns:1fr auto;gap:12px;padding-block:7px;font-size:1rem}
+.sum .row b{font-variant-numeric:tabular-nums}
+.sum .total{border-top:1px solid rgba(255,255,255,.25);margin-top:6px;padding-top:12px;font-size:1.15rem}
+.sum .total b{font-family:var(--serif);font-weight:600;font-size:1.7rem}
+.sum .after{margin-top:6px;font-size:.92rem;opacity:.8}
+.sum .tot{margin-top:10px;font-size:.88rem;opacity:.75}
+
+.terms{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.terms li{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:.98rem}
+.terms li::before{content:"";width:8px;height:8px;margin-top:9px;background:var(--green-mark);border-radius:2px}
+
+.send{display:block;margin-top:18px;background:var(--green);color:#fff;text-align:center;text-decoration:none;font-weight:700;font-size:1.05rem;padding:16px;border-radius:8px}
+.small{margin-top:10px;font-size:.88rem;color:var(--muted)}
+footer{padding-block:24px 36px;font-size:.85rem;color:var(--muted);border-top:1px solid var(--rule)}
+footer .wrap{display:flex;justify-content:space-between;gap:6px 16px;flex-wrap:wrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}.js .rv{transform:none}}
+@media print{.progress{display:none}.js .rv{transform:none}}
+</style>
+<link rel="icon" type="image/png" href="../preview.png">
+<link rel="apple-touch-icon" href="../preview.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Proposta JLD Connect">
+<meta property="og:description" content="Proposta em 3 partes: ferramenta, suporte e opcionais para a JLD Connect C Telecom Ltda.">
+<meta property="og:url" content="https://treborhand.github.io/proposta-jld/v2/">
+<meta property="og:image" content="https://treborhand.github.io/proposta-jld/preview.png">
+<meta property="og:image:width" content="800">
+<meta property="og:image:height" content="800">
+</head>
+<body>
+
+
+<div class="top" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+<div class="wrap">
+  <header>
+    <span class="label cover-label">Proposta comercial · nº 002/2026</span>
+    <h1 class="rv">Sua proposta em 3 partes</h1>
+    <p class="for">Preparada para <b>JLD Connect C Telecom Ltda</b></p>
+    <div class="sign"><span class="initials" aria-hidden="true">RM</span><div><b>Robert Martins Cezar</b><span>Coordenador de Projetos · 8+ anos em tecnologia e gestão</span></div></div>
+    <div class="meta">
+      <div><span class="label">Emitida em</span><b>05 nov 2026</b></div>
+      <div><span class="label">Válida até</span><b>20 nov 2026</b></div>
+      <div><span class="label">Responsável</span><b>Robert Martins Cezar</b></div>
+      <div><span class="label">Modalidade</span><b>Ferramenta + suporte</b></div>
+    </div>
+    <nav class="three" aria-label="Resumo">
+      <a href="#ferramenta"><span class="n">01</span><span><b>A ferramenta</b><span class="s">Paga a comissão certa, sem planilha</span></span><span class="v">R$ 12.500<small>ou 10 × R$ 1.250</small></span></a>
+      <a href="#horas"><span class="n">02</span><span><b>Suporte + 16 horas por mês</b><span class="s">Ferramenta, TI e o que precisar</span></span><span class="v">R$ 1.700<small>por mês</small></span></a>
+      <a href="#opcionais"><span class="n">03</span><span><b>Opcionais</b><span class="s">Adicione se quiser</span></span><span class="v">a partir de<small>R$ 900</small></span></a>
+    </nav>
+  </header>
+
+  <section id="ferramenta">
+    <div class="head"><span class="n">01</span><h2 class="rv">A ferramenta</h2></div>
+    <div class="price">
+      <div class="old">De R$ 20.520</div>
+      <div class="big">R$ 12.500</div>
+      <div class="split">ou 10 × R$ 1.250</div>
+      <span class="tag">Condição de cliente fundador</span>
+    </div>
+    <ul class="does">
+      <li><span class="ic">1</span><div><b>Calcula a comissão de cada vendedor</b><span>Tabela por perfil e velocidade, campanhas e histórico de mudanças.</span></div></li>
+      <li><span class="ic">2</span><div><b>Confere sozinha com a Osab</b><span>Junta a planilha de vendas com o relatório da Osab. Só entra para pagamento o que foi instalado.</span></div></li>
+      <li><span class="ic">3</span><div><b>Fecha todo dia (D+1)</b><span>Extrato pronto por vendedor.</span></div></li>
+      <li><span class="ic">4</span><div><b>Você aprova, o financeiro paga</b><span>Com comprovante. O sistema bloqueia pagamento repetido.</span></div></li>
+      <li><span class="ic">5</span><div><b>Controla os vales</b><span>Desconta sozinho das próximas comissões.</span></div></li>
+      <li><span class="ic">6</span><div><b>Avisa o vendedor pelo WhatsApp</b><span>Com o link do pagamento. Sem custo extra.</span></div></li>
+      <li><span class="ic">7</span><div><b>Seguro</b><span>Só você e o gerente financeiro entram. Tudo fica registrado, com cópia de segurança.</span></div></li>
+    </ul>
+    <div class="box">
+      <h3>A ferramenta é sua para usar</h3>
+      <p>Você usa sem prazo. O sistema continua sendo meu: não pode ser vendido nem repassado.</p>
+    </div>
+    <div class="box warn">
+      <h3>O que a JLD faz</h3>
+      <p>Sobe todo dia a planilha de vendas (no modelo que vamos combinar) e o relatório da Osab. A hospedagem fica na LocaWeb da JLD.</p>
+    </div>
+  </section>
+
+  <section id="horas">
+    <div class="head"><span class="n">02</span><h2 class="rv">Suporte + 16 horas por mês</h2></div>
+    <div class="hours">
+      <div class="big">R$ 1.700 <span class="muted" style="font-size:1rem;font-family:var(--sans);font-weight:500">por mês</span></div>
+      <p class="muted">16 horas para o que você precisar: ferramenta, TI, computadores, planilhas e processos.</p>
+      <div class="bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></div>
+      <div class="legend"><span>Qualquer pedido</span><span class="b">Até 4 h para computadores</span></div>
+    </div>
+    <div class="uses">
+      <div><span>Dúvida, planilha, acesso remoto, rede, e-mail</span><b>tempo real</b></div>
+      <div><span>Visita na empresa</span><b>mínimo 2 h</b></div>
+      <div><span>Formatar computador</span><b>1 h</b></div>
+      <div><span>Trocar SSD ou memória (peça à parte)</span><b>1 h</b></div>
+      <div><span>Limpeza interna</span><b>1 h</b></div>
+      <div><span>Descobrir defeito</span><b>30 min</b></div>
+      <div><span>Ajuste na ferramenta quando a Osab mudar</span><b>tempo real</b></div>
+      <div class="free"><span>Defeito na ferramenta</span><b>não gasta horas</b></div>
+    </div>
+    <ul class="rules">
+      <li>Pedido de mais de 2 h: eu aviso antes de começar.</li>
+      <li>Pedido de mais de 4 h vira projeto, com orçamento à parte.</li>
+      <li>Urgência fora do horário combinado conta 1,5 ×.</li>
+      <li>Horas que sobrarem valem no mês seguinte. Hora extra: R$ 120.</li>
+    </ul>
+  </section>
+
+  <section id="opcionais">
+    <div class="head"><span class="n">03</span><h2 class="rv">Opcionais</h2></div>
+    <p class="muted" style="margin-top:12px">Toque para adicionar. O valor entra junto com as 10 parcelas da ferramenta.</p>
+    <div class="opts" id="opts"></div>
+
+    <div class="sum" aria-live="polite">
+      <div class="row"><span>Ferramenta (10 ×)</span><b id="sTool">R$ 1.250</b></div>
+      <div class="row" id="sOptRow" hidden><span>Opcionais (10 ×)</span><b id="sOpt">R$ 0</b></div>
+      <div class="row"><span>Suporte + 16 horas</span><b>R$ 1.700</b></div>
+      <div class="row total"><span>Por mês, nos 10 primeiros meses</span><b id="sTot">R$ 2.950</b></div>
+      <div class="after">Depois: R$ 1.700 por mês.</div>
+      <div class="tot" id="sAll">Ferramenta total: R$ 12.500</div>
+    </div>
+  </section>
+
+  <section id="regras">
+    <div class="head"><span class="n">04</span><h2 class="rv">Combinados</h2></div>
+    <ul class="terms">
+      <li>Contrato de 1 ano, com mínimo de 3 meses. Depois disso, qualquer um pode sair avisando 1 mês antes.</li>
+      <li>Se sair antes de quitar a ferramenta, paga o que falta dela.</li>
+      <li>Pedido novo fora desta lista: orço antes, a R$ 120 por hora.</li>
+      <li>Defeito na ferramenta: eu corrijo sem gastar suas horas (garantia de 90 dias após a entrega e durante o suporte).</li>
+      <li>Pagamento até o dia 10, por Pix, com recibo de autônomo (RPA).</li>
+    </ul>
+    <a class="send" id="send" href="https://wa.me/5521993216948" target="_blank" rel="noopener">Enviar minha escolha pelo WhatsApp</a>
+    <p class="small">Esta proposta não substitui o contrato, que trará as condições definitivas.</p>
+  </section>
+</div>
+<footer><div class="wrap"><span>Robert Martins Cezar · Gestão, processos e tecnologia</span><span>Proposta nº 002/2026 para JLD Connect C Telecom Ltda</span></div></footer>
+
+<script>
+(function(){
+  var WA="5521993216948";
+  var O=[
+    {id:"repasse",nome:"Repasse da Nio + Resultado",desc:"Confere o que a Nio pagou, prepara a contestação e mostra quanto sobrou.",preco:3000},
+    {id:"inad",nome:"Inadimplência",desc:"Mostra o % de faturas em atraso por vendedor.",preco:900},
+    {id:"folha",nome:"Controle da equipe",desc:"Substitui a planilha da folha: vales, faltas, líquido e prévia do 13º.",preco:1700}
+  ];
+  var sel={};
+  function brl(v){return "R$ "+Math.round(v).toLocaleString("pt-BR");}
+  var box=document.getElementById("opts");
+  box.innerHTML=O.map(function(o){return '<div class="opt" role="checkbox" tabindex="0" aria-checked="false" data-id="'+o.id+'"><div><b>'+o.nome+'</b><span>'+o.desc+'</span></div><div class="pv">'+brl(o.preco)+'<span class="check">✓</span><small>10 × '+brl(o.preco/10)+'</small></div></div>';}).join("");
+  function update(){
+    var add=0,names=[];
+    O.forEach(function(o){if(sel[o.id]){add+=o.preco;names.push(o.nome);}});
+    var row=document.getElementById("sOptRow"); row.hidden=!add;
+    document.getElementById("sOpt").textContent=brl(add/10);
+    document.getElementById("sTot").textContent=brl(1250+add/10+1700);
+    document.getElementById("sAll").textContent="Ferramenta total: "+brl(12500+add)+(add?" (com opcionais)":"");
+    var msg="Olá, Robert! Sobre a proposta nº 002/2026 da JLD Connect: quero a ferramenta em 10 × R$ 1.250 e o suporte com 16 horas por mês (R$ 1.700)."+(names.length?" Opcionais: "+names.join(", ")+".":" Sem opcionais.");
+    document.getElementById("send").href="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);
+  }
+  [].forEach.call(box.querySelectorAll(".opt"),function(el){
+    function t(){var id=el.getAttribute("data-id");sel[id]=!sel[id];el.setAttribute("aria-checked",!!sel[id]);update();}
+    el.addEventListener("click",t);
+    el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();t();}});
+  });
+  update();
+  var doc=document.documentElement; doc.classList.add("js");
+  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var rv=document.querySelectorAll(".rv");
+  if("IntersectionObserver" in window&&!reduce){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{rootMargin:"0px 0px -8% 0px"});
+    [].forEach.call(rv,function(el){io.observe(el);});
+  } else {[].forEach.call(rv,function(el){el.classList.add("in");});}
+  var prog=document.getElementById("prog");
+  function sp(){var h=doc.scrollHeight-innerHeight;prog.style.width=(h>0?Math.min(100,scrollY/h*100):0)+"%";}
+  addEventListener("scroll",sp,{passive:true});addEventListener("resize",sp);sp();
+})();
+</script>
+
+</body>
+</html>
