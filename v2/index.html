@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: proposta curta, pensada para celular. Três cartões grandes (ferramenta, horas, opcionais) e um resumo que soma sozinho. Pouco texto, frases curtas. */
+/* Layout: apresentação em slides verticais (desliza para cima). Uma ideia por tela, mesma identidade da proposta nº 001. */
 :root{
   --bg:#fbfcfb; --sheet:#ffffff; --ink:#10212f; --muted:#56636e; --rule:#dce3e0; --rule-2:#c3ccc8;
   --green:#0e6a4e; --green-mark:#1c9a6c; --green-wash:#eaf4ef; --navy:#1d3a57; --navy-wash:#ebf0f5;
@@ -24,111 +24,175 @@
   --bg:#0c1416; --sheet:#111c1f; --ink:#e7eeec; --muted:#9fb0ab; --rule:#23312f; --rule-2:#33443f;
   --green:#5fcf9f; --green-mark:#5fcf9f; --green-wash:#13281f; --navy:#a9c2dc; --navy-wash:#152230; color-scheme:dark}
 *{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.55}
+html,body{height:100%}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.5;overflow:hidden}
 h1,h2,h3{margin:0;text-wrap:balance}
 h1,h2{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
 p{margin:0}
-.wrap{max-width:760px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px))}
-.top{height:6px;background:var(--green)}
-.progress{position:fixed;left:0;right:0;top:env(safe-area-inset-top,0px);height:3px;z-index:20}
-.progress i{display:block;height:100%;width:0;background:var(--green)}
-.js .rv{transform:translateY(14px);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-.js .rv.in{transform:none}
 .label{font-size:.78rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green)}
 .muted{color:var(--muted)}
-section{padding-block:44px;border-bottom:1px solid var(--rule)}
-section:last-of-type{border-bottom:0}
 :focus-visible{outline:2px solid var(--green);outline-offset:3px}
 
-header{padding-block:40px 32px}
-.cover-label{font-size:clamp(.9rem,1.6vw,1.05rem);letter-spacing:.1em}
-header h1{font-size:clamp(2.2rem,7vw,3.2rem);line-height:1.06;margin-top:16px;max-width:16ch}
-header .for{margin-top:14px;font-size:1.08rem;color:var(--muted)}
-header .for b{color:var(--ink);font-weight:600}
-.sign{display:flex;align-items:center;gap:14px;margin-top:24px}
+/* deck */
+.deck{position:fixed;inset:0;overflow-y:auto;scroll-snap-type:y mandatory;scroll-behavior:smooth;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
+.slide{min-height:100vh;min-height:100svh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:64px max(20px,env(safe-area-inset-right,0px)) 76px max(20px,env(safe-area-inset-left,0px));position:relative}
+.slide>.in{width:100%;max-width:720px;margin:0 auto}
+.slide+.slide{border-top:1px solid var(--rule)}
+
+/* barra fixa */
+.topband{position:fixed;left:0;right:0;top:0;height:5px;background:var(--green);z-index:30}
+.progress{position:fixed;left:0;right:0;top:5px;height:3px;z-index:30;background:var(--rule)}
+.progress i{display:block;height:100%;width:0;background:var(--green-mark);transition:width .35s}
+.bar-top{position:fixed;top:14px;right:max(14px,env(safe-area-inset-right,0px));z-index:30;display:flex;gap:8px;align-items:center}
+.count{font-size:.8rem;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;background:var(--bg);padding:6px 8px;border-radius:999px}
+.menu{font:inherit;font-size:.86rem;font-weight:700;color:var(--green);background:var(--sheet);border:1.5px solid var(--green);border-radius:999px;padding:6px 14px;cursor:pointer}
+.menu[hidden]{display:none}
+
+/* próximo */
+.next{position:absolute;left:50%;bottom:max(18px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:8px;font:inherit;font-size:.86rem;font-weight:600;color:var(--muted);background:none;border:0;cursor:pointer;white-space:nowrap;padding:8px 10px}
+.next svg{width:18px;height:18px;stroke:var(--green);animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(4px)}}
+
+/* entrada */
+.js .slide .rv{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .slide.on .rv{opacity:1;transform:none}
+.js .slide.on .rv:nth-child(2){transition-delay:.06s}
+.js .slide.on .rv:nth-child(3){transition-delay:.12s}
+.js .slide.on .rv:nth-child(4){transition-delay:.18s}
+.js .slide.on .rv:nth-child(5){transition-delay:.24s}
+
+/* cabeçalho de capítulo */
+.chap{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
+.chap .n{font-family:var(--serif);font-weight:600;font-size:1.5rem;color:var(--green);line-height:1}
+.chap .label{color:var(--muted)}
+.slide h2{font-size:clamp(1.7rem,6vw,2.4rem);line-height:1.1}
+.sub{margin-top:10px;color:var(--muted);font-size:1.02rem}
+
+/* capa */
+.cover-label{font-size:clamp(.88rem,1.6vw,1.02rem);letter-spacing:.1em}
+.cover h1{font-size:clamp(2.3rem,9vw,3.6rem);line-height:1.04;margin-top:16px;max-width:14ch}
+.cover .for{margin-top:14px;font-size:1.08rem;color:var(--muted)}
+.cover .for b{color:var(--ink);font-weight:600}
+.sign{display:flex;align-items:center;gap:14px;margin-top:22px}
 .initials{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--green);color:var(--green);display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.05rem;flex:none}
 .sign b{display:block;font-weight:700;line-height:1.3}
 .sign span{font-size:.92rem;color:var(--muted)}
-.meta{margin-top:28px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2)}
+.meta{margin-top:26px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2)}
 .meta div{padding:12px 14px 14px 0;display:grid;gap:2px}
 .meta div+div{padding-left:14px;border-left:1px solid var(--rule)}
-.meta .label{color:var(--muted);font-size:.72rem}
+.meta .label{color:var(--muted);font-size:.7rem}
 .meta b{font-weight:600;font-size:.98rem}
 @media (max-width:620px){.meta{grid-template-columns:1fr 1fr}.meta div:nth-child(3){padding-left:0;border-left:0}.meta div:nth-child(n+3){border-top:1px solid var(--rule)}}
-.three{margin-top:26px;display:grid;gap:10px}
-.three a{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;text-decoration:none;color:inherit;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
-.three .n{font-family:var(--serif);font-weight:600;font-size:1.6rem;color:var(--green);line-height:1}
-.three a:hover{border-color:var(--green)}
-.three b{display:block;font-size:1.05rem}
-.three span.s{font-size:.92rem;color:var(--muted)}
-.three .v{font-weight:700;font-size:1.05rem;text-align:right;white-space:nowrap}
-.three .v small{display:block;font-weight:500;font-size:.8rem;color:var(--muted)}
+.start{display:inline-flex;align-items:center;gap:10px;margin-top:26px;background:var(--green);color:#fff;border:0;border-radius:8px;padding:14px 22px;font:inherit;font-weight:700;font-size:1.02rem;cursor:pointer}
+:root[data-theme="dark"] .start,:root[data-theme="dark"] .send{color:#08231a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .start,:root:not([data-theme="light"]) .send{color:#08231a}}
 
-.head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:baseline}
-.head .n{font-family:var(--serif);font-weight:600;font-size:clamp(1.6rem,5vw,2.1rem);color:var(--green);line-height:1}
-.head h2{font-size:clamp(1.6rem,5.4vw,2.1rem);line-height:1.12}
-.price{margin-top:18px;background:var(--green-wash);border-radius:10px;padding:18px}
-.price .old{text-decoration:line-through;color:var(--muted);font-size:1rem}
-.price .big{font-family:var(--serif);font-weight:600;font-size:2.4rem;line-height:1.1}
-.price .tag{display:inline-block;margin-top:6px;font-size:.82rem;font-weight:700;color:var(--green)}
-.price .split{margin-top:8px;font-weight:600}
+/* sumário */
+.toc{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px}
+.toc a{display:grid;grid-template-columns:38px minmax(0,1fr) auto;gap:12px;align-items:center;text-decoration:none;color:inherit;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:14px 16px;transition:border-color .2s}
+.toc a:hover{border-color:var(--green)}
+.toc .n{font-family:var(--serif);font-weight:600;font-size:1.5rem;color:var(--green);line-height:1}
+.toc b{display:block;font-size:1.04rem;line-height:1.3}
+.toc .s{display:block;font-size:.88rem;color:var(--muted)}
+.toc .v{font-weight:700;font-size:1rem;text-align:right;white-space:nowrap}
+.toc .v small{display:block;font-weight:500;font-size:.78rem;color:var(--muted)}
+.toc li.last a{background:var(--green-wash);border-color:transparent}
 
-.does{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:12px}
-.does li{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:start}
-.does .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:var(--green-wash);color:var(--green);font-weight:700}
-.does b{display:block}
-.does span{color:var(--muted);font-size:.95rem}
-.box{margin-top:20px;border:1px solid var(--rule-2);border-radius:10px;padding:16px;display:grid;gap:8px}
-.box h3{font-size:1rem}
-.box p{font-size:.96rem;color:var(--muted)}
-.box.warn{border-color:transparent;background:var(--navy-wash)}
-.box.warn h3{color:var(--navy)}
+/* preço */
+.price{margin-top:22px;background:var(--green-wash);border-radius:12px;padding:24px 22px}
+.price .old{text-decoration:line-through;color:var(--muted);font-size:1.05rem}
+.price .big{font-family:var(--serif);font-weight:600;font-size:clamp(2.8rem,12vw,3.8rem);line-height:1.05;margin-top:2px}
+.price .split{margin-top:10px;font-size:1.25rem;font-weight:700}
+.price .tag{display:inline-block;margin-top:14px;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);border:1.5px solid var(--green);border-radius:999px;padding:4px 10px}
 
-.hours{margin-top:18px;background:var(--navy-wash);border-radius:10px;padding:18px}
-.hours .big{font-family:var(--serif);font-weight:600;font-size:2.4rem;line-height:1.1}
-.bar{margin-top:14px;display:grid;grid-template-columns:repeat(16,1fr);gap:3px}
-.bar i{height:14px;border-radius:3px;background:var(--navy)}
-.bar i.b{background:var(--green-mark)}
-.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;font-size:.88rem;color:var(--muted)}
-.legend span::before{content:"";display:inline-block;width:12px;height:10px;border-radius:2px;margin-right:6px;background:var(--navy)}
+/* lista do que faz */
+.does{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.does li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;align-items:start}
+.does .ic{width:28px;height:28px;border-radius:7px;display:grid;place-items:center;background:var(--green-wash);color:var(--green);font-weight:700;font-size:.9rem}
+.does b{display:block;font-size:1rem;line-height:1.3}
+.does span{display:block;color:var(--muted);font-size:.9rem;line-height:1.4}
+
+/* duas caixas */
+.pair{margin-top:22px;display:grid;gap:14px}
+.card{border-radius:12px;padding:20px;display:grid;gap:8px}
+.card .ico{width:40px;height:40px;border-radius:10px;display:grid;place-items:center}
+.card .ico svg{width:22px;height:22px}
+.card h3{font-size:1.15rem}
+.card p{color:var(--muted);font-size:.98rem}
+.card.yours{background:var(--green-wash)}
+.card.yours .ico{background:var(--sheet);color:var(--green)}
+.card.jld{background:var(--navy-wash)}
+.card.jld .ico{background:var(--sheet);color:var(--navy)}
+
+/* horas */
+.hours{margin-top:22px;background:var(--navy-wash);border-radius:12px;padding:24px 22px}
+.hours .big{font-family:var(--serif);font-weight:600;font-size:clamp(2.8rem,12vw,3.8rem);line-height:1.05}
+.hours .big small{font-family:var(--sans);font-size:1.05rem;font-weight:500;color:var(--muted)}
+.hours p{margin-top:6px;color:var(--muted)}
+.hbar{margin-top:20px;display:grid;grid-template-columns:repeat(16,1fr);gap:4px}
+.hbar i{height:22px;border-radius:4px;background:var(--navy);transform-origin:bottom;transform:scaleY(.2);opacity:.3;transition:transform .4s,opacity .4s}
+.hbar i.b{background:var(--green-mark)}
+.slide.on .hbar i{transform:none;opacity:1}
+.hcount{display:flex;justify-content:space-between;margin-top:6px;font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.legend{display:grid;gap:6px;margin-top:14px;font-size:.95rem}
+.legend span::before{content:"";display:inline-block;width:14px;height:12px;border-radius:3px;margin-right:8px;background:var(--navy);vertical-align:-1px}
 .legend span.b::before{background:var(--green-mark)}
-.uses{margin-top:20px;border-top:1px solid var(--rule)}
-.uses div{display:grid;grid-template-columns:1fr auto;gap:12px;padding-block:11px;border-bottom:1px solid var(--rule);font-size:.98rem}
+
+.uses{margin-top:16px;border-top:1px solid var(--rule)}
+.uses div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding-block:10px;border-bottom:1px solid var(--rule);font-size:.98rem}
 .uses b{white-space:nowrap}
 .uses .free b{color:var(--green)}
-.rules{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
-.rules li{display:grid;grid-template-columns:28px 1fr;gap:10px;font-size:.98rem}
-.rules li::before{content:"!";width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:.85rem;background:var(--navy-wash);color:var(--navy)}
 
-.opts{margin-top:18px;display:grid;gap:10px}
-.opt{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:var(--sheet);border:2px solid var(--rule);border-radius:10px;padding:14px 16px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s,background .2s}
+.rules{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:12px}
+.rules li{display:grid;grid-template-columns:56px minmax(0,1fr);gap:12px;align-items:center;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:14px 16px}
+.rules .k{font-family:var(--serif);font-weight:600;font-size:1.3rem;color:var(--navy);text-align:center;line-height:1;white-space:nowrap}
+.rules b{display:block;font-size:1rem}
+.rules span{display:block;color:var(--muted);font-size:.9rem}
+
+/* opcionais */
+.opts{margin-top:16px;display:grid;gap:10px}
+.opt{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--sheet);border:2px solid var(--rule);border-radius:10px;padding:12px 14px;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s,background .2s}
 .opt[aria-checked="true"]{border-color:var(--green);background:var(--green-wash)}
-.opt b{display:block;font-size:1.02rem}
-.opt span{font-size:.92rem;color:var(--muted)}
+.opt b{display:block;font-size:1rem;line-height:1.3}
+.opt span{display:block;font-size:.88rem;color:var(--muted);line-height:1.35}
 .opt .pv{text-align:right;font-weight:700;white-space:nowrap}
-.opt .pv small{display:block;font-weight:500;font-size:.8rem;color:var(--muted)}
+.opt .pv small{display:block;font-weight:500;font-size:.78rem;color:var(--muted)}
 .check{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:6px;border:2px solid var(--rule-2);margin-left:8px;vertical-align:middle;font-size:.85rem;color:transparent}
 .opt[aria-checked="true"] .check{background:var(--green);border-color:var(--green);color:var(--sheet)}
+.mini{margin-top:14px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;background:var(--ink);color:var(--bg);border-radius:10px;padding:14px 16px}
+.mini span{font-size:.92rem;opacity:.85}
+.mini b{font-family:var(--serif);font-weight:600;font-size:1.5rem;white-space:nowrap}
 
-.sum{margin-top:18px;background:var(--ink);color:var(--bg);border-radius:12px;padding:20px}
-.sum .row{display:grid;grid-template-columns:1fr auto;gap:12px;padding-block:7px;font-size:1rem}
+/* resumo */
+.sum{margin-top:20px;background:var(--ink);color:var(--bg);border-radius:12px;padding:22px}
+.sum .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding-block:7px;font-size:1rem}
 .sum .row b{font-variant-numeric:tabular-nums}
-.sum .total{border-top:1px solid rgba(255,255,255,.25);margin-top:6px;padding-top:12px;font-size:1.15rem}
-.sum .total b{font-family:var(--serif);font-weight:600;font-size:1.7rem}
+.sum .total{border-top:1px solid var(--muted);margin-top:6px;padding-top:12px;font-size:1.1rem;align-items:baseline}
+.sum .total b{font-family:var(--serif);font-weight:600;font-size:2rem}
 .sum .after{margin-top:6px;font-size:.92rem;opacity:.8}
-.sum .tot{margin-top:10px;font-size:.88rem;opacity:.75}
+.sum .tot{margin-top:4px;font-size:.88rem;opacity:.75}
+.chosen{margin-top:14px;font-size:.95rem;color:var(--muted)}
+.chosen b{color:var(--ink)}
+.chosen a{color:var(--green);font-weight:600}
 
-.terms{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
-.terms li{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:.98rem}
+/* combinados */
+.terms{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:12px}
+.terms li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;font-size:1rem}
 .terms li::before{content:"";width:8px;height:8px;margin-top:9px;background:var(--green-mark);border-radius:2px}
+.send{display:block;margin-top:22px;background:var(--green);color:#fff;text-align:center;text-decoration:none;font-weight:700;font-size:1.05rem;padding:16px;border-radius:8px}
+.small{margin-top:10px;font-size:.85rem;color:var(--muted)}
+.foot{margin-top:22px;padding-top:14px;border-top:1px solid var(--rule);font-size:.82rem;color:var(--muted)}
 
-.send{display:block;margin-top:18px;background:var(--green);color:#fff;text-align:center;text-decoration:none;font-weight:700;font-size:1.05rem;padding:16px;border-radius:8px}
-.small{margin-top:10px;font-size:.88rem;color:var(--muted)}
-footer{padding-block:24px 36px;font-size:.85rem;color:var(--muted);border-top:1px solid var(--rule)}
-footer .wrap{display:flex;justify-content:space-between;gap:6px 16px;flex-wrap:wrap}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}.js .rv{transform:none}}
-@media print{.progress{display:none}.js .rv{transform:none}}
+@media (max-height:680px){.slide{padding-top:54px;padding-bottom:62px}.does{gap:7px}.does span{font-size:.86rem}.price,.hours{padding:18px}.chap{margin-bottom:12px}.toc a{padding:11px 14px}.uses div{padding-block:8px}}
+@media (max-height:740px){.slide h2{font-size:1.55rem}.cover h1{font-size:2.3rem;margin-top:10px}.sign{margin-top:16px}.meta{margin-top:18px}.meta div{padding-block:8px 10px}.start{margin-top:18px}.toc{gap:8px;margin-top:14px}.sub{margin-top:6px;font-size:.95rem}.opts{margin-top:12px;gap:8px}.opt{padding:9px 12px}.opt span{font-size:.84rem}.mini{margin-top:10px;padding:10px 14px}.terms{gap:8px;margin-top:14px}.terms li{font-size:.95rem}.send{margin-top:14px;padding:13px}.sum{padding:16px;margin-top:14px}.sum .row{padding-block:3px}.sum .total{padding-top:8px}.sum .total b{font-size:1.6rem}.chosen{margin-top:10px}.small{margin-top:8px}.foot{display:none}.pair{margin-top:16px;gap:10px}.card{padding:16px}}
+@media (prefers-reduced-motion:reduce){.deck{scroll-behavior:auto}.js .slide .rv{opacity:1;transform:none;transition:none}.hbar i{transform:none;opacity:1;transition:none}.next svg{animation:none}}
+@media print{
+  body{overflow:visible}.deck{position:static;overflow:visible}
+  .topband,.progress,.bar-top,.next{display:none}
+  .slide{min-height:auto;break-after:page;padding:32px 24px}
+  .js .slide .rv{opacity:1;transform:none}.hbar i{transform:none;opacity:1}
+}
 </style>
 <link rel="icon" type="image/png" href="../preview.png">
 <link rel="apple-touch-icon" href="../preview.png">
@@ -143,109 +207,180 @@ footer .wrap{display:flex;justify-content:space-between;gap:6px 16px;flex-wrap:w
 <body>
 
 
-<div class="top" aria-hidden="true"></div>
+<div class="topband" aria-hidden="true"></div>
 <div class="progress" aria-hidden="true"><i id="prog"></i></div>
-<div class="wrap">
-  <header>
-    <span class="label cover-label">Proposta comercial · nº 002/2026</span>
-    <h1 class="rv">Sua proposta em 3 partes</h1>
-    <p class="for">Preparada para <b>JLD Connect C Telecom Ltda</b></p>
-    <div class="sign"><span class="initials" aria-hidden="true">RM</span><div><b>Robert Martins Cezar</b><span>Coordenador de Projetos · 8+ anos em tecnologia e gestão</span></div></div>
-    <div class="meta">
-      <div><span class="label">Emitida em</span><b>05 nov 2026</b></div>
-      <div><span class="label">Válida até</span><b>20 nov 2026</b></div>
-      <div><span class="label">Responsável</span><b>Robert Martins Cezar</b></div>
-      <div><span class="label">Modalidade</span><b>Ferramenta + suporte</b></div>
-    </div>
-    <nav class="three" aria-label="Resumo">
-      <a href="#ferramenta"><span class="n">01</span><span><b>A ferramenta</b><span class="s">Paga a comissão certa, sem planilha</span></span><span class="v">R$ 12.500<small>ou 10 × R$ 1.250</small></span></a>
-      <a href="#horas"><span class="n">02</span><span><b>Suporte + 16 horas por mês</b><span class="s">Ferramenta, TI e o que precisar</span></span><span class="v">R$ 1.700<small>por mês</small></span></a>
-      <a href="#opcionais"><span class="n">03</span><span><b>Opcionais</b><span class="s">Adicione se quiser</span></span><span class="v">a partir de<small>R$ 900</small></span></a>
-    </nav>
-  </header>
+<div class="bar-top"><span class="count" id="count" aria-hidden="true">1/11</span><button class="menu" id="menu" type="button" hidden>Sumário</button></div>
 
-  <section id="ferramenta">
-    <div class="head"><span class="n">01</span><h2 class="rv">A ferramenta</h2></div>
-    <div class="price">
-      <div class="old">De R$ 20.520</div>
-      <div class="big">R$ 12.500</div>
-      <div class="split">ou 10 × R$ 1.250</div>
-      <span class="tag">Condição de cliente fundador</span>
-    </div>
-    <ul class="does">
-      <li><span class="ic">1</span><div><b>Calcula a comissão de cada vendedor</b><span>Tabela por perfil e velocidade, campanhas e histórico de mudanças.</span></div></li>
-      <li><span class="ic">2</span><div><b>Confere sozinha com a Osab</b><span>Junta a planilha de vendas com o relatório da Osab. Só entra para pagamento o que foi instalado.</span></div></li>
-      <li><span class="ic">3</span><div><b>Fecha todo dia (D+1)</b><span>Extrato pronto por vendedor.</span></div></li>
-      <li><span class="ic">4</span><div><b>Você aprova, o financeiro paga</b><span>Com comprovante. O sistema bloqueia pagamento repetido.</span></div></li>
-      <li><span class="ic">5</span><div><b>Controla os vales</b><span>Desconta sozinho das próximas comissões.</span></div></li>
-      <li><span class="ic">6</span><div><b>Avisa o vendedor pelo WhatsApp</b><span>Com o link do pagamento. Sem custo extra.</span></div></li>
-      <li><span class="ic">7</span><div><b>Seguro</b><span>Só você e o gerente financeiro entram. Tudo fica registrado, com cópia de segurança.</span></div></li>
-    </ul>
-    <div class="box">
-      <h3>A ferramenta é sua para usar</h3>
-      <p>Você usa sem prazo. O sistema continua sendo meu: não pode ser vendido nem repassado.</p>
-    </div>
-    <div class="box warn">
-      <h3>O que a JLD faz</h3>
-      <p>Sobe todo dia a planilha de vendas (no modelo que vamos combinar) e o relatório da Osab. A hospedagem fica na LocaWeb da JLD.</p>
+<main class="deck" id="deck">
+
+  <section class="slide cover" id="inicio" data-next="Sumário">
+    <div class="in">
+      <span class="label cover-label rv">Proposta comercial · nº 002/2026</span>
+      <h1 class="rv">Sua proposta em 3 partes</h1>
+      <p class="for rv">Preparada para <b>JLD Connect C Telecom Ltda</b></p>
+      <div class="rv">
+        <div class="sign"><span class="initials" aria-hidden="true">RM</span><div><b>Robert Martins Cezar</b><span>Coordenador de Projetos · 8+ anos em tecnologia e gestão</span></div></div>
+        <div class="meta">
+          <div><span class="label">Emitida em</span><b>05 nov 2026</b></div>
+          <div><span class="label">Válida até</span><b>20 nov 2026</b></div>
+          <div><span class="label">Responsável</span><b>Robert Martins Cezar</b></div>
+          <div><span class="label">Modalidade</span><b>Ferramenta + suporte</b></div>
+        </div>
+      </div>
+      <button class="start rv" type="button" data-go="sumario">Começar</button>
     </div>
   </section>
 
-  <section id="horas">
-    <div class="head"><span class="n">02</span><h2 class="rv">Suporte + 16 horas por mês</h2></div>
-    <div class="hours">
-      <div class="big">R$ 1.700 <span class="muted" style="font-size:1rem;font-family:var(--sans);font-weight:500">por mês</span></div>
-      <p class="muted">16 horas para o que você precisar: ferramenta, TI, computadores, planilhas e processos.</p>
-      <div class="bar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></div>
-      <div class="legend"><span>Qualquer pedido</span><span class="b">Até 4 h para computadores</span></div>
-    </div>
-    <div class="uses">
-      <div><span>Dúvida, planilha, acesso remoto, rede, e-mail</span><b>tempo real</b></div>
-      <div><span>Visita na empresa</span><b>mínimo 2 h</b></div>
-      <div><span>Formatar computador</span><b>1 h</b></div>
-      <div><span>Trocar SSD ou memória (peça à parte)</span><b>1 h</b></div>
-      <div><span>Limpeza interna</span><b>1 h</b></div>
-      <div><span>Descobrir defeito</span><b>30 min</b></div>
-      <div><span>Ajuste na ferramenta quando a Osab mudar</span><b>tempo real</b></div>
-      <div class="free"><span>Defeito na ferramenta</span><b>não gasta horas</b></div>
-    </div>
-    <ul class="rules">
-      <li>Pedido de mais de 2 h: eu aviso antes de começar.</li>
-      <li>Pedido de mais de 4 h vira projeto, com orçamento à parte.</li>
-      <li>Urgência fora do horário combinado conta 1,5 ×.</li>
-      <li>Horas que sobrarem valem no mês seguinte. Hora extra: R$ 120.</li>
-    </ul>
-  </section>
-
-  <section id="opcionais">
-    <div class="head"><span class="n">03</span><h2 class="rv">Opcionais</h2></div>
-    <p class="muted" style="margin-top:12px">Toque para adicionar. O valor entra junto com as 10 parcelas da ferramenta.</p>
-    <div class="opts" id="opts"></div>
-
-    <div class="sum" aria-live="polite">
-      <div class="row"><span>Ferramenta (10 ×)</span><b id="sTool">R$ 1.250</b></div>
-      <div class="row" id="sOptRow" hidden><span>Opcionais (10 ×)</span><b id="sOpt">R$ 0</b></div>
-      <div class="row"><span>Suporte + 16 horas</span><b>R$ 1.700</b></div>
-      <div class="row total"><span>Por mês, nos 10 primeiros meses</span><b id="sTot">R$ 2.950</b></div>
-      <div class="after">Depois: R$ 1.700 por mês.</div>
-      <div class="tot" id="sAll">Ferramenta total: R$ 12.500</div>
+  <section class="slide" id="sumario" data-next="A ferramenta">
+    <div class="in">
+      <span class="label rv">Sumário</span>
+      <h2 class="rv" style="margin-top:8px">Toque para ir direto</h2>
+      <ol class="toc rv">
+        <li><a href="#ferramenta"><span class="n">01</span><span><b>A ferramenta</b><span class="s">Paga a comissão certa, sem planilha</span></span><span class="v">R$ 12.500<small>ou 10 × R$ 1.250</small></span></a></li>
+        <li><a href="#suporte"><span class="n">02</span><span><b>Suporte + 16 horas</b><span class="s">Ferramenta, TI e o que precisar</span></span><span class="v">R$ 1.700<small>por mês</small></span></a></li>
+        <li><a href="#opcionais"><span class="n">03</span><span><b>Opcionais</b><span class="s">Adicione se quiser</span></span><span class="v">a partir de<small>R$ 900</small></span></a></li>
+        <li><a href="#combinados"><span class="n">04</span><span><b>Combinados</b><span class="s">Prazo, pagamento e garantia</span></span><span class="v">5<small>regras</small></span></a></li>
+        <li class="last"><a href="#resumo"><span class="n">05</span><span><b>Resumo da minha escolha</b><span class="s">Quanto fica por mês</span></span><span class="v" id="tocTot">R$ 2.950<small>por mês</small></span></a></li>
+      </ol>
     </div>
   </section>
 
-  <section id="regras">
-    <div class="head"><span class="n">04</span><h2 class="rv">Combinados</h2></div>
-    <ul class="terms">
-      <li>Contrato de 1 ano, com mínimo de 3 meses. Depois disso, qualquer um pode sair avisando 1 mês antes.</li>
-      <li>Se sair antes de quitar a ferramenta, paga o que falta dela.</li>
-      <li>Pedido novo fora desta lista: orço antes, a R$ 120 por hora.</li>
-      <li>Defeito na ferramenta: eu corrijo sem gastar suas horas (garantia de 90 dias após a entrega e durante o suporte).</li>
-      <li>Pagamento até o dia 10, por Pix, com recibo de autônomo (RPA).</li>
-    </ul>
-    <a class="send" id="send" href="https://wa.me/5521993216948" target="_blank" rel="noopener">Enviar minha escolha pelo WhatsApp</a>
-    <p class="small">Esta proposta não substitui o contrato, que trará as condições definitivas.</p>
+  <section class="slide" id="ferramenta" data-next="O que ela faz">
+    <div class="in">
+      <div class="chap rv"><span class="n">01</span><span class="label">A ferramenta · 1 de 3</span></div>
+      <h2 class="rv">Paga a comissão certa, sem planilha.</h2>
+      <div class="price rv">
+        <div class="old">De R$ 20.520</div>
+        <div class="big">R$ 12.500</div>
+        <div class="split">ou 10 × R$ 1.250</div>
+        <span class="tag">Condição de cliente fundador</span>
+      </div>
+    </div>
   </section>
-</div>
-<footer><div class="wrap"><span>Robert Martins Cezar · Gestão, processos e tecnologia</span><span>Proposta nº 002/2026 para JLD Connect C Telecom Ltda</span></div></footer>
+
+  <section class="slide" id="ferramenta-faz" data-next="O que é seu e o que a JLD faz">
+    <div class="in">
+      <div class="chap rv"><span class="n">01</span><span class="label">A ferramenta · 2 de 3</span></div>
+      <h2 class="rv">O que ela faz</h2>
+      <ul class="does rv">
+        <li><span class="ic">1</span><div><b>Calcula a comissão de cada vendedor</b><span>Por perfil, velocidade e campanha, com histórico.</span></div></li>
+        <li><span class="ic">2</span><div><b>Confere sozinha com a Osab</b><span>Só entra para pagamento o que foi instalado.</span></div></li>
+        <li><span class="ic">3</span><div><b>Fecha todo dia (D+1)</b><span>Extrato pronto por vendedor.</span></div></li>
+        <li><span class="ic">4</span><div><b>Você aprova, o financeiro paga</b><span>Com comprovante. Bloqueia pagamento repetido.</span></div></li>
+        <li><span class="ic">5</span><div><b>Controla os vales</b><span>Desconta sozinho das próximas comissões.</span></div></li>
+        <li><span class="ic">6</span><div><b>Avisa o vendedor pelo WhatsApp</b><span>Com o link do pagamento. Sem custo extra.</span></div></li>
+        <li><span class="ic">7</span><div><b>Seguro</b><span>Só você e o gerente financeiro entram, com cópia de segurança.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide" id="ferramenta-uso" data-next="Suporte + 16 horas">
+    <div class="in">
+      <div class="chap rv"><span class="n">01</span><span class="label">A ferramenta · 3 de 3</span></div>
+      <h2 class="rv">O que é seu e o que a JLD faz</h2>
+      <div class="pair">
+        <div class="card yours rv">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2 20 3M16 7l3 3M14 9l2 2"/></svg></span>
+          <h3>A ferramenta é sua para usar</h3>
+          <p>Você usa sem prazo. O sistema continua sendo meu: não pode ser vendido nem repassado.</p>
+        </div>
+        <div class="card jld rv">
+          <span class="ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></span>
+          <h3>O que a JLD faz</h3>
+          <p>Sobe todo dia a planilha de vendas (no modelo que vamos combinar) e o relatório da Osab. A hospedagem fica na LocaWeb da JLD.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="suporte" data-next="Quanto gasta cada pedido">
+    <div class="in">
+      <div class="chap rv"><span class="n">02</span><span class="label">Suporte + 16 horas · 1 de 3</span></div>
+      <h2 class="rv">16 horas por mês para o que você precisar.</h2>
+      <div class="hours rv">
+        <div class="big">R$ 1.700 <small>por mês</small></div>
+        <p>Ferramenta, TI, computadores, planilhas e processos.</p>
+        <div class="hbar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="b"></i><i class="b"></i><i class="b"></i><i class="b"></i></div>
+        <div class="hcount" aria-hidden="true"><span>1 h</span><span>16 h</span></div>
+        <div class="legend"><span>12 h para qualquer pedido</span><span class="b">Até 4 h para computadores</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="suporte-uso" data-next="As regras das horas">
+    <div class="in">
+      <div class="chap rv"><span class="n">02</span><span class="label">Suporte + 16 horas · 2 de 3</span></div>
+      <h2 class="rv">Quanto gasta cada pedido</h2>
+      <div class="uses rv">
+        <div><span>Dúvida, planilha, acesso remoto, rede, e-mail</span><b>tempo real</b></div>
+        <div><span>Visita na empresa</span><b>mínimo 2 h</b></div>
+        <div><span>Formatar computador</span><b>1 h</b></div>
+        <div><span>Trocar SSD ou memória (peça à parte)</span><b>1 h</b></div>
+        <div><span>Limpeza interna</span><b>1 h</b></div>
+        <div><span>Descobrir defeito</span><b>30 min</b></div>
+        <div><span>Ajuste na ferramenta quando a Osab mudar</span><b>tempo real</b></div>
+        <div class="free"><span>Defeito na ferramenta</span><b>não gasta horas</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="suporte-regras" data-next="Opcionais">
+    <div class="in">
+      <div class="chap rv"><span class="n">02</span><span class="label">Suporte + 16 horas · 3 de 3</span></div>
+      <h2 class="rv">As regras das horas</h2>
+      <ul class="rules rv">
+        <li><span class="k">+2 h</span><div><b>Eu aviso antes de começar</b><span>Você aprova e só então eu sigo.</span></div></li>
+        <li><span class="k">+4 h</span><div><b>Vira projeto</b><span>Com orçamento à parte.</span></div></li>
+        <li><span class="k">1,5×</span><div><b>Urgência fora do horário</b><span>Conta 1,5 hora para cada hora.</span></div></li>
+        <li><span class="k">R$ 120</span><div><b>Hora extra</b><span>Horas que sobram valem no mês seguinte.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide" id="opcionais" data-next="Combinados">
+    <div class="in">
+      <div class="chap rv"><span class="n">03</span><span class="label">Opcionais</span></div>
+      <h2 class="rv">Toque para adicionar</h2>
+      <p class="sub rv">O valor entra junto com as 10 parcelas da ferramenta.</p>
+      <div class="opts rv" id="opts"></div>
+      <div class="mini rv" aria-live="polite"><span>Por mês, nos 10 primeiros meses</span><b id="miniTot">R$ 2.950</b></div>
+    </div>
+  </section>
+
+  <section class="slide" id="combinados" data-next="Resumo da minha escolha">
+    <div class="in">
+      <div class="chap rv"><span class="n">04</span><span class="label">Combinados</span></div>
+      <h2 class="rv">Regras claras desde o primeiro dia</h2>
+      <ul class="terms rv">
+        <li>Contrato de 1 ano, com mínimo de 3 meses. Depois disso, qualquer um pode sair avisando 1 mês antes.</li>
+        <li>Se sair antes de quitar a ferramenta, paga o que falta dela.</li>
+        <li>Pedido novo fora desta lista: orço antes, a R$ 120 por hora.</li>
+        <li>Defeito na ferramenta: eu corrijo sem gastar suas horas (garantia de 90 dias após a entrega e durante o suporte).</li>
+        <li>Pagamento até o dia 10, por Pix, com recibo de autônomo (RPA).</li>
+      </ul>
+      <a class="send rv js-send" href="https://wa.me/5521993216948" target="_blank" rel="noopener">Enviar minha escolha pelo WhatsApp</a>
+    </div>
+  </section>
+
+  <section class="slide" id="resumo">
+    <div class="in">
+      <div class="chap rv"><span class="n">05</span><span class="label">Resumo da minha escolha</span></div>
+      <h2 class="rv">Quanto fica por mês</h2>
+      <div class="sum rv" aria-live="polite">
+        <div class="row"><span>Ferramenta (10 ×)</span><b>R$ 1.250</b></div>
+        <div class="row" id="sOptRow" hidden><span>Opcionais (10 ×)</span><b id="sOpt">R$ 0</b></div>
+        <div class="row"><span>Suporte + 16 horas</span><b>R$ 1.700</b></div>
+        <div class="row total"><span>Por mês, nos 10 primeiros meses</span><b id="sTot">R$ 2.950</b></div>
+        <div class="after">Depois: R$ 1.700 por mês.</div>
+        <div class="tot" id="sAll">Ferramenta total: R$ 12.500</div>
+      </div>
+      <p class="chosen rv" id="chosen"></p>
+      <a class="send rv js-send" href="https://wa.me/5521993216948" target="_blank" rel="noopener">Enviar minha escolha pelo WhatsApp</a>
+      <p class="small rv">Esta proposta não substitui o contrato, que trará as condições definitivas.</p>
+      <p class="foot">Robert Martins Cezar · Gestão, processos e tecnologia · Proposta nº 002/2026 para JLD Connect C Telecom Ltda</p>
+    </div>
+  </section>
+</main>
 
 <script>
 (function(){
@@ -257,34 +392,67 @@ footer .wrap{display:flex;justify-content:space-between;gap:6px 16px;flex-wrap:w
   ];
   var sel={};
   function brl(v){return "R$ "+Math.round(v).toLocaleString("pt-BR");}
-  var box=document.getElementById("opts");
+  function $(id){return document.getElementById(id);}
+  var box=$("opts");
   box.innerHTML=O.map(function(o){return '<div class="opt" role="checkbox" tabindex="0" aria-checked="false" data-id="'+o.id+'"><div><b>'+o.nome+'</b><span>'+o.desc+'</span></div><div class="pv">'+brl(o.preco)+'<span class="check">✓</span><small>10 × '+brl(o.preco/10)+'</small></div></div>';}).join("");
   function update(){
     var add=0,names=[];
     O.forEach(function(o){if(sel[o.id]){add+=o.preco;names.push(o.nome);}});
-    var row=document.getElementById("sOptRow"); row.hidden=!add;
-    document.getElementById("sOpt").textContent=brl(add/10);
-    document.getElementById("sTot").textContent=brl(1250+add/10+1700);
-    document.getElementById("sAll").textContent="Ferramenta total: "+brl(12500+add)+(add?" (com opcionais)":"");
-    var msg="Olá, Robert! Sobre a proposta nº 002/2026 da JLD Connect: quero a ferramenta em 10 × R$ 1.250 e o suporte com 16 horas por mês (R$ 1.700)."+(names.length?" Opcionais: "+names.join(", ")+".":" Sem opcionais.");
-    document.getElementById("send").href="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);
+    var tot=brl(1250+add/10+1700);
+    $("sOptRow").hidden=!add;
+    $("sOpt").textContent=brl(add/10);
+    $("sTot").textContent=tot; $("miniTot").textContent=tot;
+    $("tocTot").innerHTML=tot+"<small>por mês</small>";
+    $("sAll").textContent="Ferramenta total: "+brl(12500+add)+(add?" (com opcionais)":"");
+    $("chosen").innerHTML="Opcionais: <b>"+(names.length?names.join(", "):"nenhum")+"</b>. <a href=\"#opcionais\">Alterar</a>";
+    var msg="Olá, Robert! Sobre a proposta nº 002/2026 da JLD Connect: quero a ferramenta em 10 × R$ 1.250 e o suporte com 16 horas por mês (R$ 1.700)."+(names.length?" Opcionais: "+names.join(", ")+".":" Sem opcionais.")+" Total por mês nos 10 primeiros meses: "+tot+".";
+    [].forEach.call(document.querySelectorAll(".js-send"),function(a){a.href="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);});
   }
   [].forEach.call(box.querySelectorAll(".opt"),function(el){
     function t(){var id=el.getAttribute("data-id");sel[id]=!sel[id];el.setAttribute("aria-checked",!!sel[id]);update();}
     el.addEventListener("click",t);
-    el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();t();}});
+    el.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();e.stopPropagation();t();}});
   });
   update();
+
   var doc=document.documentElement; doc.classList.add("js");
+  var deck=$("deck"), slides=[].slice.call(document.querySelectorAll(".slide")), cur=0;
   var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var rv=document.querySelectorAll(".rv");
-  if("IntersectionObserver" in window&&!reduce){
-    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{rootMargin:"0px 0px -8% 0px"});
-    [].forEach.call(rv,function(el){io.observe(el);});
-  } else {[].forEach.call(rv,function(el){el.classList.add("in");});}
-  var prog=document.getElementById("prog");
-  function sp(){var h=doc.scrollHeight-innerHeight;prog.style.width=(h>0?Math.min(100,scrollY/h*100):0)+"%";}
-  addEventListener("scroll",sp,{passive:true});addEventListener("resize",sp);sp();
+  var chev='<svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+  slides.forEach(function(s,i){
+    var nx=s.getAttribute("data-next"); if(!nx) return;
+    var b=document.createElement("button"); b.type="button"; b.className="next";
+    b.innerHTML=(i===0?"Deslize para cima":"Próximo: "+nx)+chev;
+    b.addEventListener("click",function(){go(i+1);}); s.appendChild(b);
+  });
+  function go(i){ if(i<0||i>=slides.length) return; deck.scrollTo({top:slides[i].offsetTop,behavior:reduce?"auto":"smooth"}); }
+  function goId(id){ for(var i=0;i<slides.length;i++){ if(slides[i].id===id){go(i);return true;} } return false; }
+  function setCur(i){
+    cur=i; slides[i].classList.add("on");
+    $("prog").style.width=(i/(slides.length-1)*100)+"%";
+    $("count").textContent=(i+1)+"/"+slides.length;
+    $("menu").hidden=(i<2);
+    try{history.replaceState(null,"","#"+slides[i].id);}catch(e){}
+  }
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting) setCur(slides.indexOf(e.target));});},{root:deck,threshold:0.5});
+    slides.forEach(function(s){io.observe(s);});
+  } else { slides.forEach(function(s){s.classList.add("on");}); }
+  document.addEventListener("click",function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"],[data-go]'); if(!a) return;
+    var id=a.getAttribute("data-go")||a.getAttribute("href").slice(1);
+    if(goId(id)) e.preventDefault();
+  });
+  $("menu").addEventListener("click",function(){goId("sumario");});
+  document.addEventListener("keydown",function(e){
+    if(["ArrowDown","PageDown"].indexOf(e.key)>-1||(e.key===" "&&!e.shiftKey)){e.preventDefault();go(cur+1);}
+    else if(["ArrowUp","PageUp"].indexOf(e.key)>-1||(e.key===" "&&e.shiftKey)){e.preventDefault();go(cur-1);}
+    else if(e.key==="Home"){e.preventDefault();go(0);} else if(e.key==="End"){e.preventDefault();go(slides.length-1);}
+  });
+  var h=location.hash.slice(1), start=0;
+  for(var i=0;i<slides.length;i++){ if(slides[i].id===h){ start=i; break; } }
+  if(start){ deck.style.scrollBehavior="auto"; deck.scrollTop=slides[start].offsetTop; setTimeout(function(){deck.style.scrollBehavior="";},50); }
+  setCur(start);
 })();
 </script>
 
