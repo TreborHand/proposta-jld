@@ -1,0 +1,489 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;padding:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<title>Proposta NexFlow JLD</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0c1416">
+<meta name="format-detection" content="telephone=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Source+Sans+3:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: slides verticais, uma ideia por tela, mesma identidade das propostas nº 001 e 002 (tema escuro único). */
+:root,:root[data-theme="light"],:root[data-theme="dark"]{
+  --bg:#0c1416; --sheet:#111c1f; --ink:#e7eeec; --muted:#9fb0ab; --rule:#23312f; --rule-2:#33443f;
+  --green:#5fcf9f; --green-wash:#13281f; --navy:#a9c2dc; --navy-wash:#152230; --on-green:#08231a;
+  --amber:#e9c46a; --amber-wash:#2a2412; --red:#e98a7a;
+  --serif:"Source Serif 4",Georgia,serif; --sans:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.5;overflow:hidden}
+h1,h2,h3{margin:0;text-wrap:balance}
+h1,h2{font-family:var(--serif);font-weight:600;letter-spacing:-.01em}
+p{margin:0}
+.label{font-size:.78rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green)}
+.muted{color:var(--muted)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+
+.deck{position:fixed;inset:0;overflow-y:auto;scroll-snap-type:y proximity;scroll-behavior:smooth;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch}
+.slide{min-height:100vh;min-height:100svh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding-block:64px 76px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));position:relative}
+.slide>.in{width:100%;max-width:720px;margin:0 auto;min-width:0}
+.slide+.slide{border-top:1px solid var(--rule)}
+
+.topband{position:fixed;left:0;right:0;top:0;height:5px;background:var(--green);z-index:30}
+.progress{position:fixed;left:0;right:0;top:5px;height:3px;z-index:30;background:var(--rule)}
+.progress i{display:block;height:100%;width:0;background:var(--green);transition:width .35s}
+.bar-top{position:fixed;top:14px;right:max(14px,env(safe-area-inset-right,0px));z-index:30}
+.count{font-size:.8rem;font-weight:600;color:var(--muted);font-variant-numeric:tabular-nums;background:var(--bg);padding:6px 8px;border-radius:999px}
+
+.next{position:absolute;left:50%;bottom:max(18px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;align-items:center;gap:8px;font:inherit;font-size:.86rem;font-weight:600;color:var(--muted);background:none;border:0;cursor:pointer;white-space:nowrap;padding:8px 10px;max-width:calc(100% - 24px)}
+.next span{overflow:hidden;text-overflow:ellipsis}
+.next svg{width:18px;height:18px;flex:none;stroke:var(--green);animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(4px)}}
+
+.js .slide .rv{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .slide.on .rv{opacity:1;transform:none}
+.js .slide.on .rv:nth-child(2){transition-delay:.06s}
+.js .slide.on .rv:nth-child(3){transition-delay:.12s}
+.js .slide.on .rv:nth-child(4){transition-delay:.18s}
+.js .slide.on .rv:nth-child(5){transition-delay:.24s}
+
+.chap{margin-bottom:12px}
+.slide h2{font-size:clamp(1.6rem,5.6vw,2.3rem);line-height:1.12}
+.sub{margin-top:10px;color:var(--muted);font-size:1.02rem}
+
+/* capa */
+.cover-label{font-size:clamp(.88rem,1.6vw,1.02rem);letter-spacing:.1em}
+.cover h1{font-size:clamp(2.4rem,9.5vw,3.8rem);line-height:1.03;margin-top:16px;max-width:13ch}
+.cover h1 em{font-style:normal;color:var(--green)}
+.cover .for{margin-top:14px;font-size:1.08rem;color:var(--muted)}
+.cover .for b{color:var(--ink);font-weight:600}
+.sign{display:flex;align-items:center;gap:14px;margin-top:22px}
+.initials{width:48px;height:48px;border-radius:50%;border:1.5px solid var(--green);color:var(--green);display:grid;place-items:center;font-family:var(--serif);font-weight:700;font-size:1.05rem;flex:none}
+.sign b{display:block;font-weight:700;line-height:1.3}
+.sign span{font-size:.92rem;color:var(--muted)}
+.meta{margin-top:26px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--rule-2);border-bottom:1px solid var(--rule-2)}
+.meta div{padding:12px 14px 14px 0;display:grid;gap:2px;min-width:0}
+.meta div+div{padding-left:14px;border-left:1px solid var(--rule)}
+.meta .label{color:var(--muted);font-size:.7rem}
+.meta b{font-weight:600;font-size:.98rem}
+.start{display:inline-flex;align-items:center;gap:10px;margin-top:26px;background:var(--green);color:var(--on-green);border:0;border-radius:8px;padding:14px 22px;font:inherit;font-weight:700;font-size:1.02rem;cursor:pointer}
+
+/* antes x depois */
+.swap{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.swap li{display:grid;grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);gap:10px;align-items:stretch}
+.swap .was,.swap .now{border-radius:10px;padding:12px 14px;font-size:.95rem;line-height:1.35}
+.swap .was{background:var(--sheet);border:1px solid var(--rule);color:var(--muted)}
+.swap .now{background:var(--green-wash);color:var(--ink);font-weight:600}
+.swap .ar{display:grid;place-items:center;color:var(--green)}
+.swap .ar svg{width:20px;height:20px}
+.swap-head{display:grid;grid-template-columns:minmax(0,1fr) 24px minmax(0,1fr);gap:10px;margin-top:18px}
+.swap-head span{font-size:.72rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.swap-head span:last-child{color:var(--green)}
+.swap-head+.swap{margin-top:8px}
+
+/* lista com ícone numérico */
+.does{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:11px}
+.does li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;align-items:start}
+.does .ic{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:var(--green-wash);color:var(--green)}
+.does .ic svg{width:17px;height:17px}
+.does b{display:block;font-size:1rem;line-height:1.3}
+.does span{display:block;color:var(--muted);font-size:.9rem;line-height:1.4}
+
+/* detalhes */
+.det{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.det li{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:13px 14px;display:grid;gap:3px;align-content:start;min-width:0}
+.det b{font-size:.98rem;line-height:1.3}
+.det span{font-size:.86rem;color:var(--muted);line-height:1.35}
+.det li.wide{grid-column:1/-1}
+@media (max-width:560px){.det{grid-template-columns:1fr}}
+
+/* protótipo */
+.proof{margin-top:20px;background:var(--green-wash);border-radius:12px;padding:22px;display:grid;gap:12px}
+.proof .big{font-family:var(--serif);font-weight:600;font-size:clamp(1.5rem,5vw,1.9rem);line-height:1.15}
+.proof p{color:var(--ink);opacity:.85}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:var(--on-green);text-decoration:none;font-weight:700;font-size:1rem;padding:13px 20px;border-radius:8px;justify-self:start}
+.btn svg{width:18px;height:18px}
+.fine{font-size:.86rem;color:var(--muted)}
+
+/* investimento */
+.pair{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:620px){.pair{grid-template-columns:1fr}}
+.card{border-radius:12px;padding:20px;display:grid;gap:6px;align-content:start;min-width:0}
+.card.app{background:var(--green-wash)}
+.card.man{background:var(--navy-wash)}
+.card .label{color:var(--muted)}
+.card .big{font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,8vw,2.8rem);line-height:1.05}
+.card .big small{font-family:var(--sans);font-size:1rem;font-weight:500;color:var(--muted)}
+.card .split{font-size:1.15rem;font-weight:700;color:var(--green)}
+.card.man .split{color:var(--navy)}
+.card .when{font-size:.92rem;color:var(--ink)}
+.incl{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:6px}
+.incl li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:8px;font-size:.92rem;line-height:1.35}
+.incl li::before{content:"✓";width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.72rem;font-weight:700;background:var(--sheet);color:var(--navy)}
+
+.card .old{text-decoration:line-through;color:var(--muted);font-size:1.05rem}
+.card .tag{justify-self:start;margin-top:4px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);border:1.5px solid var(--green);border-radius:999px;padding:3px 10px}
+
+/* horas da manutenção */
+.hrs{margin-top:18px;background:var(--navy-wash);border-radius:12px;padding:18px 20px}
+.hrs .big{font-family:var(--serif);font-weight:600;font-size:clamp(2.2rem,8vw,2.8rem);line-height:1.05}
+.hrs .big small{font-family:var(--sans);font-size:1rem;font-weight:500;color:var(--muted)}
+.hbar{margin-top:12px;display:grid;grid-template-columns:repeat(8,1fr);gap:5px}
+.hbar i{height:22px;border-radius:4px;background:var(--navy);transform-origin:bottom;transform:scaleY(.2);opacity:.3;transition:transform .4s,opacity .4s}
+.slide.on .hbar i{transform:none;opacity:1}
+.cols{margin-top:14px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:520px){.cols{grid-template-columns:1fr}}
+.col{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:12px 14px;min-width:0}
+.col .label{font-size:.7rem}
+.col.uses .label{color:var(--navy)}
+.col ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.col li{font-size:.92rem;line-height:1.35;display:grid;grid-template-columns:18px minmax(0,1fr);gap:8px}
+.col li::before{content:"✓";color:var(--green);font-weight:700}
+.col.uses li::before{content:"•";color:var(--navy)}
+.hrules{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
+.hrules li{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:10px 14px}
+.hrules .k{font-family:var(--serif);font-weight:600;font-size:1.2rem;color:var(--navy);text-align:center;white-space:nowrap}
+.hrules b{display:block;font-size:.96rem}
+.hrules span{display:block;color:var(--muted);font-size:.86rem}
+
+/* seu mês */
+.chart{margin-top:20px;background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:18px 16px 12px}
+.bars{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;align-items:end;height:150px}
+.bar{display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+.bar i{display:block;width:100%;transform-origin:bottom;transform:scaleY(.15);opacity:.3;transition:transform .5s,opacity .5s}
+.bar i.m{background:var(--navy);border-radius:4px 4px 0 0}
+.bar i.a{background:var(--green);border-radius:0}
+.bar i.a:first-child{border-radius:4px 4px 0 0}
+.slide.on .bar i{transform:none;opacity:1}
+.months{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;margin-top:6px}
+.months span{text-align:center;font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:10px;font-size:.86rem;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:12px;height:10px;border-radius:2px;margin-right:6px;background:var(--green)}
+.legend span.m::before{background:var(--navy)}
+.keys{margin-top:14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.key{border-radius:10px;padding:12px 14px;display:grid;gap:2px;min-width:0}
+.key .label{font-size:.68rem;color:var(--muted)}
+.key b{font-family:var(--serif);font-weight:600;font-size:1.45rem;line-height:1.1;font-variant-numeric:tabular-nums}
+.key span{font-size:.8rem;color:var(--muted);line-height:1.3}
+.key.k1{background:var(--green-wash)}
+.key.k2{background:var(--navy-wash)}
+.key.k3{background:var(--sheet);border:1px solid var(--rule)}
+@media (max-width:520px){.keys{grid-template-columns:1fr}.key{grid-template-columns:minmax(0,1fr) auto;align-items:baseline}.key .label{grid-column:1/-1}.key span{grid-row:2;grid-column:1}.key b{grid-row:2;grid-column:2}}
+
+/* fluxo */
+.flow{list-style:none;margin:18px 0 0;padding:0;display:grid;position:relative}
+.flow li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:14px;align-items:start;padding-bottom:16px;position:relative}
+.flow li:not(:last-child)::after{content:"";position:absolute;left:19px;top:40px;bottom:2px;width:2px;background:var(--rule-2)}
+.flow .st{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-family:var(--serif);font-weight:600;font-size:1.05rem;color:var(--green);border:1.5px solid var(--green);background:var(--sheet);position:relative;z-index:1}
+.flow li.you .st{color:var(--amber);border-color:var(--amber)}
+.flow b{display:block;font-size:1.02rem;line-height:1.3;padding-top:8px}
+.flow b small{font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-left:6px;color:var(--amber)}
+.flow li.us b small{color:var(--green)}
+.flow span{display:block;color:var(--muted);font-size:.9rem;line-height:1.4}
+.alert{margin-top:4px;background:var(--amber-wash);border:1.5px solid var(--amber);border-radius:10px;padding:13px 15px;display:grid;gap:3px}
+.alert b{color:var(--amber);font-size:.95rem}
+.alert span{font-size:.92rem;color:var(--ink);line-height:1.4}
+
+/* combinados */
+.tiles{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tile{background:var(--sheet);border:1px solid var(--rule);border-radius:10px;padding:12px 14px;display:grid;gap:2px;align-content:start;min-width:0}
+.tile .label{color:var(--muted);font-size:.68rem}
+.tile b{font-family:var(--serif);font-weight:600;font-size:1.2rem;line-height:1.15}
+.tile span{font-size:.86rem;color:var(--muted);line-height:1.35}
+.tile.wide{grid-column:1/-1}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chips i{font-style:normal;font-size:.82rem;color:var(--ink);background:var(--bg);border:1px solid var(--rule-2);border-radius:999px;padding:3px 10px}
+
+/* aceite */
+.sum{margin-top:18px;background:var(--sheet);border:1.5px solid var(--green);border-radius:12px;padding:22px}
+.sum .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;padding-block:7px;font-size:1rem}
+.sum .row b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.sum .total{border-top:1px solid var(--rule-2);margin-top:6px;padding-top:12px;font-size:1.1rem;align-items:baseline}
+.sum .total b{font-family:var(--serif);font-weight:600;font-size:2rem;color:var(--green)}
+.send{display:block;margin-top:18px;background:var(--green);color:var(--on-green);text-align:center;text-decoration:none;font-weight:700;font-size:1.05rem;padding:15px;border-radius:8px}
+.small{margin-top:10px;font-size:.85rem;color:var(--muted)}
+.foot{margin-top:20px;padding-top:14px;border-top:1px solid var(--rule);font-size:.82rem;color:var(--muted)}
+
+@media (max-height:740px){
+  .slide{padding-block:54px 60px}
+  .slide h2{font-size:1.5rem}.chap{margin-bottom:8px}
+  .cover h1{font-size:2.4rem;margin-top:10px}.sign{margin-top:16px}.meta{margin-top:18px}.meta div{padding-block:8px 10px}.start{margin-top:18px}
+  .swap{gap:7px}.swap .was,.swap .now{padding:9px 12px;font-size:.88rem}
+  .does{gap:7px}.does span{font-size:.84rem}
+  .det{gap:8px}.det li{padding:10px 12px}.det span{font-size:.8rem}
+  .proof{padding:16px}.card{padding:16px}.card .big{font-size:2.1rem}.incl li{font-size:.86rem}
+  .chart{padding:14px 12px 10px}.bars{height:120px}.keys{margin-top:10px}
+  .flow li{padding-bottom:10px}.flow span{font-size:.85rem}
+  .tiles{gap:8px;margin-top:12px}.tile{padding:10px 12px}.tile b{font-size:1.05rem}
+  .sum{padding:16px}.sum .row{padding-block:4px}.send{padding:13px;margin-top:14px}.foot{display:none}
+}
+@media (max-height:640px){.slide{padding-block:46px 46px}.next{bottom:4px;font-size:.78rem}.sub{font-size:.9rem}.pair{gap:8px;margin-top:12px}.incl{gap:4px}.bars{height:96px}}
+@media (prefers-reduced-motion:reduce){.deck{scroll-behavior:auto}.js .slide .rv{opacity:1;transform:none;transition:none}.bar i{transform:none;opacity:1;transition:none}.next svg{animation:none}}
+@media print{
+  body{overflow:visible}.deck{position:static;overflow:visible}
+  .topband,.progress,.bar-top,.next{display:none}
+  .slide{min-height:auto;break-after:page;padding:32px 24px}
+  .js .slide .rv{opacity:1;transform:none}.bar i{transform:none;opacity:1}
+}
+</style>
+
+<div class="topband" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"><i id="prog"></i></div>
+<div class="bar-top"><span class="count" id="count" aria-hidden="true">1/11</span></div>
+
+<main class="deck" id="deck">
+
+  <section class="slide cover" id="inicio" data-next="O que muda no dia a dia">
+    <div class="in">
+      <span class="label cover-label rv">Proposta comercial · nº 003/2026</span>
+      <h1 class="rv">Da venda ao pagamento, <em>num só lugar</em></h1>
+      <p class="for rv">NexFlow para a <b>JLD Connect C Telecom Ltda</b></p>
+      <div class="rv">
+        <div class="sign"><span class="initials" aria-hidden="true">RM</span><div><b>Robert Martins Cezar</b><span>Gestão, processos e tecnologia · 8+ anos</span></div></div>
+        <div class="meta">
+          <div><span class="label">Emitida em</span><b>07 nov 2026</b></div>
+          <div><span class="label">Válida até</span><b>22 nov 2026</b></div>
+          <div><span class="label">Para começar</span><b>R$ 750</b></div>
+        </div>
+      </div>
+      <button class="start rv" type="button" data-go="muda">Ver a proposta</button>
+    </div>
+  </section>
+
+  <section class="slide" id="muda" data-next="O que o NexFlow faz">
+    <div class="in">
+      <span class="label chap rv">O que muda</span>
+      <h2 class="rv">Menos planilha. Mais controle.</h2>
+      <div class="swap-head rv" aria-hidden="true"><span>Hoje</span><span></span><span>Com o NexFlow</span></div>
+      <ul class="swap rv">
+        <li><span class="was">Planilha de vendas pesada, que trava</span><span class="ar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="now">Vendas num só lugar, com busca</span></li>
+        <li><span class="was">Conferir o Osab na mão</span><span class="ar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="now">Cruzamento automático pela OS</span></li>
+        <li><span class="was">Fechamento montado todo dia</span><span class="ar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="now">Fechamento pronto, você só aprova</span></li>
+        <li><span class="was">Risco de pagar a mesma venda duas vezes</span><span class="ar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="now">OS paga sai sozinha</span></li>
+        <li><span class="was">Vale pedido no grupo e controlado à mão</span><span class="ar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span><span class="now">Vale descontado sozinho</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide" id="faz" data-next="Os detalhes que protegem seu dinheiro">
+    <div class="in">
+      <span class="label chap rv">O que o NexFlow faz</span>
+      <h2 class="rv">Tudo o que entra agora</h2>
+      <ul class="does rv">
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></span><div><b>Cadastro das vendas</b><span>O back office segue nos grupos e registra cada venda no NexFlow.</span></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></span><div><b>Acompanhamento</b><span>Biometria, cadastro e instalação de cada venda, com busca.</span></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg></span><div><b>Conferência com o Osab</b><span>Só vai para pagamento o que foi "Concluído com sucesso".</span></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M17 7H9.5a3 3 0 0 0 0 6h5a3 3 0 0 1 0 6H6"/></svg></span><div><b>Comissão e pagamento</b><span>Você aprova, o financeiro paga e registra. Demonstrativo por vendedor.</span></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18v10H3z"/><path d="M7 12h.01M17 12h.01"/><circle cx="12" cy="12" r="2"/></svg></span><div><b>Vales</b><span>Pedido, aprovação e desconto nas próximas comissões.</span></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span><div><b>Acesso seguro</b><span>3 acessos (você, financeiro e back office), histórico de tudo e cópia de segurança.</span></div></li>
+        <li><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v12M7 11l5 5 5-5"/><path d="M4 20h16"/></svg></span><div><b>Vendas de 2026 carregadas</b><span>O NexFlow já começa com o seu histórico do ano.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide" id="detalhes" data-next="Você já viu funcionando">
+    <div class="in">
+      <span class="label chap rv">Os detalhes</span>
+      <h2 class="rv">Feito para a regra da JLD</h2>
+      <p class="sub rv">Coisas que só aparecem quando se conhece a operação.</p>
+      <ul class="det rv">
+        <li><b>Segunda fecha o fim de semana</b><span>Sexta, sábado e domingo no mesmo fechamento.</span></li>
+        <li><b>Segura sem travar o resto</b><span>Uma OS ou um vendedor, com motivo.</span></li>
+        <li><b>Venda suspeita vai para análise</b><span>CPF ou telefone repetido, telefone igual com nome diferente.</span></li>
+        <li><b>Tabela muda a partir de uma data</b><span>Sem mexer no que já foi pago.</span></li>
+        <li><b>Campanha soma sozinha</b><span>O valor extra entra em cada venda da campanha.</span></li>
+        <li><b>Vale com desconto parcial</b><span>Desconta uma parte agora e o resto depois.</span></li>
+        <li class="wide"><b>Acha qualquer pagamento em segundos</b><span>Por vendedor, cliente ou OS, com quem fez e a hora.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide" id="prototipo" data-next="Investimento">
+    <div class="in">
+      <span class="label chap rv">Sem surpresa</span>
+      <h2 class="rv">Você já viu funcionando</h2>
+      <div class="proof rv">
+        <p class="big">O NexFlow não é promessa. As telas já existem.</p>
+        <p>Você conhece o protótipo e pode abrir de novo agora, no celular ou no computador.</p>
+        <a class="btn" href="https://treborhand.github.io/nexflow/" target="_blank" rel="noopener">Abrir o protótipo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></a>
+        <p class="fine">O protótipo mostra também ideias para as próximas fases. O que entra agora está nas telas anteriores.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="investimento" data-next="As 8 horas da manutenção">
+    <div class="in">
+      <span class="label chap rv">Investimento</span>
+      <h2 class="rv">Dois valores. Só isso.</h2>
+      <div class="pair">
+        <div class="card app rv">
+          <span class="label">NexFlow</span>
+          <div class="old">De R$ 12.500</div>
+          <div class="big">R$ 7.500</div>
+          <div class="split">10 × R$ 750</div>
+          <p class="when">A 1ª no aceite. Sem entrada à parte.</p>
+          <span class="tag">Novo preço</span>
+        </div>
+        <div class="card man rv">
+          <span class="label">Manutenção</span>
+          <div class="big">R$ 750 <small>por mês</small></div>
+          <div class="split">Só quando estiver rodando</div>
+          <ul class="incl">
+            <li><b>8 horas por mês</b> de ajustes e melhorias</li>
+            <li>Correção de defeitos, sem gastar horas</li>
+            <li>Ajuste quando o Osab mudar</li>
+            <li>Cópia de segurança</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="horas" data-next="Como fica o seu mês">
+    <div class="in">
+      <span class="label chap rv">Manutenção</span>
+      <h2 class="rv">8 horas por mês para o NexFlow</h2>
+      <div class="hrs rv">
+        <div class="big">8 h <small>por mês, incluídas nos R$ 750</small></div>
+        <div class="hbar" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="cols rv">
+        <div class="col"><span class="label">Não gasta horas</span><ul><li>Correção de defeito</li><li>Cópia de segurança</li><li>Dúvidas de uso</li></ul></div>
+        <div class="col uses"><span class="label">Usa as 8 horas</span><ul><li>Ajuste quando o Osab mudar</li><li>Pequenas melhorias e ajustes</li></ul></div>
+      </div>
+      <ul class="hrules rv">
+        <li><span class="k">+2 h</span><div><b>Eu aviso antes de começar</b><span>Você aprova e só então eu sigo.</span></div></li>
+        <li><span class="k">+8 h</span><div><b>Orçado antes</b><span>R$ 120 por hora, só com a sua aprovação.</span></div></li>
+        <li><span class="k">½</span><div><b>Sobrou? Metade passa para o mês seguinte</b><span>Exemplo: usou 4 h, sobraram 4 h, 2 h vão para o próximo mês.</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide" id="mes" data-next="Como vamos trabalhar">
+    <div class="in">
+      <span class="label chap rv">Como fica o seu mês</span>
+      <h2 class="rv">Cabe no caixa desde o primeiro dia</h2>
+      <div class="chart rv" role="img" aria-label="Exemplo mês a mês: R$ 750 nos meses 1 e 2, R$ 1.125 no mês 3, R$ 1.500 do mês 4 ao 10, R$ 750 a partir do mês 11.">
+        <div class="bars" aria-hidden="true">
+          <div class="bar"><i class="a" style="height:50%"></i></div>
+          <div class="bar"><i class="a" style="height:50%"></i></div>
+          <div class="bar"><i class="m" style="height:25%"></i><i class="a" style="height:50%;border-radius:0"></i></div>
+          <div class="bar"><i class="m" style="height:50%"></i><i class="a" style="height:50%;border-radius:0"></i></div>
+          <div class="bar"><i class="m" style="height:50%"></i><i class="a" style="height:50%;border-radius:0"></i></div>
+          <div class="bar"><i class="m" style="height:50%"></i><i class="a" style="height:50%;border-radius:0"></i></div>
+          <div class="bar"><i class="m" style="height:50%"></i><i class="a" style="height:50%;border-radius:0"></i></div>
+          <div class="bar"><i class="m" style="height:50%"></i><i class="a" style="height:50%;border-radius:0"></i></div>
+          <div class="bar"><i class="m" style="height:50%"></i><i class="a" style="height:50%;border-radius:0"></i></div>
+          <div class="bar"><i class="m" style="height:50%"></i><i class="a" style="height:50%;border-radius:0"></i></div>
+          <div class="bar"><i class="m" style="height:50%"></i></div>
+          <div class="bar"><i class="m" style="height:50%"></i></div>
+        </div>
+        <div class="months" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span></div>
+        <div class="legend"><span>NexFlow</span><span class="m">Manutenção</span><span style="margin-left:auto">Exemplo: rodando no meio do mês 3</span></div>
+      </div>
+      <div class="keys rv">
+        <div class="key k1"><span class="label">Para começar</span><b>R$ 750</b><span>e nada de manutenção</span></div>
+        <div class="key k2"><span class="label">Com o NexFlow rodando</span><b>R$ 1.500</b><span>até a 10ª parcela</span></div>
+        <div class="key k3"><span class="label">Depois de quitar</span><b>R$ 750</b><span>só a manutenção</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="trabalho" data-next="Combinados">
+    <div class="in">
+      <span class="label chap rv">Como vamos trabalhar</span>
+      <h2 class="rv">Três passos até o NexFlow rodar</h2>
+      <ol class="flow rv">
+        <li class="you"><span class="st">1</span><div><b>Definição <small>JLD</small></b><span>Responder às perguntas, aprovar as regras e entregar a planilha de 2026 preenchida.</span></div></li>
+        <li class="us"><span class="st">2</span><div><b>Implementação <small>Robert</small></b><span>Até 8 semanas, contadas a partir da definição aprovada.</span></div></li>
+        <li class="us"><span class="st">3</span><div><b>Em uso <small>Todos</small></b><span>Treinamento, guia de uso e a manutenção começa a contar.</span></div></li>
+      </ol>
+      <div class="alert rv">
+        <b>Importante</b>
+        <span>As parcelas seguem o calendário a partir do aceite. Atraso na definição adia a entrega, mas não suspende as parcelas.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="combinados" data-next="Aceite">
+    <div class="in">
+      <span class="label chap rv">Combinados</span>
+      <h2 class="rv">O que fica acertado</h2>
+      <div class="tiles rv">
+        <div class="tile"><span class="label">Pagamento</span><b>Pix</b><span>1ª parcela no aceite, as demais até o dia 10.</span></div>
+        <div class="tile"><span class="label">Hospedagem</span><b>LocaWeb da JLD</b><span>Contratada e paga pela JLD.</span></div>
+        <div class="tile"><span class="label">Manutenção</span><b>12 meses</b><span>A partir do uso. Reajuste pelo IPCA no 2º ano.</span></div>
+        <div class="tile"><span class="label">Pedido novo</span><b>Orçado antes</b><span>R$ 120 por hora, só com a sua aprovação.</span></div>
+        <div class="tile wide"><span class="label">Se sair antes de quitar</span><span style="font-size:.95rem;color:var(--ink)">Paga o restante das parcelas do NexFlow.</span></div>
+        <div class="tile wide"><span class="label">Fica para as próximas fases</span>
+          <div class="chips"><i>Integração com WhatsApp</i><i>Fila automática</i><i>Conciliação com a Nio</i><i>Inadimplência</i><i>Painéis gerenciais</i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide" id="aceite">
+    <div class="in">
+      <span class="label rv">Aceite</span>
+      <h2 class="rv" style="margin-top:8px">Pronto para começar</h2>
+      <div class="sum rv">
+        <div class="row"><span>NexFlow</span><b>10 × R$ 750</b></div>
+        <div class="row"><span>Manutenção, quando estiver rodando</span><b>R$ 750 por mês</b></div>
+        <div class="row total"><span>Para começar</span><b>R$ 750</b></div>
+      </div>
+      <a class="send rv" id="send" href="https://wa.me/5521993216948" target="_blank" rel="noopener">Quero começar</a>
+      <p class="small rv">Abre o WhatsApp do Robert com a mensagem pronta. Esta proposta não substitui o contrato, que trará as condições definitivas.</p>
+      <p class="foot">Robert Martins Cezar · Gestão, processos e tecnologia · Proposta nº 003/2026 para JLD Connect C Telecom Ltda · válida até 22/11/2026</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  var msg="Olá, Robert! Li a proposta nº 003/2026 do NexFlow e quero começar: NexFlow em 10 × R$ 750 (1ª no aceite) e manutenção de R$ 750 por mês quando estiver rodando.";
+  document.getElementById("send").href="https://wa.me/5521993216948?text="+encodeURIComponent(msg);
+
+  document.documentElement.classList.add("js");
+  var deck=document.getElementById("deck"), slides=[].slice.call(document.querySelectorAll(".slide")), cur=0;
+  var reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var chev='<svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+  slides.forEach(function(s,i){
+    var nx=s.getAttribute("data-next"); if(!nx) return;
+    var b=document.createElement("button"); b.type="button"; b.className="next";
+    b.innerHTML="<span>"+(i===0?"Deslize para cima":"Próximo: "+nx)+"</span>"+chev;
+    b.addEventListener("click",function(){go(i+1);}); s.appendChild(b);
+  });
+  function go(i){ if(i<0||i>=slides.length) return; deck.scrollTo({top:slides[i].offsetTop,behavior:reduce?"auto":"smooth"}); }
+  function goId(id){ for(var i=0;i<slides.length;i++){ if(slides[i].id===id){go(i);return true;} } return false; }
+  function setCur(i){
+    cur=i; slides[i].classList.add("on");
+    document.getElementById("prog").style.width=(i/(slides.length-1)*100)+"%";
+    document.getElementById("count").textContent=(i+1)+"/"+slides.length;
+    try{history.replaceState(null,"","#"+slides[i].id);}catch(e){}
+  }
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting) setCur(slides.indexOf(e.target));});},{root:deck,threshold:0.5});
+    slides.forEach(function(s){io.observe(s);});
+  } else { slides.forEach(function(s){s.classList.add("on");}); }
+  document.addEventListener("click",function(e){
+    var a=e.target.closest&&e.target.closest('a[href^="#"],[data-go]'); if(!a) return;
+    var id=a.getAttribute("data-go")||a.getAttribute("href").slice(1);
+    if(goId(id)) e.preventDefault();
+  });
+  document.addEventListener("keydown",function(e){
+    if(["ArrowDown","PageDown"].indexOf(e.key)>-1||(e.key===" "&&!e.shiftKey)){e.preventDefault();go(cur+1);}
+    else if(["ArrowUp","PageUp"].indexOf(e.key)>-1||(e.key===" "&&e.shiftKey)){e.preventDefault();go(cur-1);}
+    else if(e.key==="Home"){e.preventDefault();go(0);} else if(e.key==="End"){e.preventDefault();go(slides.length-1);}
+  });
+  var h=location.hash.slice(1), start=0;
+  for(var i=0;i<slides.length;i++){ if(slides[i].id===h){ start=i; break; } }
+  if(start){ deck.style.scrollBehavior="auto"; deck.scrollTop=slides[start].offsetTop; setTimeout(function(){deck.style.scrollBehavior="";},50); }
+  setCur(start);
+})();
+</script>
+
+</body></html>
